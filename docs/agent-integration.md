@@ -24,6 +24,8 @@ Suggested flow:
 1. `agentpowershell session create --output json`
 2. `agentpowershell checkpoint create --name before-change --output json`
 3. `agentpowershell exec <session-id> <command...> --output json`
+
+When parsing `exec` output, inspect both `policyDecision` and `eventType`. `policyDecision` tells you whether policy allowed the request, while `eventType` tells you which runtime path actually executed it.
 ```
 
 ## Recommended Workflow

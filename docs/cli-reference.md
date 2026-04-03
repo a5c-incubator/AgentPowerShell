@@ -32,6 +32,21 @@ Stop the tracked daemon PID from `.agentpowershell/daemon.json` and remove that 
 
 Execute an explicit command in a session through the current daemon processor path. Inline PowerShell commands route through the hosted constrained runspace when supported. Interactive shell launches such as bare `powershell` or `pwsh` are rejected by design. The CLI process exits with the underlying command or policy result code.
 
+When `--output json` is used, the payload includes:
+
+- `exitCode`
+- `policyDecision`
+- `eventType`
+- `stdout`
+- `stderr`
+- `denialReason`
+
+`eventType` is the quickest way to tell which runtime path handled the execution, for example:
+
+- `process.executed.powershell-host`
+- `process.executed.native`
+- `process.executed.native.appcontainer`
+
 ### `session create`
 
 Create a new session identifier.
