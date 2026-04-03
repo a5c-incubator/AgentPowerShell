@@ -124,13 +124,14 @@ public sealed class SessionStore : IDisposable
         }
     }
 
-    public async Task RemoveAsync(string sessionId, CancellationToken cancellationToken)
+    public async Task<bool> RemoveAsync(string sessionId, CancellationToken cancellationToken)
     {
         await _gate.WaitAsync(cancellationToken).ConfigureAwait(false);
         try
         {
-            _sessions.Remove(sessionId);
+            var removed = _sessions.Remove(sessionId);
             await PersistUnsafeAsync(cancellationToken).ConfigureAwait(false);
+            return removed;
         }
         finally
         {

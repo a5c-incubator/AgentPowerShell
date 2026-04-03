@@ -1612,6 +1612,37 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public void CliApp_SessionDestroy_Returns_NotFound_For_Missing_Session()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-session-destroy-missing");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(1, CliApp.Run(["session", "destroy", "missing-session", "--output", "json"]));
+            var payload = writer.ToString();
+            Assert.Contains("\"command\":\"session destroy\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"removed\":false", payload, StringComparison.Ordinal);
+            Assert.Contains("\"status\":\"not-found\"", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public void DaemonLaunchResolver_Falls_Back_To_Source_Project_When_Repo_Is_Available()
     {
         var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-daemon-launch-project");

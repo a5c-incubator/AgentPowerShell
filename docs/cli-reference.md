@@ -61,7 +61,7 @@ Show one persisted session from `.agentpowershell/sessions.json`. If `session-id
 
 ### `session destroy <session-id>`
 
-Remove a session from the session store.
+Remove a session from the session store. Missing sessions return `status: not-found`, `removed: false`, and a non-zero exit code.
 
 ### `policy validate <path>`
 

@@ -256,8 +256,12 @@ public static class CliApp
         {
             var store = new SessionStore(Path.Combine(Environment.CurrentDirectory, ".agentpowershell", "sessions.json"));
             await store.LoadAsync(CancellationToken.None).ConfigureAwait(false);
-            await store.RemoveAsync(id, CancellationToken.None).ConfigureAwait(false);
-            Emit(output, new { command = "session destroy", sessionId = id, removed = true });
+            var removed = await store.RemoveAsync(id, CancellationToken.None).ConfigureAwait(false);
+            Emit(output, new { command = "session destroy", sessionId = id, removed, status = removed ? "removed" : "not-found" });
+            if (!removed)
+            {
+                Environment.ExitCode = 1;
+            }
         }, sessionId, outputOption);
 
         command.AddCommand(create);
