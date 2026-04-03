@@ -1,17 +1,38 @@
-using System.Diagnostics;
 using AgentPowerShell.Core;
 using AgentPowerShell.Protos;
 
 namespace AgentPowerShell.Daemon;
 
-public sealed class ShimCommandProcessor(SessionStore sessionStore, AgentPowerShellConfig config)
+public sealed class ShimCommandProcessor
 {
+    private readonly SessionStore _sessionStore;
+    private readonly AgentPowerShellConfig _config;
+    private readonly HostedPowerShellExecutor _hostedPowerShellExecutor;
+    private readonly NativeProcessLauncher _nativeProcessLauncher;
+
+    public ShimCommandProcessor(SessionStore sessionStore, AgentPowerShellConfig config)
+        : this(sessionStore, config, new HostedPowerShellExecutor(), new NativeProcessLauncher())
+    {
+    }
+
+    internal ShimCommandProcessor(
+        SessionStore sessionStore,
+        AgentPowerShellConfig config,
+        HostedPowerShellExecutor hostedPowerShellExecutor,
+        NativeProcessLauncher nativeProcessLauncher)
+    {
+        _sessionStore = sessionStore;
+        _config = config;
+        _hostedPowerShellExecutor = hostedPowerShellExecutor;
+        _nativeProcessLauncher = nativeProcessLauncher;
+    }
+
     public async Task<ShimCommandResponse> ExecuteAsync(ShimCommandRequest request, CancellationToken cancellationToken)
     {
-        var session = await sessionStore.GetOrCreateAsync(
+        var session = await _sessionStore.GetOrCreateAsync(
             request.SessionId,
             string.IsNullOrWhiteSpace(request.WorkingDirectory) ? Environment.CurrentDirectory : request.WorkingDirectory,
-            config.Sessions,
+            _config.Sessions,
             cancellationToken).ConfigureAwait(false);
 
         var decision = EvaluatePolicy(request, session);
@@ -53,46 +74,20 @@ public sealed class ShimCommandProcessor(SessionStore sessionStore, AgentPowerSh
             };
         }
 
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = request.ExecutablePath,
-            WorkingDirectory = string.IsNullOrWhiteSpace(request.WorkingDirectory) ? Environment.CurrentDirectory : request.WorkingDirectory,
-            RedirectStandardError = true,
-            RedirectStandardOutput = true,
-            RedirectStandardInput = false,
-            UseShellExecute = false
-        };
-
-        foreach (var argument in request.Arguments)
-        {
-            startInfo.ArgumentList.Add(argument);
-        }
-
-        foreach (var pair in request.Environment)
-        {
-            startInfo.Environment[pair.Key] = pair.Value;
-        }
-
-        startInfo.Environment["AGENTPOWERSHELL_IN_SESSION"] = "1";
-        startInfo.Environment["AGENTPOWERSHELL_SESSION_ID"] = session.SessionId;
-
-        using var process = new Process { StartInfo = startInfo };
-        process.Start();
-
-        var stdoutTask = process.StandardOutput.ReadToEndAsync(cancellationToken);
-        var stderrTask = process.StandardError.ReadToEndAsync(cancellationToken);
-        await process.WaitForExitAsync(cancellationToken).ConfigureAwait(false);
+        var execution = _hostedPowerShellExecutor.CanExecute(request)
+            ? await _hostedPowerShellExecutor.ExecuteAsync(request, session, cancellationToken).ConfigureAwait(false)
+            : await _nativeProcessLauncher.ExecuteAsync(request, session, cancellationToken).ConfigureAwait(false);
 
         return new ShimCommandResponse
         {
             SessionId = session.SessionId,
-            ExitCode = process.ExitCode,
+            ExitCode = execution.ExitCode,
             PolicyDecision = decision.Decision.ToString().ToLowerInvariant(),
-            Stdout = await stdoutTask.ConfigureAwait(false),
-            Stderr = await stderrTask.ConfigureAwait(false),
+            Stdout = execution.Stdout,
+            Stderr = execution.Stderr,
             Events =
             [
-                new ShimEventMessage("process.executed", request.ExecutablePath, DateTimeOffset.UtcNow)
+                new ShimEventMessage(execution.EventType, execution.EventDetail, DateTimeOffset.UtcNow)
             ]
         };
     }

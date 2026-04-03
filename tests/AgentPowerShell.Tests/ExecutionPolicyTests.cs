@@ -977,6 +977,53 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task ShimProcessor_Hosts_PowerShell_Commands_In_Constrained_Language_Mode()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-powershell-host");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                command_rules:
+                  - name: allow-powershell
+                    pattern: "powershell"
+                    decision: allow
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+
+            var response = await processor.ExecuteAsync(
+                new ShimCommandRequest
+                {
+                    SessionId = "session-a",
+                    InvocationName = "powershell",
+                    ExecutablePath = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                    Arguments = ["-NoProfile", "-Command", "$ExecutionContext.SessionState.LanguageMode"],
+                    WorkingDirectory = root
+                },
+                CancellationToken.None);
+
+            Assert.Equal(0, response.ExitCode);
+            Assert.Equal("allow", response.PolicyDecision);
+            Assert.Contains("ConstrainedLanguage", response.Stdout, StringComparison.Ordinal);
+            Assert.Contains(response.Events, item => item.EventType == "process.executed.powershell-host");
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task CliApp_Exec_Rejects_Interactive_Shell_Launches()
     {
         var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-exec-interactive");
@@ -1092,6 +1139,53 @@ public sealed class ExecutionPolicyTests
             Assert.Equal(126, response.ExitCode);
             Assert.Equal("deny", response.PolicyDecision);
             Assert.Contains("No matching network rule", response.Stderr, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task ShimProcessor_Uses_Native_Process_Launcher_For_Non_PowerShell_Commands()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-native-launch");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                command_rules:
+                  - name: allow-dotnet
+                    pattern: "dotnet"
+                    decision: allow
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+
+            var response = await processor.ExecuteAsync(
+                new ShimCommandRequest
+                {
+                    SessionId = "session-a",
+                    InvocationName = "dotnet",
+                    ExecutablePath = "dotnet",
+                    Arguments = ["--version"],
+                    WorkingDirectory = root
+                },
+                CancellationToken.None);
+
+            Assert.Equal(0, response.ExitCode);
+            Assert.Equal("allow", response.PolicyDecision);
+            Assert.Contains(response.Events, item => item.EventType == "process.executed.native");
+            Assert.NotEmpty(response.Stdout);
         }
         finally
         {
