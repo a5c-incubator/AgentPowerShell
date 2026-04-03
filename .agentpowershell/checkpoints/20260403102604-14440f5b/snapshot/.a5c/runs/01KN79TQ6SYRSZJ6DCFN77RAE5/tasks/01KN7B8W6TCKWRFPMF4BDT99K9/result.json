@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7B8W6TCKWRFPMF4BDT99K9",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "agentpowershell-full-build:S000003:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "response": "Approve"
+  },
+  "startedAt": "2026-04-02T14:59:28.490Z",
+  "finishedAt": "2026-04-02T14:59:28.490Z",
+  "value": {
+    "approved": true,
+    "response": "Approve"
+  }
+}

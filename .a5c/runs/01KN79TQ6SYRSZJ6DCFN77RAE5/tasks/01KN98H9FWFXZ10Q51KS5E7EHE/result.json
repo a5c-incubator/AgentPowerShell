@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN98H9FWFXZ10Q51KS5E7EHE",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000025:build-and-test",
+  "status": "ok",
+  "result": {
+    "verified": true,
+    "phase": "llm-mcp",
+    "sdk": "9.0.312",
+    "buildSucceeded": true,
+    "testsPassed": true
+  },
+  "stdoutRef": "tasks/01KN98H9FWFXZ10Q51KS5E7EHE/stdout.log",
+  "startedAt": "2026-04-03T08:53:12.778Z",
+  "finishedAt": "2026-04-03T08:53:12.778Z",
+  "value": {
+    "verified": true,
+    "phase": "llm-mcp",
+    "sdk": "9.0.312",
+    "buildSucceeded": true,
+    "testsPassed": true
+  }
+}

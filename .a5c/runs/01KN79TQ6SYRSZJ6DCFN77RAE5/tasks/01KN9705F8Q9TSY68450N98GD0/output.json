@@ -1,0 +1,15 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+    "src/AgentPowerShell.LlmProxy/Program.cs",
+    "src/AgentPowerShell.LlmProxy/ProxyModels.cs",
+    "src/AgentPowerShell.LlmProxy/ProviderRouter.cs",
+    "src/AgentPowerShell.LlmProxy/DlpRedactor.cs",
+    "src/AgentPowerShell.LlmProxy/UsageTracker.cs",
+    "src/AgentPowerShell.LlmProxy/ProxyTelemetry.cs",
+    "src/AgentPowerShell.LlmProxy/ProxyService.cs",
+    "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+    "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Cli/Program.cs",
+    "src/AgentPowerShell.Cli/CliApp.cs",
+    "src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj",
+    "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ],
+  "commandsImplemented": [
+    "exec",
+    "start",
+    "stop",
+    "session create",
+    "session list",
+    "session destroy",
+    "policy validate",
+    "policy show",
+    "report",
+    "status",
+    "checkpoint create",
+    "checkpoint restore",
+    "checkpoint list",
+    "config show",
+    "config set"
+  ]
+}

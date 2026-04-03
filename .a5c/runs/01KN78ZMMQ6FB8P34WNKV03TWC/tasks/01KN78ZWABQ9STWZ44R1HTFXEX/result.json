@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN78ZWABQ9STWZ44R1HTFXEX",
+  "taskId": "check-existing-setup",
+  "invocationKey": "cradle/project-install:S000001:check-existing-setup",
+  "status": "ok",
+  "result": {
+    "a5cDirExists": true,
+    "a5cFiles": [
+      "cache",
+      "inputs-project-install.json",
+      "node_modules",
+      "package.json",
+      "package-lock.json",
+      "processes",
+      "runs"
+    ],
+    "cicdConfigFiles": [],
+    "claudeMdContent": "",
+    "claudeMdExists": false,
+    "existingProfile": null,
+    "gitCommitCount": 2,
+    "isFirstRun": true,
+    "isNewProject": true,
+    "profileVersion": 0
+  },
+  "startedAt": "2026-04-02T14:20:18.641Z",
+  "finishedAt": "2026-04-02T14:20:18.641Z",
+  "value": {
+    "a5cDirExists": true,
+    "a5cFiles": [
+      "cache",
+      "inputs-project-install.json",
+      "node_modules",
+      "package.json",
+      "package-lock.json",
+      "processes",
+      "runs"
+    ],
+    "cicdConfigFiles": [],
+    "claudeMdContent": "",
+    "claudeMdExists": false,
+    "existingProfile": null,
+    "gitCommitCount": 2,
+    "isFirstRun": true,
+    "isNewProject": true,
+    "profileVersion": 0
+  }
+}

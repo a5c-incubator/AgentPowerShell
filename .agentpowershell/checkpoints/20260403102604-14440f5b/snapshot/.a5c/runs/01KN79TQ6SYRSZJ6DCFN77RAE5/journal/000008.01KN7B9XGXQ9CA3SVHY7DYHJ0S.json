@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:59:35.581Z",
+  "data": {
+    "effectId": "01KN7B9XFFNTBCB0N3QSPG00NW",
+    "invocationKey": "agentpowershell-full-build:S000004:project-scaffold",
+    "invocationHash": "b1ae9250e6440a0f727258de52cb88694101f7f8655bb550b1d5fa3bc4dbcf68",
+    "stepId": "S000004",
+    "taskId": "project-scaffold",
+    "kind": "agent",
+    "label": "Scaffold .NET solution and projects",
+    "taskDefRef": "tasks/01KN7B9XFFNTBCB0N3QSPG00NW/task.json"
+  },
+  "checksum": "b29ffbcb7bb08b5d03ff3bd975526f83e232a28af647ff2fdf4da5f3b8072476"
+}

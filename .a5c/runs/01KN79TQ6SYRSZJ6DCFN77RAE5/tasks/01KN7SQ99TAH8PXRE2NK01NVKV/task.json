@@ -1,0 +1,22 @@
+{
+  "description": "Verify platform-specific enforcement compiles (cross-compile check for all targets)",
+  "io": {
+    "inputJsonPath": "tasks/01KN7SQ99TAH8PXRE2NK01NVKV/input.json",
+    "outputJsonPath": "tasks/01KN7SQ99TAH8PXRE2NK01NVKV/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: platform-enforcement",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7SQ99TAH8PXRE2NK01NVKV",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000012:build-and-test",
+  "stepId": "S000012",
+  "inputs": {
+    "description": "Verify platform-specific enforcement compiles (cross-compile check for all targets)",
+    "phase": "platform-enforcement",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

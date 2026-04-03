@@ -1,0 +1,13 @@
+{
+  "filesCreated": [
+    "README.md",
+    "docs/getting-started.md",
+    "docs/policy-reference.md",
+    "docs/cli-reference.md",
+    "docs/configuration.md",
+    "docs/cross-platform.md",
+    "docs/agent-integration.md",
+    "SECURITY.md",
+    "CONTRIBUTING.md"
+  ]
+}

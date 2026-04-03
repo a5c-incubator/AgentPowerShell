@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7SCD2FRPZPN6AE560A0K3T",
+  "taskId": "platform-enforcement",
+  "invocationKey": "agentpowershell-full-build:S000009:platform-enforcement",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.Windows/WindowsEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.Windows/WindowsNativeMethods.cs",
+      "src/AgentPowerShell.Platform.Windows/ConPtySessionOptions.cs",
+      "src/AgentPowerShell.Platform.Windows/WindowsServiceRegistration.cs"
+    ],
+    "platformFeatures": [
+      "Job Objects planning",
+      "AppContainer profile interop stubs",
+      "ConPTY session options",
+      "Windows service registration model"
+    ]
+  },
+  "stdoutRef": "tasks/01KN7SCD2FRPZPN6AE560A0K3T/stdout.log",
+  "startedAt": "2026-04-02T19:11:08.569Z",
+  "finishedAt": "2026-04-02T19:11:08.569Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.Windows/WindowsEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.Windows/WindowsNativeMethods.cs",
+      "src/AgentPowerShell.Platform.Windows/ConPtySessionOptions.cs",
+      "src/AgentPowerShell.Platform.Windows/WindowsServiceRegistration.cs"
+    ],
+    "platformFeatures": [
+      "Job Objects planning",
+      "AppContainer profile interop stubs",
+      "ConPTY session options",
+      "Windows service registration model"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "description": "Verify event system, audit logging, and session management pass tests",
+  "io": {
+    "inputJsonPath": "tasks/01KN839WFMASW43KTC6ZZDS4HK/input.json",
+    "outputJsonPath": "tasks/01KN839WFMASW43KTC6ZZDS4HK/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: event-audit-session",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN839WFMASW43KTC6ZZDS4HK",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000015:build-and-test",
+  "stepId": "S000015",
+  "inputs": {
+    "description": "Verify event system, audit logging, and session management pass tests",
+    "phase": "event-audit-session",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

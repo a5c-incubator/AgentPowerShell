@@ -1,0 +1,22 @@
+  AgentPowerShell.Events -> C:\work\agentpowershell\src\AgentPowerShell.Events\bin\Debug\net9.0\AgentPowerShell.Events.dll
+  AgentPowerShell.Protos -> C:\work\agentpowershell\src\AgentPowerShell.Protos\bin\Debug\net9.0\AgentPowerShell.Protos.dll
+  AgentPowerShell.Core -> C:\work\agentpowershell\src\AgentPowerShell.Core\bin\Debug\net9.0\AgentPowerShell.Core.dll
+  AgentPowerShell.Platform.Linux -> C:\work\agentpowershell\src\AgentPowerShell.Platform.Linux\bin\Debug\net9.0\AgentPowerShell.Platform.Linux.dll
+  AgentPowerShell.Platform.Windows -> C:\work\agentpowershell\src\AgentPowerShell.Platform.Windows\bin\Debug\net9.0\AgentPowerShell.Platform.Windows.dll
+  AgentPowerShell.Platform.MacOS -> C:\work\agentpowershell\src\AgentPowerShell.Platform.MacOS\bin\Debug\net9.0\AgentPowerShell.Platform.MacOS.dll
+  AgentPowerShell.Cli -> C:\work\agentpowershell\src\AgentPowerShell.Cli\bin\Debug\net9.0\AgentPowerShell.Cli.dll
+  AgentPowerShell.Shim -> C:\work\agentpowershell\src\AgentPowerShell.Shim\bin\Debug\net9.0\AgentPowerShell.Shim.dll
+  AgentPowerShell.Mcp -> C:\work\agentpowershell\src\AgentPowerShell.Mcp\bin\Debug\net9.0\AgentPowerShell.Mcp.dll
+  AgentPowerShell.Tests -> C:\work\agentpowershell\tests\AgentPowerShell.Tests\bin\Debug\net9.0\AgentPowerShell.Tests.dll
+  AgentPowerShell.LlmProxy -> C:\work\agentpowershell\src\AgentPowerShell.LlmProxy\bin\Debug\net9.0\AgentPowerShell.LlmProxy.dll
+  AgentPowerShell.IntegrationTests -> C:\work\agentpowershell\tests\AgentPowerShell.IntegrationTests\bin\Debug\net9.0\AgentPowerShell.IntegrationTests.dll
+  AgentPowerShell.Platform.Tests -> C:\work\agentpowershell\tests\AgentPowerShell.Platform.Tests\bin\Debug\net9.0\AgentPowerShell.Platform.Tests.dll
+  AgentPowerShell.Daemon -> C:\work\agentpowershell\src\AgentPowerShell.Daemon\bin\Debug\net9.0\AgentPowerShell.Daemon.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 6 ms - AgentPowerShell.Platform.Tests.dll (net9.0)
+Passed!  - Failed:     0, Passed:     1, Skipped:     0, Total:     1, Duration: 6 ms - AgentPowerShell.IntegrationTests.dll (net9.0)
+Passed!  - Failed:     0, Passed:     6, Skipped:     0, Total:     6, Duration: 58 ms - AgentPowerShell.Tests.dll (net9.0)

@@ -1,0 +1,139 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "filesCreated": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "filesCreated"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "architecture": {
+          "designDecisions": [
+            "PATH-based shim instead of binary replacement",
+            "Native AOT for shim binary -- sub-50ms cold start",
+            "gRPC over named pipes/Unix domain sockets for IPC",
+            "Protobuf wire protocol for schema-first compatibility",
+            "Generic Host for daemon lifecycle and DI",
+            "ConstrainedLanguage mode as baseline PowerShell enforcement",
+            "Custom PSHost + InitialSessionState for PowerShell interception",
+            "Platform enforcer abstraction with factory pattern",
+            "Composite event store with fan-out (SQLite + JSONL + webhook + OTEL)",
+            "System.Threading.Channels for pub/sub event broker",
+            "YAML policy format compatible with agentsh",
+            "YARP reverse proxy for LLM proxy",
+            "Native helper binaries for high-risk platform features",
+            "Minifilter driver communication via fltlib.dll P/Invoke"
+          ],
+          "platformStrategies": {
+            "linux": "cgroups v2 + Landlock + seccomp-bpf + ptrace + eBPF + namespaces + Unix sockets",
+            "macos": "Endpoint Security + sandbox-exec + Network Extension + FSEvents + RLIMIT + XPC",
+            "windows": "Job Objects + minifilter + ETW + AppContainer + AMSI + ConPTY + named pipes"
+          },
+          "solutionStructure": {
+            "projects": [
+              "AgentPowerShell.Core",
+              "AgentPowerShell.Protos",
+              "AgentPowerShell.Daemon",
+              "AgentPowerShell.Shim",
+              "AgentPowerShell.Cli",
+              "AgentPowerShell.Events",
+              "AgentPowerShell.LlmProxy",
+              "AgentPowerShell.Mcp",
+              "AgentPowerShell.Platform.Windows",
+              "AgentPowerShell.Platform.Linux",
+              "AgentPowerShell.Platform.MacOS",
+              "AgentPowerShell.Tests",
+              "AgentPowerShell.IntegrationTests",
+              "AgentPowerShell.Platform.Tests"
+            ],
+            "totalProjects": 14
+          },
+          "summary": "Complete architecture for agentpowershell -- a C#/.NET 9 PowerShell policy-enforced shell execution gateway with daemon+shim pattern, gRPC IPC, YAML-based first-match-wins policy engine, 70+ event types with composite fan-out store, cross-platform enforcement via platform abstraction, LLM reverse proxy with DLP, MCP security monitoring, and multi-modal approval system."
+        },
+        "projectRoot": "C:/work/agentpowershell"
+      },
+      "instructions": [
+        "Set up dotnet publish profiles for self-contained single-file executables:",
+        "- win-x64, win-arm64",
+        "- linux-x64, linux-arm64",
+        "- osx-x64, osx-arm64",
+        "Create Dockerfile for containerized usage",
+        "Create GitHub Actions workflow for CI/CD build and release",
+        "Create NuGet package configuration for the SDK/library components",
+        "Create installation scripts (install.ps1, install.sh)",
+        "Set up code signing configuration placeholder"
+      ],
+      "outputFormat": "JSON with filesCreated",
+      "role": "Senior .NET DevOps engineer",
+      "task": "Set up packaging and distribution for agentpowershell"
+    }
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9CQM0R40D4KKCXV0PJ9NQD/input.json",
+    "outputJsonPath": "tasks/01KN9CQM0R40D4KKCXV0PJ9NQD/output.json"
+  },
+  "kind": "agent",
+  "title": "Set up packaging and distribution",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9CQM0R40D4KKCXV0PJ9NQD",
+  "taskId": "packaging",
+  "invocationKey": "agentpowershell-full-build:S000033:packaging",
+  "stepId": "S000033",
+  "inputs": {
+    "architecture": {
+      "designDecisions": [
+        "PATH-based shim instead of binary replacement",
+        "Native AOT for shim binary -- sub-50ms cold start",
+        "gRPC over named pipes/Unix domain sockets for IPC",
+        "Protobuf wire protocol for schema-first compatibility",
+        "Generic Host for daemon lifecycle and DI",
+        "ConstrainedLanguage mode as baseline PowerShell enforcement",
+        "Custom PSHost + InitialSessionState for PowerShell interception",
+        "Platform enforcer abstraction with factory pattern",
+        "Composite event store with fan-out (SQLite + JSONL + webhook + OTEL)",
+        "System.Threading.Channels for pub/sub event broker",
+        "YAML policy format compatible with agentsh",
+        "YARP reverse proxy for LLM proxy",
+        "Native helper binaries for high-risk platform features",
+        "Minifilter driver communication via fltlib.dll P/Invoke"
+      ],
+      "platformStrategies": {
+        "linux": "cgroups v2 + Landlock + seccomp-bpf + ptrace + eBPF + namespaces + Unix sockets",
+        "macos": "Endpoint Security + sandbox-exec + Network Extension + FSEvents + RLIMIT + XPC",
+        "windows": "Job Objects + minifilter + ETW + AppContainer + AMSI + ConPTY + named pipes"
+      },
+      "solutionStructure": {
+        "projects": [
+          "AgentPowerShell.Core",
+          "AgentPowerShell.Protos",
+          "AgentPowerShell.Daemon",
+          "AgentPowerShell.Shim",
+          "AgentPowerShell.Cli",
+          "AgentPowerShell.Events",
+          "AgentPowerShell.LlmProxy",
+          "AgentPowerShell.Mcp",
+          "AgentPowerShell.Platform.Windows",
+          "AgentPowerShell.Platform.Linux",
+          "AgentPowerShell.Platform.MacOS",
+          "AgentPowerShell.Tests",
+          "AgentPowerShell.IntegrationTests",
+          "AgentPowerShell.Platform.Tests"
+        ],
+        "totalProjects": 14
+      },
+      "summary": "Complete architecture for agentpowershell -- a C#/.NET 9 PowerShell policy-enforced shell execution gateway with daemon+shim pattern, gRPC IPC, YAML-based first-match-wins policy engine, 70+ event types with composite fan-out store, cross-platform enforcement via platform abstraction, LLM reverse proxy with DLP, MCP security monitoring, and multi-modal approval system."
+    },
+    "projectName": "agentpowershell",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

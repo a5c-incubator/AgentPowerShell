@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:06:41.734Z",
+  "data": {
+    "effectId": "01KN9CYAGQ76YSG7FWJXE9N1CQ",
+    "invocationKey": "agentpowershell-full-build:S000034:final-review",
+    "invocationHash": "a7c9e882a92f650f7a4da7ef620b759808717f30e53716395b9162f87621e52d",
+    "stepId": "S000034",
+    "taskId": "final-review",
+    "kind": "agent",
+    "label": "Final project review",
+    "taskDefRef": "tasks/01KN9CYAGQ76YSG7FWJXE9N1CQ/task.json"
+  },
+  "checksum": "0f1d061da212a7d69607b1054c644cb8d4237352ea2b99729a2301368631c070"
+}

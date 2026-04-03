@@ -1,0 +1,12 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Platform.Linux/LinuxEnforcementPlan.cs",
+    "src/AgentPowerShell.Platform.Linux/LinuxNativeMethods.cs",
+    "src/AgentPowerShell.Platform.Linux/SystemdUnitFile.cs"
+  ],
+  "platformFeatures": [
+    "seccomp/ptrace/Landlock planning",
+    "Linux syscall interop stubs",
+    "systemd unit rendering"
+  ]
+}

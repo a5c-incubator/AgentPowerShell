@@ -1,0 +1,35 @@
+{
+  "architecture": {
+    "pattern": "new-project-scaffold",
+    "modules": [],
+    "entryPoints": [],
+    "dataFlow": "Not yet established - project is in initial planning phase"
+  },
+  "techStack": {
+    "languages": [{"name": "PowerShell", "role": "target runtime"}, {"name": "JavaScript/Node.js", "role": "babysitter infrastructure"}],
+    "frameworks": [],
+    "databases": [],
+    "buildTools": [],
+    "packageManagers": ["npm"],
+    "infrastructure": [{"name": "babysitter", "description": ".a5c/ orchestration harness"}]
+  },
+  "conventions": {
+    "naming": {},
+    "git": {"commitStyle": "imperative-mood-prefix", "mainBranch": "main"},
+    "codeStyle": {},
+    "importOrder": [],
+    "errorHandling": "Not yet established",
+    "testingConventions": "Not yet established",
+    "additionalRules": []
+  },
+  "documentation": [
+    {"path": "request.task.md", "type": "requirements", "summary": "Project task outline - build cross-platform PowerShell agent tool similar to agentsh with sandboxing, permissions and security features"}
+  ],
+  "directoryTree": {
+    "root": {
+      ".a5c/": "Babysitter orchestration infrastructure",
+      ".gitignore": "Ignores .a5c/node_modules/ and .a5c/cache/compression/",
+      "request.task.md": "Project requirements and task outline"
+    }
+  }
+}

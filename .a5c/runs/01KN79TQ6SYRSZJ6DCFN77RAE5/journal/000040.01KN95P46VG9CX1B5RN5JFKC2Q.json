@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T07:59:53.051Z",
+  "data": {
+    "effectId": "01KN95P45E5BM764N8PTTRVJGA",
+    "invocationKey": "agentpowershell-full-build:S000020:approval-system",
+    "invocationHash": "953a622360c6b81794f920bbff60164f53da53e3fafab75e33121f98182aed6e",
+    "stepId": "S000020",
+    "taskId": "approval-system",
+    "kind": "agent",
+    "label": "Implement approval system",
+    "taskDefRef": "tasks/01KN95P45E5BM764N8PTTRVJGA/task.json"
+  },
+  "checksum": "b6bb7c2a133c1755ad3e7eef010c9d5ee0523bc6c701d7d9ab35b77b1ff9099e"
+}

@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:00:38.195Z",
+  "data": {
+    "effectId": "01KN9CK7G09J0CRBPE164PN23B",
+    "invocationKey": "agentpowershell-full-build:S000029:build-and-test",
+    "invocationHash": "48afc1727c85e979dbd9db6f86e168ab1a3398fc92450e2ecd6f9a35ab78df85",
+    "stepId": "S000029",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: cli-reporting-checkpoints",
+    "taskDefRef": "tasks/01KN9CK7G09J0CRBPE164PN23B/task.json"
+  },
+  "checksum": "c70dfd84ac89887d553ae9aea60ed3a77d53da943bf3792f732181c05f0ca504"
+}

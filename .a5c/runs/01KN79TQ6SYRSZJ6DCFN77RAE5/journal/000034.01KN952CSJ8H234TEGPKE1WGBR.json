@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T07:49:06.482Z",
+  "data": {
+    "effectId": "01KN952CQQ10WTV6QM44QNF1D4",
+    "invocationKey": "agentpowershell-full-build:S000017:network-monitor",
+    "invocationHash": "d1d54df1bd91bf897e3aedf9447bb303769590c1def2a23c813b952b81a640b6",
+    "stepId": "S000017",
+    "taskId": "network-monitor",
+    "kind": "agent",
+    "label": "Implement network monitoring",
+    "taskDefRef": "tasks/01KN952CQQ10WTV6QM44QNF1D4/task.json"
+  },
+  "checksum": "5e601b5ae27c3f4e748a32f098f45570f98a7a346cdac257763a08ef9b7ef02b"
+}

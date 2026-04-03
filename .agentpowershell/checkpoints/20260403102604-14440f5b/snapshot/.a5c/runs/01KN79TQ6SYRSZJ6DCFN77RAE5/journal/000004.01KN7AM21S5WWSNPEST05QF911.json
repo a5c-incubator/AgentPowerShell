@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:47:39.321Z",
+  "data": {
+    "effectId": "01KN7AM20KHBKTDGSNEDHG7HJ7",
+    "invocationKey": "agentpowershell-full-build:S000002:architecture-design",
+    "invocationHash": "f622a56215d3d1f28f1d1c974cf79f0b0b13fad401a151352ebd365af997344d",
+    "stepId": "S000002",
+    "taskId": "architecture-design",
+    "kind": "agent",
+    "label": "Design agentpowershell architecture",
+    "taskDefRef": "tasks/01KN7AM20KHBKTDGSNEDHG7HJ7/task.json"
+  },
+  "checksum": "641e2d6b42fbaaa588bb55afce444c4d58b9c1433c60448451af15a9fb207329"
+}

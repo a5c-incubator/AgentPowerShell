@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN95P45E5BM764N8PTTRVJGA",
+  "taskId": "approval-system",
+  "invocationKey": "agentpowershell-full-build:S000020:approval-system",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Events/EventRecords.cs",
+      "src/AgentPowerShell.Daemon/ApprovalManager.cs",
+      "src/AgentPowerShell.Daemon/ApprovalSecretStore.cs",
+      "src/AgentPowerShell.Daemon/ApprovalTotp.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T08:04:33.829Z",
+  "finishedAt": "2026-04-03T08:04:33.829Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Events/EventRecords.cs",
+      "src/AgentPowerShell.Daemon/ApprovalManager.cs",
+      "src/AgentPowerShell.Daemon/ApprovalSecretStore.cs",
+      "src/AgentPowerShell.Daemon/ApprovalTotp.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

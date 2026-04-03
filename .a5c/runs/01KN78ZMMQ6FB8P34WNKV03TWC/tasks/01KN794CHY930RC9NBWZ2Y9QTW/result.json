@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN794CHY930RC9NBWZ2Y9QTW",
+  "taskId": "process-mining",
+  "invocationKey": "cradle/project-install:S000004:process-mining",
+  "status": "ok",
+  "result": {
+    "bottlenecks": [],
+    "branchPatterns": {
+      "averageLifetime": "N/A",
+      "mergeStrategy": "unknown - new project",
+      "namingConvention": "main branch only - too early to determine"
+    },
+    "commitPatterns": {
+      "averageFrequency": "new project - insufficient data",
+      "averageSize": {
+        "filesChanged": 2,
+        "linesAdded": 15,
+        "linesRemoved": 0
+      },
+      "conventions": [
+        "Imperative mood commit messages",
+        "Descriptive subject lines"
+      ],
+      "messageFormat": "imperative-mood, descriptive prefix (Add, Update, Fix, etc.)"
+    },
+    "contributors": [
+      {
+        "areas": [
+          "project setup"
+        ],
+        "commitCount": 2,
+        "name": "Tal Muskal"
+      }
+    ],
+    "evolution": {
+      "growthAreas": [
+        "Project is in greenfield phase - all areas will grow"
+      ],
+      "majorEvents": [
+        {
+          "date": "2026-04-02",
+          "description": "Project initialization with task outline"
+        }
+      ],
+      "technologyChanges": []
+    },
+    "implicitRules": [
+      "Project is brand new - no implicit rules established yet"
+    ],
+    "painPoints": [],
+    "releasePatterns": {
+      "frequency": "none yet",
+      "tagFormat": "none yet",
+      "versioningScheme": "not established"
+    }
+  },
+  "startedAt": "2026-04-02T14:21:54.571Z",
+  "finishedAt": "2026-04-02T14:21:54.571Z",
+  "value": {
+    "bottlenecks": [],
+    "branchPatterns": {
+      "averageLifetime": "N/A",
+      "mergeStrategy": "unknown - new project",
+      "namingConvention": "main branch only - too early to determine"
+    },
+    "commitPatterns": {
+      "averageFrequency": "new project - insufficient data",
+      "averageSize": {
+        "filesChanged": 2,
+        "linesAdded": 15,
+        "linesRemoved": 0
+      },
+      "conventions": [
+        "Imperative mood commit messages",
+        "Descriptive subject lines"
+      ],
+      "messageFormat": "imperative-mood, descriptive prefix (Add, Update, Fix, etc.)"
+    },
+    "contributors": [
+      {
+        "areas": [
+          "project setup"
+        ],
+        "commitCount": 2,
+        "name": "Tal Muskal"
+      }
+    ],
+    "evolution": {
+      "growthAreas": [
+        "Project is in greenfield phase - all areas will grow"
+      ],
+      "majorEvents": [
+        {
+          "date": "2026-04-02",
+          "description": "Project initialization with task outline"
+        }
+      ],
+      "technologyChanges": []
+    },
+    "implicitRules": [
+      "Project is brand new - no implicit rules established yet"
+    ],
+    "painPoints": [],
+    "releasePatterns": {
+      "frequency": "none yet",
+      "tagFormat": "none yet",
+      "versioningScheme": "not established"
+    }
+  }
+}

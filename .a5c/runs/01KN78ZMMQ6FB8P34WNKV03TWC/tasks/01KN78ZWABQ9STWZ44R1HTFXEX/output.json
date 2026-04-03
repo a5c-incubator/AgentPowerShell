@@ -1,0 +1,12 @@
+{
+  "existingProfile": null,
+  "isFirstRun": true,
+  "isNewProject": true,
+  "a5cDirExists": true,
+  "a5cFiles": ["cache", "inputs-project-install.json", "node_modules", "package.json", "package-lock.json", "processes", "runs"],
+  "claudeMdExists": false,
+  "claudeMdContent": "",
+  "cicdConfigFiles": [],
+  "gitCommitCount": 2,
+  "profileVersion": 0
+}

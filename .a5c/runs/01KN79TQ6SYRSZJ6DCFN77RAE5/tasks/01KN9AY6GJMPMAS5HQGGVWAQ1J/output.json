@@ -1,0 +1,9 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+    "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+    "src/AgentPowerShell.Events/SessionReport.cs",
+    "src/AgentPowerShell.Events/SessionReportGenerator.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

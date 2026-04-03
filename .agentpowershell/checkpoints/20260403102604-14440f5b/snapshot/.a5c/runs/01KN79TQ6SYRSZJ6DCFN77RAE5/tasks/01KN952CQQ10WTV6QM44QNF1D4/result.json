@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN952CQQ10WTV6QM44QNF1D4",
+  "taskId": "network-monitor",
+  "invocationKey": "agentpowershell-full-build:S000017:network-monitor",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Core/PolicyEngine.cs",
+      "src/AgentPowerShell.Daemon/NetworkMonitor.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T07:55:54.101Z",
+  "finishedAt": "2026-04-03T07:55:54.101Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Core/PolicyEngine.cs",
+      "src/AgentPowerShell.Daemon/NetworkMonitor.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

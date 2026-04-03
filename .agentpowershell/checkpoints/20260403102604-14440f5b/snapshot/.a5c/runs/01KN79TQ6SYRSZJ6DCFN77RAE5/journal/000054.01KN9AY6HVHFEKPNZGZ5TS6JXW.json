@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T09:31:40.475Z",
+  "data": {
+    "effectId": "01KN9AY6GJMPMAS5HQGGVWAQ1J",
+    "invocationKey": "agentpowershell-full-build:S000027:reporting",
+    "invocationHash": "391a24faad1c8e8afd407120063a6b7760bedd01ade1d1c2f84a7b9b61299135",
+    "stepId": "S000027",
+    "taskId": "reporting",
+    "kind": "agent",
+    "label": "Implement session reporting",
+    "taskDefRef": "tasks/01KN9AY6GJMPMAS5HQGGVWAQ1J/task.json"
+  },
+  "checksum": "fe43ecccb9cdde20ad98e506c3448b96b148ac60cfe85dc2850e51c2c59e9b74"
+}

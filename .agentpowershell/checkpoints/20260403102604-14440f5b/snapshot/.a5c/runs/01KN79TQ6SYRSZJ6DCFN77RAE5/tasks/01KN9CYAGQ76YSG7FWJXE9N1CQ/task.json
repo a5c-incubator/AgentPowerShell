@@ -1,0 +1,863 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "approved": {
+          "type": "boolean"
+        },
+        "concerns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "confidence": {
+          "type": "number"
+        },
+        "followUpTasks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "strengths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "verdict": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "verdict",
+        "approved",
+        "confidence"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "phases": {
+          "approval": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+              "src/AgentPowerShell.Events/EventRecords.cs",
+              "src/AgentPowerShell.Daemon/ApprovalManager.cs",
+              "src/AgentPowerShell.Daemon/ApprovalSecretStore.cs",
+              "src/AgentPowerShell.Daemon/ApprovalTotp.cs",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "architecture": {
+            "designDecisions": [
+              "PATH-based shim instead of binary replacement",
+              "Native AOT for shim binary -- sub-50ms cold start",
+              "gRPC over named pipes/Unix domain sockets for IPC",
+              "Protobuf wire protocol for schema-first compatibility",
+              "Generic Host for daemon lifecycle and DI",
+              "ConstrainedLanguage mode as baseline PowerShell enforcement",
+              "Custom PSHost + InitialSessionState for PowerShell interception",
+              "Platform enforcer abstraction with factory pattern",
+              "Composite event store with fan-out (SQLite + JSONL + webhook + OTEL)",
+              "System.Threading.Channels for pub/sub event broker",
+              "YAML policy format compatible with agentsh",
+              "YARP reverse proxy for LLM proxy",
+              "Native helper binaries for high-risk platform features",
+              "Minifilter driver communication via fltlib.dll P/Invoke"
+            ],
+            "platformStrategies": {
+              "linux": "cgroups v2 + Landlock + seccomp-bpf + ptrace + eBPF + namespaces + Unix sockets",
+              "macos": "Endpoint Security + sandbox-exec + Network Extension + FSEvents + RLIMIT + XPC",
+              "windows": "Job Objects + minifilter + ETW + AppContainer + AMSI + ConPTY + named pipes"
+            },
+            "solutionStructure": {
+              "projects": [
+                "AgentPowerShell.Core",
+                "AgentPowerShell.Protos",
+                "AgentPowerShell.Daemon",
+                "AgentPowerShell.Shim",
+                "AgentPowerShell.Cli",
+                "AgentPowerShell.Events",
+                "AgentPowerShell.LlmProxy",
+                "AgentPowerShell.Mcp",
+                "AgentPowerShell.Platform.Windows",
+                "AgentPowerShell.Platform.Linux",
+                "AgentPowerShell.Platform.MacOS",
+                "AgentPowerShell.Tests",
+                "AgentPowerShell.IntegrationTests",
+                "AgentPowerShell.Platform.Tests"
+              ],
+              "totalProjects": 14
+            },
+            "summary": "Complete architecture for agentpowershell -- a C#/.NET 9 PowerShell policy-enforced shell execution gateway with daemon+shim pattern, gRPC IPC, YAML-based first-match-wins policy engine, 70+ event types with composite fan-out store, cross-platform enforcement via platform abstraction, LLM reverse proxy with DLP, MCP security monitoring, and multi-modal approval system."
+          },
+          "auth": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/Abstractions.cs",
+              "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+              "src/AgentPowerShell.Daemon/AuthenticationManager.cs",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "checkpoints": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/WorkspaceCheckpointManager.cs",
+              "src/AgentPowerShell.Cli/CliApp.cs",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "cli": {
+            "commandsImplemented": [
+              "exec",
+              "start",
+              "stop",
+              "session create",
+              "session list",
+              "session destroy",
+              "policy validate",
+              "policy show",
+              "report",
+              "status",
+              "checkpoint create",
+              "checkpoint restore",
+              "checkpoint list",
+              "config show",
+              "config set"
+            ],
+            "filesCreated": [
+              "src/AgentPowerShell.Cli/Program.cs",
+              "src/AgentPowerShell.Cli/CliApp.cs",
+              "src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj",
+              "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "core": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/PolicyDecision.cs",
+              "src/AgentPowerShell.Core/PolicyModels.cs",
+              "src/AgentPowerShell.Core/PolicyRequests.cs",
+              "src/AgentPowerShell.Core/GlobMatcher.cs",
+              "src/AgentPowerShell.Core/PolicyEngine.cs",
+              "src/AgentPowerShell.Core/PortMatcher.cs",
+              "src/AgentPowerShell.Core/PolicyLoader.cs",
+              "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+              "src/AgentPowerShell.Core/CoreEvents.cs",
+              "src/AgentPowerShell.Core/Abstractions.cs"
+            ],
+            "filesModified": [
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ],
+            "testsPassing": false,
+            "testsWritten": 6
+          },
+          "docs": {
+            "filesCreated": [
+              "README.md",
+              "docs/getting-started.md",
+              "docs/policy-reference.md",
+              "docs/cli-reference.md",
+              "docs/configuration.md",
+              "docs/cross-platform.md",
+              "docs/agent-integration.md",
+              "SECURITY.md",
+              "CONTRIBUTING.md"
+            ]
+          },
+          "events": {
+            "filesCreated": [
+              "src/AgentPowerShell.Events/EventRecords.cs",
+              "src/AgentPowerShell.Events/EventBus.cs",
+              "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+              "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+              "src/AgentPowerShell.Events/EventQuery.cs"
+            ]
+          },
+          "fsMonitor": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/Abstractions.cs",
+              "src/AgentPowerShell.Daemon/FilesystemMonitor.cs",
+              "src/AgentPowerShell.Daemon/FilesystemMonitorHostedService.cs",
+              "src/AgentPowerShell.Daemon/QuarantineService.cs",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "src/AgentPowerShell.Daemon/SessionStore.cs",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "llmProxy": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+              "src/AgentPowerShell.LlmProxy/Program.cs",
+              "src/AgentPowerShell.LlmProxy/ProxyModels.cs",
+              "src/AgentPowerShell.LlmProxy/ProviderRouter.cs",
+              "src/AgentPowerShell.LlmProxy/DlpRedactor.cs",
+              "src/AgentPowerShell.LlmProxy/UsageTracker.cs",
+              "src/AgentPowerShell.LlmProxy/ProxyTelemetry.cs",
+              "src/AgentPowerShell.LlmProxy/ProxyService.cs",
+              "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+              "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "mcp": {
+            "filesCreated": [
+              "src/AgentPowerShell.Mcp/McpServer.cs",
+              "src/AgentPowerShell.Mcp/McpModels.cs",
+              "src/AgentPowerShell.Mcp/McpRegistry.cs",
+              "src/AgentPowerShell.Mcp/McpVersionPinStore.cs",
+              "src/AgentPowerShell.Mcp/McpSessionAnalyzer.cs",
+              "src/AgentPowerShell.Mcp/McpInspector.cs",
+              "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "netMonitor": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/Abstractions.cs",
+              "src/AgentPowerShell.Core/PolicyEngine.cs",
+              "src/AgentPowerShell.Daemon/NetworkMonitor.cs",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "packaging": {
+            "filesCreated": [
+              "Dockerfile",
+              ".github/workflows/release.yml",
+              "install.ps1",
+              "install.sh",
+              "NuGet.config",
+              "eng/code-signing/README.md",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-x64.pubxml",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-arm64.pubxml",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-x64.pubxml",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-arm64.pubxml",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-x64.pubxml",
+              "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-arm64.pubxml"
+            ]
+          },
+          "platforms": {
+            "linux": {
+              "filesCreated": [
+                "src/AgentPowerShell.Platform.Linux/LinuxEnforcementPlan.cs",
+                "src/AgentPowerShell.Platform.Linux/LinuxNativeMethods.cs",
+                "src/AgentPowerShell.Platform.Linux/SystemdUnitFile.cs"
+              ],
+              "platformFeatures": [
+                "seccomp/ptrace/Landlock planning",
+                "Linux syscall interop stubs",
+                "systemd unit rendering"
+              ]
+            },
+            "macos": {
+              "filesCreated": [
+                "src/AgentPowerShell.Platform.MacOS/MacOsEnforcementPlan.cs",
+                "src/AgentPowerShell.Platform.MacOS/MacOsNativeMethods.cs",
+                "src/AgentPowerShell.Platform.MacOS/LaunchdPlist.cs"
+              ],
+              "platformFeatures": [
+                "Endpoint Security / sandbox-exec planning",
+                "macOS rlimit interop stubs",
+                "launchd plist rendering"
+              ]
+            },
+            "windows": {
+              "filesCreated": [
+                "src/AgentPowerShell.Platform.Windows/WindowsEnforcementPlan.cs",
+                "src/AgentPowerShell.Platform.Windows/WindowsNativeMethods.cs",
+                "src/AgentPowerShell.Platform.Windows/ConPtySessionOptions.cs",
+                "src/AgentPowerShell.Platform.Windows/WindowsServiceRegistration.cs"
+              ],
+              "platformFeatures": [
+                "Job Objects planning",
+                "AppContainer profile interop stubs",
+                "ConPTY session options",
+                "Windows service registration model"
+              ]
+            }
+          },
+          "reporting": {
+            "filesCreated": [
+              "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+              "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+              "src/AgentPowerShell.Events/SessionReport.cs",
+              "src/AgentPowerShell.Events/SessionReportGenerator.cs",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+            ]
+          },
+          "research": {
+            "architecturalInsights": [
+              "The daemon should be a long-running .NET process hosting the policy engine, event store, and approval manager, with the shim being a lightweight PowerShell module or custom host that contacts the daemon per command",
+              "Policy evaluation must happen BEFORE process creation, not after -- this requires intercepting at the PowerShell command pipeline level (pre-execution) and at the OS level (Job Objects with CREATE_SUSPENDED for process creation control)",
+              "Session-scoped policy engines with variable expansion enable workspace-aware policies without per-workspace policy files",
+              "The composite event store pattern (fan-out to multiple backends) should be adopted directly -- SQLite for queries, JSONL for rotation-based logs, webhooks for external integration",
+              "Process context chains (ancestry-based policy) are critical for AI agent sandboxing -- detecting shell laundering requires tracking process trees",
+              "The approval flow needs multiple modes (TTY, API, TOTP, WebAuthn, dialog) to support different deployment scenarios from local dev to headless CI",
+              "ETW on Windows provides PowerShell script block logging, process creation, file operations, and network activity without any modifications to the target process"
+            ],
+            "keyFindings": [
+              "agentsh uses a daemon+shim pattern where /bin/sh is replaced with a shim binary that contacts the daemon for policy decisions via IPC before executing commands through the real shell",
+              "The policy engine supports 10+ rule types (file, network, command, registry, signal, DNS redirect, connect redirect, unix socket, MCP, package) with first-match-wins evaluation and compiled glob/regex patterns",
+              "The event system has 70+ event types across 14 categories with a pub/sub broker and composite fan-out store (SQLite, JSONL, webhook, OTEL) supporting tamper-detection via HMAC chains",
+              "PowerShell's PSHost is a 1:1 host-to-runspace abstraction that controls UI but NOT command interception -- actual command interception requires InitialSessionState constraints, binary module proxy cmdlets, or NativeCommandProcessor wrapping",
+              "PowerShell's NativeCommandProcessor uses System.Diagnostics.Process internally, meaning OS-level enforcement (Job Objects, seccomp) is the only reliable way to prevent process execution bypass via direct .NET API calls",
+              "The agentsh Windows minifilter driver communicates via FilterPort using a structured protocol with MSG_POLICY_CHECK_FILE and MSG_POLICY_CHECK_REGISTRY messages, supporting async decisions with configurable cache TTL",
+              "ConstrainedLanguage mode in PowerShell prevents Add-Type, direct .NET type instantiation, and COM objects -- essential for preventing sandbox escape",
+              "Named pipes (System.IO.Pipes) provide cross-platform IPC in .NET, mapping to Win32 named pipes on Windows and Unix domain sockets on Linux/macOS"
+            ],
+            "platformApis": {
+              "linux": [
+                "seccomp-bpf via syscall(2)",
+                "ptrace via libc",
+                "Landlock LSM via syscall(2)",
+                "eBPF via bpf() syscall",
+                "cgroups v2 via filesystem",
+                "Unix domain sockets (System.Net.Sockets)"
+              ],
+              "macos": [
+                "Endpoint Security Framework (native helper required)",
+                "sandbox-exec profiles",
+                "Network Extension Framework",
+                "RLIMIT via setrlimit()",
+                "FSEvents"
+              ],
+              "windows": [
+                "Job Objects (kernel32.dll) -- process containment, resource limits",
+                "AppContainer (userenv.dll) -- capability-based sandbox",
+                "ETW via Microsoft.Diagnostics.Tracing.TraceEvent",
+                "Minifilter communication (fltlib.dll)",
+                "ConPTY (kernel32.dll)",
+                "Named Pipes (System.IO.Pipes)",
+                "AMSI (amsi.dll)"
+              ]
+            },
+            "risks": [
+              "PowerShell bypass via -NoProfile flag renders profile-based enforcement insufficient",
+              "Direct .NET API calls bypass PowerShell command pipeline entirely -- ConstrainedLanguage mode + OS enforcement required",
+              "Windows minifilter driver requires kernel-mode signing certificate for production",
+              "macOS Endpoint Security requires System Extension entitlement from Apple",
+              "seccomp user-notify not available in all Linux environments -- need fallback to ptrace",
+              "Per-command IPC to daemon adds latency; need caching of policy decisions",
+              "Race conditions in process tree tracking when PIDs are recycled"
+            ],
+            "summary": "Deep analysis of the agentsh Go codebase, PowerShell internals, and .NET platform APIs reveals a clear architectural path for agentpowershell: a C#/.NET daemon that uses named pipes for IPC, hosts PowerShell via the SDK with a custom PSHost and constrained InitialSessionState, evaluates YAML-based policies through a compiled rule engine, and enforces security through platform-specific mechanisms (Job Objects + minifilter on Windows, Landlock + seccomp on Linux, Endpoint Security on macOS)."
+          },
+          "scaffold": {
+            "filesCreated": [
+              "agentpowershell.sln",
+              "src/AgentPowerShell.Core/AgentPowerShell.Core.csproj",
+              "src/AgentPowerShell.Core/ExecutionPolicy.cs",
+              "src/AgentPowerShell.Protos/AgentPowerShell.Protos.csproj",
+              "src/AgentPowerShell.Protos/agentpowershell.proto",
+              "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "src/AgentPowerShell.Daemon/Worker.cs",
+              "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+              "src/AgentPowerShell.Shim/Program.cs",
+              "src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj",
+              "src/AgentPowerShell.Cli/Program.cs",
+              "src/AgentPowerShell.Events/AgentPowerShell.Events.csproj",
+              "src/AgentPowerShell.Events/AuditEvent.cs",
+              "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+              "src/AgentPowerShell.LlmProxy/Program.cs",
+              "src/AgentPowerShell.Mcp/AgentPowerShell.Mcp.csproj",
+              "src/AgentPowerShell.Mcp/McpServer.cs",
+              "src/AgentPowerShell.Platform.Windows/AgentPowerShell.Platform.Windows.csproj",
+              "src/AgentPowerShell.Platform.Windows/WindowsPlatformEnforcer.cs",
+              "src/AgentPowerShell.Platform.Linux/AgentPowerShell.Platform.Linux.csproj",
+              "src/AgentPowerShell.Platform.Linux/LinuxPlatformEnforcer.cs",
+              "src/AgentPowerShell.Platform.MacOS/AgentPowerShell.Platform.MacOS.csproj",
+              "src/AgentPowerShell.Platform.MacOS/MacOsPlatformEnforcer.cs",
+              "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+              "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs",
+              "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+              "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+              "tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj",
+              "tests/AgentPowerShell.Platform.Tests/PlatformSmokeTests.cs"
+            ],
+            "projectsCreated": [
+              "AgentPowerShell.Core",
+              "AgentPowerShell.Protos",
+              "AgentPowerShell.Daemon",
+              "AgentPowerShell.Shim",
+              "AgentPowerShell.Cli",
+              "AgentPowerShell.Events",
+              "AgentPowerShell.LlmProxy",
+              "AgentPowerShell.Mcp",
+              "AgentPowerShell.Platform.Windows",
+              "AgentPowerShell.Platform.Linux",
+              "AgentPowerShell.Platform.MacOS",
+              "AgentPowerShell.Tests",
+              "AgentPowerShell.IntegrationTests",
+              "AgentPowerShell.Platform.Tests"
+            ]
+          },
+          "sessions": {
+            "filesCreated": [
+              "src/AgentPowerShell.Core/SessionModels.cs",
+              "src/AgentPowerShell.Daemon/SessionStore.cs",
+              "src/AgentPowerShell.Daemon/SessionLifecycleService.cs"
+            ]
+          },
+          "shim": {
+            "filesCreated": [
+              "src/AgentPowerShell.Protos/ShimMessages.cs",
+              "src/AgentPowerShell.Core/ShimIpcOptions.cs",
+              "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+              "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+              "src/AgentPowerShell.Shim/ShimClient.cs",
+              "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+              "src/AgentPowerShell.Shim/RealPowerShellResolver.cs"
+            ],
+            "filesModified": [
+              "src/AgentPowerShell.Protos/agentpowershell.proto",
+              "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+              "src/AgentPowerShell.Daemon/Program.cs",
+              "src/AgentPowerShell.Daemon/Worker.cs",
+              "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+              "src/AgentPowerShell.Shim/Program.cs",
+              "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+              "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+              "Directory.Build.props"
+            ],
+            "testsWritten": 1
+          }
+        },
+        "projectName": "agentpowershell",
+        "projectRoot": "C:/work/agentpowershell",
+        "qualityScore": 88,
+        "targetQuality": 85
+      },
+      "instructions": [
+        "Review overall architecture and code organization",
+        "Verify feature parity with agentsh",
+        "Review security posture of the implementation",
+        "Check cross-platform readiness",
+        "Review test coverage and quality",
+        "Assess documentation completeness",
+        "Provide final verdict and any remaining recommendations",
+        "Write docs/final-report.md with the complete review"
+      ],
+      "outputFormat": "JSON with verdict, approved, confidence, strengths, concerns, followUpTasks",
+      "role": "Principal engineer and technical reviewer",
+      "task": "Conduct final comprehensive review of the agentpowershell implementation"
+    }
+  },
+  "execution": {
+    "model": "claude-opus-4-6"
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9CYAGQ76YSG7FWJXE9N1CQ/input.json",
+    "outputJsonPath": "tasks/01KN9CYAGQ76YSG7FWJXE9N1CQ/output.json"
+  },
+  "kind": "agent",
+  "title": "Final project review",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9CYAGQ76YSG7FWJXE9N1CQ",
+  "taskId": "final-review",
+  "invocationKey": "agentpowershell-full-build:S000034:final-review",
+  "stepId": "S000034",
+  "inputs": {
+    "phases": {
+      "approval": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+          "src/AgentPowerShell.Events/EventRecords.cs",
+          "src/AgentPowerShell.Daemon/ApprovalManager.cs",
+          "src/AgentPowerShell.Daemon/ApprovalSecretStore.cs",
+          "src/AgentPowerShell.Daemon/ApprovalTotp.cs",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "architecture": {
+        "designDecisions": [
+          "PATH-based shim instead of binary replacement",
+          "Native AOT for shim binary -- sub-50ms cold start",
+          "gRPC over named pipes/Unix domain sockets for IPC",
+          "Protobuf wire protocol for schema-first compatibility",
+          "Generic Host for daemon lifecycle and DI",
+          "ConstrainedLanguage mode as baseline PowerShell enforcement",
+          "Custom PSHost + InitialSessionState for PowerShell interception",
+          "Platform enforcer abstraction with factory pattern",
+          "Composite event store with fan-out (SQLite + JSONL + webhook + OTEL)",
+          "System.Threading.Channels for pub/sub event broker",
+          "YAML policy format compatible with agentsh",
+          "YARP reverse proxy for LLM proxy",
+          "Native helper binaries for high-risk platform features",
+          "Minifilter driver communication via fltlib.dll P/Invoke"
+        ],
+        "platformStrategies": {
+          "linux": "cgroups v2 + Landlock + seccomp-bpf + ptrace + eBPF + namespaces + Unix sockets",
+          "macos": "Endpoint Security + sandbox-exec + Network Extension + FSEvents + RLIMIT + XPC",
+          "windows": "Job Objects + minifilter + ETW + AppContainer + AMSI + ConPTY + named pipes"
+        },
+        "solutionStructure": {
+          "projects": [
+            "AgentPowerShell.Core",
+            "AgentPowerShell.Protos",
+            "AgentPowerShell.Daemon",
+            "AgentPowerShell.Shim",
+            "AgentPowerShell.Cli",
+            "AgentPowerShell.Events",
+            "AgentPowerShell.LlmProxy",
+            "AgentPowerShell.Mcp",
+            "AgentPowerShell.Platform.Windows",
+            "AgentPowerShell.Platform.Linux",
+            "AgentPowerShell.Platform.MacOS",
+            "AgentPowerShell.Tests",
+            "AgentPowerShell.IntegrationTests",
+            "AgentPowerShell.Platform.Tests"
+          ],
+          "totalProjects": 14
+        },
+        "summary": "Complete architecture for agentpowershell -- a C#/.NET 9 PowerShell policy-enforced shell execution gateway with daemon+shim pattern, gRPC IPC, YAML-based first-match-wins policy engine, 70+ event types with composite fan-out store, cross-platform enforcement via platform abstraction, LLM reverse proxy with DLP, MCP security monitoring, and multi-modal approval system."
+      },
+      "auth": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/Abstractions.cs",
+          "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+          "src/AgentPowerShell.Daemon/AuthenticationManager.cs",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "checkpoints": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/WorkspaceCheckpointManager.cs",
+          "src/AgentPowerShell.Cli/CliApp.cs",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "cli": {
+        "commandsImplemented": [
+          "exec",
+          "start",
+          "stop",
+          "session create",
+          "session list",
+          "session destroy",
+          "policy validate",
+          "policy show",
+          "report",
+          "status",
+          "checkpoint create",
+          "checkpoint restore",
+          "checkpoint list",
+          "config show",
+          "config set"
+        ],
+        "filesCreated": [
+          "src/AgentPowerShell.Cli/Program.cs",
+          "src/AgentPowerShell.Cli/CliApp.cs",
+          "src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj",
+          "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "core": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/PolicyDecision.cs",
+          "src/AgentPowerShell.Core/PolicyModels.cs",
+          "src/AgentPowerShell.Core/PolicyRequests.cs",
+          "src/AgentPowerShell.Core/GlobMatcher.cs",
+          "src/AgentPowerShell.Core/PolicyEngine.cs",
+          "src/AgentPowerShell.Core/PortMatcher.cs",
+          "src/AgentPowerShell.Core/PolicyLoader.cs",
+          "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+          "src/AgentPowerShell.Core/CoreEvents.cs",
+          "src/AgentPowerShell.Core/Abstractions.cs"
+        ],
+        "filesModified": [
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ],
+        "testsPassing": false,
+        "testsWritten": 6
+      },
+      "docs": {
+        "filesCreated": [
+          "README.md",
+          "docs/getting-started.md",
+          "docs/policy-reference.md",
+          "docs/cli-reference.md",
+          "docs/configuration.md",
+          "docs/cross-platform.md",
+          "docs/agent-integration.md",
+          "SECURITY.md",
+          "CONTRIBUTING.md"
+        ]
+      },
+      "events": {
+        "filesCreated": [
+          "src/AgentPowerShell.Events/EventRecords.cs",
+          "src/AgentPowerShell.Events/EventBus.cs",
+          "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+          "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+          "src/AgentPowerShell.Events/EventQuery.cs"
+        ]
+      },
+      "fsMonitor": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/Abstractions.cs",
+          "src/AgentPowerShell.Daemon/FilesystemMonitor.cs",
+          "src/AgentPowerShell.Daemon/FilesystemMonitorHostedService.cs",
+          "src/AgentPowerShell.Daemon/QuarantineService.cs",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "src/AgentPowerShell.Daemon/SessionStore.cs",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "llmProxy": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+          "src/AgentPowerShell.LlmProxy/Program.cs",
+          "src/AgentPowerShell.LlmProxy/ProxyModels.cs",
+          "src/AgentPowerShell.LlmProxy/ProviderRouter.cs",
+          "src/AgentPowerShell.LlmProxy/DlpRedactor.cs",
+          "src/AgentPowerShell.LlmProxy/UsageTracker.cs",
+          "src/AgentPowerShell.LlmProxy/ProxyTelemetry.cs",
+          "src/AgentPowerShell.LlmProxy/ProxyService.cs",
+          "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+          "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "mcp": {
+        "filesCreated": [
+          "src/AgentPowerShell.Mcp/McpServer.cs",
+          "src/AgentPowerShell.Mcp/McpModels.cs",
+          "src/AgentPowerShell.Mcp/McpRegistry.cs",
+          "src/AgentPowerShell.Mcp/McpVersionPinStore.cs",
+          "src/AgentPowerShell.Mcp/McpSessionAnalyzer.cs",
+          "src/AgentPowerShell.Mcp/McpInspector.cs",
+          "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "netMonitor": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/Abstractions.cs",
+          "src/AgentPowerShell.Core/PolicyEngine.cs",
+          "src/AgentPowerShell.Daemon/NetworkMonitor.cs",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "packaging": {
+        "filesCreated": [
+          "Dockerfile",
+          ".github/workflows/release.yml",
+          "install.ps1",
+          "install.sh",
+          "NuGet.config",
+          "eng/code-signing/README.md",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-x64.pubxml",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-arm64.pubxml",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-x64.pubxml",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-arm64.pubxml",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-x64.pubxml",
+          "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-arm64.pubxml"
+        ]
+      },
+      "platforms": {
+        "linux": {
+          "filesCreated": [
+            "src/AgentPowerShell.Platform.Linux/LinuxEnforcementPlan.cs",
+            "src/AgentPowerShell.Platform.Linux/LinuxNativeMethods.cs",
+            "src/AgentPowerShell.Platform.Linux/SystemdUnitFile.cs"
+          ],
+          "platformFeatures": [
+            "seccomp/ptrace/Landlock planning",
+            "Linux syscall interop stubs",
+            "systemd unit rendering"
+          ]
+        },
+        "macos": {
+          "filesCreated": [
+            "src/AgentPowerShell.Platform.MacOS/MacOsEnforcementPlan.cs",
+            "src/AgentPowerShell.Platform.MacOS/MacOsNativeMethods.cs",
+            "src/AgentPowerShell.Platform.MacOS/LaunchdPlist.cs"
+          ],
+          "platformFeatures": [
+            "Endpoint Security / sandbox-exec planning",
+            "macOS rlimit interop stubs",
+            "launchd plist rendering"
+          ]
+        },
+        "windows": {
+          "filesCreated": [
+            "src/AgentPowerShell.Platform.Windows/WindowsEnforcementPlan.cs",
+            "src/AgentPowerShell.Platform.Windows/WindowsNativeMethods.cs",
+            "src/AgentPowerShell.Platform.Windows/ConPtySessionOptions.cs",
+            "src/AgentPowerShell.Platform.Windows/WindowsServiceRegistration.cs"
+          ],
+          "platformFeatures": [
+            "Job Objects planning",
+            "AppContainer profile interop stubs",
+            "ConPTY session options",
+            "Windows service registration model"
+          ]
+        }
+      },
+      "reporting": {
+        "filesCreated": [
+          "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+          "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+          "src/AgentPowerShell.Events/SessionReport.cs",
+          "src/AgentPowerShell.Events/SessionReportGenerator.cs",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+        ]
+      },
+      "research": {
+        "architecturalInsights": [
+          "The daemon should be a long-running .NET process hosting the policy engine, event store, and approval manager, with the shim being a lightweight PowerShell module or custom host that contacts the daemon per command",
+          "Policy evaluation must happen BEFORE process creation, not after -- this requires intercepting at the PowerShell command pipeline level (pre-execution) and at the OS level (Job Objects with CREATE_SUSPENDED for process creation control)",
+          "Session-scoped policy engines with variable expansion enable workspace-aware policies without per-workspace policy files",
+          "The composite event store pattern (fan-out to multiple backends) should be adopted directly -- SQLite for queries, JSONL for rotation-based logs, webhooks for external integration",
+          "Process context chains (ancestry-based policy) are critical for AI agent sandboxing -- detecting shell laundering requires tracking process trees",
+          "The approval flow needs multiple modes (TTY, API, TOTP, WebAuthn, dialog) to support different deployment scenarios from local dev to headless CI",
+          "ETW on Windows provides PowerShell script block logging, process creation, file operations, and network activity without any modifications to the target process"
+        ],
+        "keyFindings": [
+          "agentsh uses a daemon+shim pattern where /bin/sh is replaced with a shim binary that contacts the daemon for policy decisions via IPC before executing commands through the real shell",
+          "The policy engine supports 10+ rule types (file, network, command, registry, signal, DNS redirect, connect redirect, unix socket, MCP, package) with first-match-wins evaluation and compiled glob/regex patterns",
+          "The event system has 70+ event types across 14 categories with a pub/sub broker and composite fan-out store (SQLite, JSONL, webhook, OTEL) supporting tamper-detection via HMAC chains",
+          "PowerShell's PSHost is a 1:1 host-to-runspace abstraction that controls UI but NOT command interception -- actual command interception requires InitialSessionState constraints, binary module proxy cmdlets, or NativeCommandProcessor wrapping",
+          "PowerShell's NativeCommandProcessor uses System.Diagnostics.Process internally, meaning OS-level enforcement (Job Objects, seccomp) is the only reliable way to prevent process execution bypass via direct .NET API calls",
+          "The agentsh Windows minifilter driver communicates via FilterPort using a structured protocol with MSG_POLICY_CHECK_FILE and MSG_POLICY_CHECK_REGISTRY messages, supporting async decisions with configurable cache TTL",
+          "ConstrainedLanguage mode in PowerShell prevents Add-Type, direct .NET type instantiation, and COM objects -- essential for preventing sandbox escape",
+          "Named pipes (System.IO.Pipes) provide cross-platform IPC in .NET, mapping to Win32 named pipes on Windows and Unix domain sockets on Linux/macOS"
+        ],
+        "platformApis": {
+          "linux": [
+            "seccomp-bpf via syscall(2)",
+            "ptrace via libc",
+            "Landlock LSM via syscall(2)",
+            "eBPF via bpf() syscall",
+            "cgroups v2 via filesystem",
+            "Unix domain sockets (System.Net.Sockets)"
+          ],
+          "macos": [
+            "Endpoint Security Framework (native helper required)",
+            "sandbox-exec profiles",
+            "Network Extension Framework",
+            "RLIMIT via setrlimit()",
+            "FSEvents"
+          ],
+          "windows": [
+            "Job Objects (kernel32.dll) -- process containment, resource limits",
+            "AppContainer (userenv.dll) -- capability-based sandbox",
+            "ETW via Microsoft.Diagnostics.Tracing.TraceEvent",
+            "Minifilter communication (fltlib.dll)",
+            "ConPTY (kernel32.dll)",
+            "Named Pipes (System.IO.Pipes)",
+            "AMSI (amsi.dll)"
+          ]
+        },
+        "risks": [
+          "PowerShell bypass via -NoProfile flag renders profile-based enforcement insufficient",
+          "Direct .NET API calls bypass PowerShell command pipeline entirely -- ConstrainedLanguage mode + OS enforcement required",
+          "Windows minifilter driver requires kernel-mode signing certificate for production",
+          "macOS Endpoint Security requires System Extension entitlement from Apple",
+          "seccomp user-notify not available in all Linux environments -- need fallback to ptrace",
+          "Per-command IPC to daemon adds latency; need caching of policy decisions",
+          "Race conditions in process tree tracking when PIDs are recycled"
+        ],
+        "summary": "Deep analysis of the agentsh Go codebase, PowerShell internals, and .NET platform APIs reveals a clear architectural path for agentpowershell: a C#/.NET daemon that uses named pipes for IPC, hosts PowerShell via the SDK with a custom PSHost and constrained InitialSessionState, evaluates YAML-based policies through a compiled rule engine, and enforces security through platform-specific mechanisms (Job Objects + minifilter on Windows, Landlock + seccomp on Linux, Endpoint Security on macOS)."
+      },
+      "scaffold": {
+        "filesCreated": [
+          "agentpowershell.sln",
+          "src/AgentPowerShell.Core/AgentPowerShell.Core.csproj",
+          "src/AgentPowerShell.Core/ExecutionPolicy.cs",
+          "src/AgentPowerShell.Protos/AgentPowerShell.Protos.csproj",
+          "src/AgentPowerShell.Protos/agentpowershell.proto",
+          "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "src/AgentPowerShell.Daemon/Worker.cs",
+          "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+          "src/AgentPowerShell.Shim/Program.cs",
+          "src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj",
+          "src/AgentPowerShell.Cli/Program.cs",
+          "src/AgentPowerShell.Events/AgentPowerShell.Events.csproj",
+          "src/AgentPowerShell.Events/AuditEvent.cs",
+          "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+          "src/AgentPowerShell.LlmProxy/Program.cs",
+          "src/AgentPowerShell.Mcp/AgentPowerShell.Mcp.csproj",
+          "src/AgentPowerShell.Mcp/McpServer.cs",
+          "src/AgentPowerShell.Platform.Windows/AgentPowerShell.Platform.Windows.csproj",
+          "src/AgentPowerShell.Platform.Windows/WindowsPlatformEnforcer.cs",
+          "src/AgentPowerShell.Platform.Linux/AgentPowerShell.Platform.Linux.csproj",
+          "src/AgentPowerShell.Platform.Linux/LinuxPlatformEnforcer.cs",
+          "src/AgentPowerShell.Platform.MacOS/AgentPowerShell.Platform.MacOS.csproj",
+          "src/AgentPowerShell.Platform.MacOS/MacOsPlatformEnforcer.cs",
+          "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+          "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs",
+          "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+          "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+          "tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj",
+          "tests/AgentPowerShell.Platform.Tests/PlatformSmokeTests.cs"
+        ],
+        "projectsCreated": [
+          "AgentPowerShell.Core",
+          "AgentPowerShell.Protos",
+          "AgentPowerShell.Daemon",
+          "AgentPowerShell.Shim",
+          "AgentPowerShell.Cli",
+          "AgentPowerShell.Events",
+          "AgentPowerShell.LlmProxy",
+          "AgentPowerShell.Mcp",
+          "AgentPowerShell.Platform.Windows",
+          "AgentPowerShell.Platform.Linux",
+          "AgentPowerShell.Platform.MacOS",
+          "AgentPowerShell.Tests",
+          "AgentPowerShell.IntegrationTests",
+          "AgentPowerShell.Platform.Tests"
+        ]
+      },
+      "sessions": {
+        "filesCreated": [
+          "src/AgentPowerShell.Core/SessionModels.cs",
+          "src/AgentPowerShell.Daemon/SessionStore.cs",
+          "src/AgentPowerShell.Daemon/SessionLifecycleService.cs"
+        ]
+      },
+      "shim": {
+        "filesCreated": [
+          "src/AgentPowerShell.Protos/ShimMessages.cs",
+          "src/AgentPowerShell.Core/ShimIpcOptions.cs",
+          "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+          "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+          "src/AgentPowerShell.Shim/ShimClient.cs",
+          "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+          "src/AgentPowerShell.Shim/RealPowerShellResolver.cs"
+        ],
+        "filesModified": [
+          "src/AgentPowerShell.Protos/agentpowershell.proto",
+          "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+          "src/AgentPowerShell.Daemon/Program.cs",
+          "src/AgentPowerShell.Daemon/Worker.cs",
+          "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+          "src/AgentPowerShell.Shim/Program.cs",
+          "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+          "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+          "Directory.Build.props"
+        ],
+        "testsWritten": 1
+      }
+    },
+    "projectName": "agentpowershell",
+    "projectRoot": "C:/work/agentpowershell",
+    "qualityScore": 88,
+    "targetQuality": 85
+  }
+}

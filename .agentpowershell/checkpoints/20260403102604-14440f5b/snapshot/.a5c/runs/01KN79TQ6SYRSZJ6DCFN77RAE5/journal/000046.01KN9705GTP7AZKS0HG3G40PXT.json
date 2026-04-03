@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:22:50.650Z",
+  "data": {
+    "effectId": "01KN9705F8Q9TSY68450N98GD0",
+    "invocationKey": "agentpowershell-full-build:S000023:llm-proxy",
+    "invocationHash": "90d16112be33bca33fd8f71f90cbdd62bc1d4fc08b0d6c80b52e47cb9c7ea4b6",
+    "stepId": "S000023",
+    "taskId": "llm-proxy",
+    "kind": "agent",
+    "label": "Implement LLM proxy with DLP",
+    "taskDefRef": "tasks/01KN9705F8Q9TSY68450N98GD0/task.json"
+  },
+  "checksum": "1be083a9e77a3b7b2575d153d14fca2f1d2944f4c26822f304cf8ecaaa7fc53b"
+}

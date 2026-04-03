@@ -1,0 +1,57 @@
+{
+  "summary": "Deep analysis of the agentsh Go codebase, PowerShell internals, and .NET platform APIs reveals a clear architectural path for agentpowershell: a C#/.NET daemon that uses named pipes for IPC, hosts PowerShell via the SDK with a custom PSHost and constrained InitialSessionState, evaluates YAML-based policies through a compiled rule engine, and enforces security through platform-specific mechanisms (Job Objects + minifilter on Windows, Landlock + seccomp on Linux, Endpoint Security on macOS).",
+  "keyFindings": [
+    "agentsh uses a daemon+shim pattern where /bin/sh is replaced with a shim binary that contacts the daemon for policy decisions via IPC before executing commands through the real shell",
+    "The policy engine supports 10+ rule types (file, network, command, registry, signal, DNS redirect, connect redirect, unix socket, MCP, package) with first-match-wins evaluation and compiled glob/regex patterns",
+    "The event system has 70+ event types across 14 categories with a pub/sub broker and composite fan-out store (SQLite, JSONL, webhook, OTEL) supporting tamper-detection via HMAC chains",
+    "PowerShell's PSHost is a 1:1 host-to-runspace abstraction that controls UI but NOT command interception -- actual command interception requires InitialSessionState constraints, binary module proxy cmdlets, or NativeCommandProcessor wrapping",
+    "PowerShell's NativeCommandProcessor uses System.Diagnostics.Process internally, meaning OS-level enforcement (Job Objects, seccomp) is the only reliable way to prevent process execution bypass via direct .NET API calls",
+    "The agentsh Windows minifilter driver communicates via FilterPort using a structured protocol with MSG_POLICY_CHECK_FILE and MSG_POLICY_CHECK_REGISTRY messages, supporting async decisions with configurable cache TTL",
+    "ConstrainedLanguage mode in PowerShell prevents Add-Type, direct .NET type instantiation, and COM objects -- essential for preventing sandbox escape",
+    "Named pipes (System.IO.Pipes) provide cross-platform IPC in .NET, mapping to Win32 named pipes on Windows and Unix domain sockets on Linux/macOS"
+  ],
+  "architecturalInsights": [
+    "The daemon should be a long-running .NET process hosting the policy engine, event store, and approval manager, with the shim being a lightweight PowerShell module or custom host that contacts the daemon per command",
+    "Policy evaluation must happen BEFORE process creation, not after -- this requires intercepting at the PowerShell command pipeline level (pre-execution) and at the OS level (Job Objects with CREATE_SUSPENDED for process creation control)",
+    "Session-scoped policy engines with variable expansion enable workspace-aware policies without per-workspace policy files",
+    "The composite event store pattern (fan-out to multiple backends) should be adopted directly -- SQLite for queries, JSONL for rotation-based logs, webhooks for external integration",
+    "Process context chains (ancestry-based policy) are critical for AI agent sandboxing -- detecting shell laundering requires tracking process trees",
+    "The approval flow needs multiple modes (TTY, API, TOTP, WebAuthn, dialog) to support different deployment scenarios from local dev to headless CI",
+    "ETW on Windows provides PowerShell script block logging, process creation, file operations, and network activity without any modifications to the target process"
+  ],
+  "platformApis": {
+    "windows": [
+      "Job Objects (kernel32.dll) -- process containment, resource limits",
+      "AppContainer (userenv.dll) -- capability-based sandbox",
+      "ETW via Microsoft.Diagnostics.Tracing.TraceEvent",
+      "Minifilter communication (fltlib.dll)",
+      "ConPTY (kernel32.dll)",
+      "Named Pipes (System.IO.Pipes)",
+      "AMSI (amsi.dll)"
+    ],
+    "linux": [
+      "seccomp-bpf via syscall(2)",
+      "ptrace via libc",
+      "Landlock LSM via syscall(2)",
+      "eBPF via bpf() syscall",
+      "cgroups v2 via filesystem",
+      "Unix domain sockets (System.Net.Sockets)"
+    ],
+    "macos": [
+      "Endpoint Security Framework (native helper required)",
+      "sandbox-exec profiles",
+      "Network Extension Framework",
+      "RLIMIT via setrlimit()",
+      "FSEvents"
+    ]
+  },
+  "risks": [
+    "PowerShell bypass via -NoProfile flag renders profile-based enforcement insufficient",
+    "Direct .NET API calls bypass PowerShell command pipeline entirely -- ConstrainedLanguage mode + OS enforcement required",
+    "Windows minifilter driver requires kernel-mode signing certificate for production",
+    "macOS Endpoint Security requires System Extension entitlement from Apple",
+    "seccomp user-notify not available in all Linux environments -- need fallback to ptrace",
+    "Per-command IPC to daemon adds latency; need caching of policy decisions",
+    "Race conditions in process tree tracking when PIDs are recycled"
+  ]
+}

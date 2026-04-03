@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T07:58:15.749Z",
+  "data": {
+    "effectId": "01KN95K54QZRP5TV4AS6ND5G26",
+    "invocationKey": "agentpowershell-full-build:S000019:build-and-test",
+    "invocationHash": "3f7fc84b66c5683fa841a255b23c112b0a8d8cf267d8bf6cb5d700ef4e86d846",
+    "stepId": "S000019",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: monitors",
+    "taskDefRef": "tasks/01KN95K54QZRP5TV4AS6ND5G26/task.json"
+  },
+  "checksum": "32aed3d460de5b1bfe29142a90326c3abb599978f47ca8bbbde5ac2f68b7d6ab"
+}

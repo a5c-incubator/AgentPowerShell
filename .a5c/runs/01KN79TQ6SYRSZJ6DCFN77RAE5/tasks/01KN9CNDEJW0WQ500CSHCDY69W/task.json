@@ -1,0 +1,69 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "buildSuccess": {
+          "type": "boolean"
+        },
+        "issuesFixed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "issuesFound": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "testResults": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "buildSuccess"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "iteration": 1,
+        "previousScore": 0,
+        "projectRoot": "C:/work/agentpowershell"
+      },
+      "instructions": [
+        "Run dotnet build to verify compilation",
+        "Run dotnet test to execute all unit tests",
+        "Run integration tests that test end-to-end flows:",
+        "- Policy loading and evaluation",
+        "- Shim-to-daemon communication",
+        "- Event capture and logging",
+        "- Session lifecycle",
+        "Check cross-compilation for all target platforms",
+        "Identify any failing tests or compilation errors",
+        "Fix any issues found and re-run tests"
+      ],
+      "outputFormat": "JSON with testResults, buildSuccess, issuesFound, issuesFixed",
+      "role": "Senior QA engineer",
+      "task": "Run comprehensive integration tests and identify failures"
+    }
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9CNDEJW0WQ500CSHCDY69W/input.json",
+    "outputJsonPath": "tasks/01KN9CNDEJW0WQ500CSHCDY69W/output.json"
+  },
+  "kind": "agent",
+  "title": "Integration testing (iteration 1)",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9CNDEJW0WQ500CSHCDY69W",
+  "taskId": "integration-test",
+  "invocationKey": "agentpowershell-full-build:S000030:integration-test",
+  "stepId": "S000030",
+  "inputs": {
+    "iteration": 1,
+    "previousScore": 0,
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

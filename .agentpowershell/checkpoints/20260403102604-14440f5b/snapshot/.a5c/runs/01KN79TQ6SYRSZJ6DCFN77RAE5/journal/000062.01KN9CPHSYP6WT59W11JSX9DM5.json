@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:02:27.006Z",
+  "data": {
+    "effectId": "01KN9CPHRH0W3V954M1AABDY77",
+    "invocationKey": "agentpowershell-full-build:S000031:quality-scoring",
+    "invocationHash": "c1501473cd6db0a6ece9a99cd26e4ef53f3daceb85086a20210f6ddf9130eb02",
+    "stepId": "S000031",
+    "taskId": "quality-scoring",
+    "kind": "agent",
+    "label": "Quality scoring (iteration 1)",
+    "taskDefRef": "tasks/01KN9CPHRH0W3V954M1AABDY77/task.json"
+  },
+  "checksum": "88eb7cf61d74a1e45a861704ea1e32d20353af6509cbe7661215501ff321c7a9"
+}

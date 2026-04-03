@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:07:28.336Z",
+  "data": {
+    "effectId": "01KN9CZR152NCQBKCAPSPVFR6N",
+    "invocationKey": "agentpowershell-full-build:S000035:__sdk.breakpoint",
+    "invocationHash": "02317d329f15e2c8833281bb43b93b09818606a6e1252d6cd58552096135dfdb",
+    "stepId": "S000035",
+    "taskId": "__sdk.breakpoint",
+    "kind": "breakpoint",
+    "label": "breakpoint",
+    "taskDefRef": "tasks/01KN9CZR152NCQBKCAPSPVFR6N/task.json",
+    "labels": [
+      "breakpoint"
+    ]
+  },
+  "checksum": "dde13c35492f7df881c91ee56e7209fac3245633c1bb63cf19d26ad2138359fe"
+}

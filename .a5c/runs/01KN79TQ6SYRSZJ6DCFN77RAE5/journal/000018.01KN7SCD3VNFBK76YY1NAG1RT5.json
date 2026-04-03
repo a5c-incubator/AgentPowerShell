@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:05:37.147Z",
+  "data": {
+    "effectId": "01KN7SCD2FRPZPN6AE560A0K3T",
+    "invocationKey": "agentpowershell-full-build:S000009:platform-enforcement",
+    "invocationHash": "76cd44520ec49fd10d978f2c18660de483130009634f4ffdc9705159a14e750a",
+    "stepId": "S000009",
+    "taskId": "platform-enforcement",
+    "kind": "agent",
+    "label": "Implement windows enforcement",
+    "taskDefRef": "tasks/01KN7SCD2FRPZPN6AE560A0K3T/task.json"
+  },
+  "checksum": "a6737929152673acef33e9ff2aec1227f91f877f79975253c1f7d155b7e8efa0"
+}

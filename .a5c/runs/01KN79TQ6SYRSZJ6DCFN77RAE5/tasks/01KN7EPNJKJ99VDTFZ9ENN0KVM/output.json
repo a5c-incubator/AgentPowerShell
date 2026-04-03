@@ -1,0 +1,7 @@
+{
+  "verified": true,
+  "command": "dotnet build agentpowershell.sln --verbosity minimal && dotnet test agentpowershell.sln --verbosity minimal --no-build",
+  "sdk": "9.0.312",
+  "buildSucceeded": true,
+  "testsPassed": true
+}

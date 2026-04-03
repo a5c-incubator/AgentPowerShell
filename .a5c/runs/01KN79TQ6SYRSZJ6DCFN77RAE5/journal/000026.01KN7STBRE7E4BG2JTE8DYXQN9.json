@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:13:14.510Z",
+  "data": {
+    "effectId": "01KN7STBQ51QWC6FNCDH1DVQ6W",
+    "invocationKey": "agentpowershell-full-build:S000013:event-system",
+    "invocationHash": "827e591cf23493e89445a6575510a20201cfccf106f8a7b98e094ed6423421e1",
+    "stepId": "S000013",
+    "taskId": "event-system",
+    "kind": "agent",
+    "label": "Implement event system and structured logging",
+    "taskDefRef": "tasks/01KN7STBQ51QWC6FNCDH1DVQ6W/task.json"
+  },
+  "checksum": "4e11fea6a8c7e157392a93a6a0fd52fe09ed956c44f955c8f5d36936b405e7bf"
+}

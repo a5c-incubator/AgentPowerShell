@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:03:02.010Z",
+  "data": {
+    "effectId": "01KN9CQKYNDB538CEW635599FG",
+    "invocationKey": "agentpowershell-full-build:S000032:documentation",
+    "invocationHash": "b2f6f2af64b35741a189989ba3614d49cf43fa75d4af142f4452077cab50947e",
+    "stepId": "S000032",
+    "taskId": "documentation",
+    "kind": "agent",
+    "label": "Write project documentation",
+    "taskDefRef": "tasks/01KN9CQKYNDB538CEW635599FG/task.json"
+  },
+  "checksum": "b5c17258ce513626848212995f1b90edfeb7221c043c419ccfdfc86c5947c281"
+}

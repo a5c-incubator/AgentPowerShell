@@ -1,0 +1,46 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        rid:
+          - win-x64
+          - win-arm64
+          - linux-x64
+          - linux-arm64
+          - osx-x64
+          - osx-arm64
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore agentpowershell.sln
+
+      - name: Build
+        run: dotnet build agentpowershell.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test agentpowershell.sln --configuration Release --no-build
+
+      - name: Publish CLI
+        run: dotnet publish src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj --configuration Release -p:PublishProfile=${{ matrix.rid }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentpowershell-${{ matrix.rid }}
+          path: src/AgentPowerShell.Cli/bin/Release/net9.0/${{ matrix.rid }}/publish

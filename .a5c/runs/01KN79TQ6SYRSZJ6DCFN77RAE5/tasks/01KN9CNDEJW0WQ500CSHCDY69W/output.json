@@ -1,0 +1,11 @@
+{
+  "buildSuccess": true,
+  "testResults": {
+    "solutionBuild": "passed",
+    "unitTests": "passed",
+    "integrationTests": "passed",
+    "platformTests": "passed"
+  },
+  "issuesFound": [],
+  "issuesFixed": []
+}

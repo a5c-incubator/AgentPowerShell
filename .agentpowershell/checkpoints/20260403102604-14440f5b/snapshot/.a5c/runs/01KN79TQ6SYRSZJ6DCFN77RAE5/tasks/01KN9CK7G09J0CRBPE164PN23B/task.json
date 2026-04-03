@@ -1,0 +1,22 @@
+{
+  "description": "Verify CLI commands, reporting, and workspace checkpoints pass tests",
+  "io": {
+    "inputJsonPath": "tasks/01KN9CK7G09J0CRBPE164PN23B/input.json",
+    "outputJsonPath": "tasks/01KN9CK7G09J0CRBPE164PN23B/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: cli-reporting-checkpoints",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9CK7G09J0CRBPE164PN23B",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000029:build-and-test",
+  "stepId": "S000029",
+  "inputs": {
+    "description": "Verify CLI commands, reporting, and workspace checkpoints pass tests",
+    "phase": "cli-reporting-checkpoints",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

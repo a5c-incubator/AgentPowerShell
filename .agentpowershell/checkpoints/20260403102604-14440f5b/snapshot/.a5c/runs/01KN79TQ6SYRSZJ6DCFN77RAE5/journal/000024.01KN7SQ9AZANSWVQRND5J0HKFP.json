@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:11:33.727Z",
+  "data": {
+    "effectId": "01KN7SQ99TAH8PXRE2NK01NVKV",
+    "invocationKey": "agentpowershell-full-build:S000012:build-and-test",
+    "invocationHash": "0508e853910f991cf010d844cd2ff785018663aa1238c6fc2f177ddad8d5f928",
+    "stepId": "S000012",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: platform-enforcement",
+    "taskDefRef": "tasks/01KN7SQ99TAH8PXRE2NK01NVKV/task.json"
+  },
+  "checksum": "fc05d58c5e21675d9fa6770f5cc74e9b12ff2770f5aca1b25143897e23b16e00"
+}

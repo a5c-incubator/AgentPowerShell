@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9CQKYNDB538CEW635599FG",
+  "taskId": "documentation",
+  "invocationKey": "agentpowershell-full-build:S000032:documentation",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "README.md",
+      "docs/getting-started.md",
+      "docs/policy-reference.md",
+      "docs/cli-reference.md",
+      "docs/configuration.md",
+      "docs/cross-platform.md",
+      "docs/agent-integration.md",
+      "SECURITY.md",
+      "CONTRIBUTING.md"
+    ]
+  },
+  "startedAt": "2026-04-03T10:06:21.3763916Z",
+  "finishedAt": "2026-04-03T10:06:21.3763916Z",
+  "value": {
+    "filesCreated": [
+      "README.md",
+      "docs/getting-started.md",
+      "docs/policy-reference.md",
+      "docs/cli-reference.md",
+      "docs/configuration.md",
+      "docs/cross-platform.md",
+      "docs/agent-integration.md",
+      "SECURITY.md",
+      "CONTRIBUTING.md"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Continue",
+        "Request changes"
+      ],
+      "question": "Core infrastructure, shim, platform enforcement, events, and sessions are implemented. Review progress before continuing to advanced features?",
+      "tags": [
+        "mid-checkpoint"
+      ],
+      "title": "Mid-Project Checkpoint"
+    },
+    "requestedAt": "2026-04-02T22:00:37.471Z"
+  },
+  "title": "breakpoint",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN83CVAZDBDSXXXJ5HDVV2DA",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "agentpowershell-full-build:S000016:__sdk.breakpoint",
+  "stepId": "S000016",
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Continue",
+        "Request changes"
+      ],
+      "question": "Core infrastructure, shim, platform enforcement, events, and sessions are implemented. Review progress before continuing to advanced features?",
+      "tags": [
+        "mid-checkpoint"
+      ],
+      "title": "Mid-Project Checkpoint"
+    },
+    "requestedAt": "2026-04-02T22:00:37.471Z"
+  }
+}

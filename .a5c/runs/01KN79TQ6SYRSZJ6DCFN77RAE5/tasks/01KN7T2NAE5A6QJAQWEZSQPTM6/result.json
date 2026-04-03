@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7T2NAE5A6QJAQWEZSQPTM6",
+  "taskId": "session-management",
+  "invocationKey": "agentpowershell-full-build:S000014:session-management",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/SessionModels.cs",
+      "src/AgentPowerShell.Daemon/SessionStore.cs",
+      "src/AgentPowerShell.Daemon/SessionLifecycleService.cs"
+    ]
+  },
+  "stdoutRef": "tasks/01KN7T2NAE5A6QJAQWEZSQPTM6/stdout.log",
+  "startedAt": "2026-04-02T21:58:37.032Z",
+  "finishedAt": "2026-04-02T21:58:37.032Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/SessionModels.cs",
+      "src/AgentPowerShell.Daemon/SessionStore.cs",
+      "src/AgentPowerShell.Daemon/SessionLifecycleService.cs"
+    ]
+  }
+}

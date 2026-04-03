@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:27:10.143Z",
+  "data": {
+    "effectId": "01KN9782WM38TZZVANN1CJJBYW",
+    "invocationKey": "agentpowershell-full-build:S000024:mcp-integration",
+    "invocationHash": "2a80f1af68fd9e0099ea2dd646d0cc1cabb9b6d14686acf7f0a6134fc753047f",
+    "stepId": "S000024",
+    "taskId": "mcp-integration",
+    "kind": "agent",
+    "label": "Implement MCP tool whitelisting and inspection",
+    "taskDefRef": "tasks/01KN9782WM38TZZVANN1CJJBYW/task.json"
+  },
+  "checksum": "e4a6fde6b28c5cc16967f6c346a8018582d4f2393e408d8d0416eb9b2a6bd436"
+}

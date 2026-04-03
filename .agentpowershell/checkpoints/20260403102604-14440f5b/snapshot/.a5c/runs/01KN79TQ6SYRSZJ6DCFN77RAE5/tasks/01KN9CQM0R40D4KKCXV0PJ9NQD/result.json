@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9CQM0R40D4KKCXV0PJ9NQD",
+  "taskId": "packaging",
+  "invocationKey": "agentpowershell-full-build:S000033:packaging",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "Dockerfile",
+      ".github/workflows/release.yml",
+      "install.ps1",
+      "install.sh",
+      "NuGet.config",
+      "eng/code-signing/README.md",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-arm64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-arm64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-arm64.pubxml"
+    ]
+  },
+  "startedAt": "2026-04-03T10:05:54.9809769Z",
+  "finishedAt": "2026-04-03T10:05:54.9809769Z",
+  "value": {
+    "filesCreated": [
+      "Dockerfile",
+      ".github/workflows/release.yml",
+      "install.ps1",
+      "install.sh",
+      "NuGet.config",
+      "eng/code-signing/README.md",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/win-arm64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/linux-arm64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-x64.pubxml",
+      "src/AgentPowerShell.Cli/Properties/PublishProfiles/osx-arm64.pubxml"
+    ]
+  }
+}

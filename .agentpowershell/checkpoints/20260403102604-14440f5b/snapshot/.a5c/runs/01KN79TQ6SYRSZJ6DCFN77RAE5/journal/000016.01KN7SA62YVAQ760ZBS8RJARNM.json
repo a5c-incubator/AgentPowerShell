@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:04:24.414Z",
+  "data": {
+    "effectId": "01KN7SA61EFM28XPXBE3ZS4GZ5",
+    "invocationKey": "agentpowershell-full-build:S000008:build-and-test",
+    "invocationHash": "38341704cc1e9af00777e0c8b5fc06500b7458a19f7aa035ff6b74e65d955f60",
+    "stepId": "S000008",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: powershell-shim",
+    "taskDefRef": "tasks/01KN7SA61EFM28XPXBE3ZS4GZ5/task.json"
+  },
+  "checksum": "c10875a2d573130db48d75096ce75c1f1799ab5458f43f25824e2a1da6171e04"
+}

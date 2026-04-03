@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:05:37.208Z",
+  "data": {
+    "effectId": "01KN7SCD4S65661AANVTZE2FQD",
+    "invocationKey": "agentpowershell-full-build:S000010:platform-enforcement",
+    "invocationHash": "d4d30b513c3705cd2480fdee292a4b52c63e872e402bb4100696fe9563e5929c",
+    "stepId": "S000010",
+    "taskId": "platform-enforcement",
+    "kind": "agent",
+    "label": "Implement linux enforcement",
+    "taskDefRef": "tasks/01KN7SCD4S65661AANVTZE2FQD/task.json"
+  },
+  "checksum": "0360da83fb51c8ae0317cb5b43c774cf356d680617bb5ccf4883cd3d6c0b7475"
+}

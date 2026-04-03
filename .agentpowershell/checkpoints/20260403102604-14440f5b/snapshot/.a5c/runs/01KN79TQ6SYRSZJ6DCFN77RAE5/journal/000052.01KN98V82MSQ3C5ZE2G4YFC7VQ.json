@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:55:06.580Z",
+  "data": {
+    "effectId": "01KN98V81DX3KT279FSEB6J49D",
+    "invocationKey": "agentpowershell-full-build:S000026:cli-implementation",
+    "invocationHash": "c30014c9efa8db94c1326563ba0542ec39c215cef96df47cf78609de0eb845a5",
+    "stepId": "S000026",
+    "taskId": "cli-implementation",
+    "kind": "agent",
+    "label": "Implement CLI commands",
+    "taskDefRef": "tasks/01KN98V81DX3KT279FSEB6J49D/task.json"
+  },
+  "checksum": "ab2f191f92f5318d6fa34d9fda8b5f57e952ed4589f92c84ee69a82162738914"
+}

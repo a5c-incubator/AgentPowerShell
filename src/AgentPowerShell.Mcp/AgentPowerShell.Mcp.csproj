@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\AgentPowerShell.Core\AgentPowerShell.Core.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Events\AgentPowerShell.Events.csproj" />
+  </ItemGroup>
+</Project>

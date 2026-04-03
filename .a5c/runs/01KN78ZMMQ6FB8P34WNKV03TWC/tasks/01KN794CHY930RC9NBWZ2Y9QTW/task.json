@@ -1,0 +1,337 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "bottlenecks": {
+          "items": {
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "frequency": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "impact": {
+                "type": "string"
+              },
+              "location": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "branchPatterns": {
+          "properties": {
+            "averageLifetime": {
+              "type": "string"
+            },
+            "mergeStrategy": {
+              "type": "string"
+            },
+            "namingConvention": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "commitPatterns": {
+          "properties": {
+            "averageFrequency": {
+              "type": "string"
+            },
+            "averageSize": {
+              "type": "object"
+            },
+            "conventions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "messageFormat": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "contributors": {
+          "items": {
+            "properties": {
+              "areas": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "commitCount": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "evolution": {
+          "properties": {
+            "growthAreas": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "majorEvents": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "technologyChanges": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "implicitRules": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "painPoints": {
+          "items": {
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "discoveredVia": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "releasePatterns": {
+          "properties": {
+            "frequency": {
+              "type": "string"
+            },
+            "tagFormat": {
+              "type": "string"
+            },
+            "versioningScheme": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "commitPatterns",
+        "bottlenecks"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "existingProfile": null,
+        "projectRoot": "C:/work/agentpowershell",
+        "repoStructure": {
+          "architecture": {
+            "dataFlow": "Not yet established - project is in initial planning phase",
+            "entryPoints": [],
+            "modules": [],
+            "pattern": "new-project-scaffold"
+          },
+          "conventions": {
+            "additionalRules": [],
+            "codeStyle": {},
+            "errorHandling": "Not yet established",
+            "git": {
+              "commitStyle": "imperative-mood-prefix",
+              "mainBranch": "main"
+            },
+            "importOrder": [],
+            "naming": {},
+            "testingConventions": "Not yet established"
+          },
+          "directoryTree": {
+            "root": {
+              ".a5c/": "Babysitter orchestration infrastructure",
+              ".gitignore": "Ignores .a5c/node_modules/ and .a5c/cache/compression/",
+              "request.task.md": "Project requirements and task outline"
+            }
+          },
+          "documentation": [
+            {
+              "path": "request.task.md",
+              "summary": "Project task outline - build cross-platform PowerShell agent tool similar to agentsh with sandboxing, permissions and security features",
+              "type": "requirements"
+            }
+          ],
+          "techStack": {
+            "buildTools": [],
+            "databases": [],
+            "frameworks": [],
+            "infrastructure": [
+              {
+                "description": ".a5c/ orchestration harness",
+                "name": "babysitter"
+              }
+            ],
+            "languages": [
+              {
+                "name": "PowerShell",
+                "role": "target runtime"
+              },
+              {
+                "name": "JavaScript/Node.js",
+                "role": "babysitter infrastructure"
+              }
+            ],
+            "packageManagers": [
+              "npm"
+            ]
+          }
+        }
+      },
+      "instructions": [
+        "Analyze git log for commit patterns:",
+        "  - Commit message format and conventions (conventional commits, ticket references, etc.)",
+        "  - Commit frequency and distribution over time",
+        "  - Average commit size (files changed, lines added/removed)",
+        "  - Most active contributors and their areas of focus",
+        "Analyze branch patterns:",
+        "  - Branch naming conventions",
+        "  - Branch lifetime (how long branches live before merge)",
+        "  - Merge strategy (merge commits, squash, rebase)",
+        "Analyze PR/merge patterns if available:",
+        "  - PR size distribution",
+        "  - Review turnaround time indicators (time between commits)",
+        "  - Common reviewers",
+        "Analyze release patterns:",
+        "  - Tag format and frequency",
+        "  - Release branching strategy",
+        "  - Versioning scheme (semver, calver, etc.)",
+        "Identify evolution patterns:",
+        "  - Major refactoring events (large commits touching many files)",
+        "  - Technology migrations visible in history",
+        "  - Growing or shrinking areas of the codebase",
+        "Identify bottlenecks:",
+        "  - Files with high churn (frequently changed)",
+        "  - Files that are always changed together (hidden coupling)",
+        "  - Long-lived branches that cause merge conflicts",
+        "Extract implicit rules:",
+        "  - Files that must be changed together",
+        "  - Areas that rarely change (stable core)",
+        "  - Patterns of test-code co-changes",
+        "Limit git log analysis to a reasonable depth (last 500-1000 commits or 6 months)",
+        "Do NOT access any sensitive information from git history"
+      ],
+      "outputFormat": "JSON with commitPatterns (object), branchPatterns (object), releasePatterns (object), evolution (object with majorEvents, technologyChanges, growthAreas), bottlenecks (array of {id, description, impact, location, frequency}), implicitRules (array of strings), painPoints (array of {id, description, severity, category, discoveredVia}), contributors (array of {name, areas, commitCount})",
+      "role": "process mining specialist and software historian",
+      "task": "Analyze the git history of this project to extract development patterns, implicit rules, evolution trajectory, and bottlenecks. This information will help babysitter understand how the project operates."
+    }
+  },
+  "description": "Analyze git history to extract commit patterns, PR patterns, release patterns, evolution, bottlenecks, and implicit rules",
+  "io": {
+    "inputJsonPath": "tasks/01KN794CHY930RC9NBWZ2Y9QTW/input.json",
+    "outputJsonPath": "tasks/01KN794CHY930RC9NBWZ2Y9QTW/result.json"
+  },
+  "kind": "agent",
+  "labels": [
+    "agent",
+    "cradle",
+    "git-history",
+    "mining"
+  ],
+  "title": "Mine git history for process patterns",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN794CHY930RC9NBWZ2Y9QTW",
+  "taskId": "process-mining",
+  "invocationKey": "cradle/project-install:S000004:process-mining",
+  "stepId": "S000004",
+  "inputs": {
+    "existingProfile": null,
+    "projectRoot": "C:/work/agentpowershell",
+    "repoStructure": {
+      "architecture": {
+        "dataFlow": "Not yet established - project is in initial planning phase",
+        "entryPoints": [],
+        "modules": [],
+        "pattern": "new-project-scaffold"
+      },
+      "conventions": {
+        "additionalRules": [],
+        "codeStyle": {},
+        "errorHandling": "Not yet established",
+        "git": {
+          "commitStyle": "imperative-mood-prefix",
+          "mainBranch": "main"
+        },
+        "importOrder": [],
+        "naming": {},
+        "testingConventions": "Not yet established"
+      },
+      "directoryTree": {
+        "root": {
+          ".a5c/": "Babysitter orchestration infrastructure",
+          ".gitignore": "Ignores .a5c/node_modules/ and .a5c/cache/compression/",
+          "request.task.md": "Project requirements and task outline"
+        }
+      },
+      "documentation": [
+        {
+          "path": "request.task.md",
+          "summary": "Project task outline - build cross-platform PowerShell agent tool similar to agentsh with sandboxing, permissions and security features",
+          "type": "requirements"
+        }
+      ],
+      "techStack": {
+        "buildTools": [],
+        "databases": [],
+        "frameworks": [],
+        "infrastructure": [
+          {
+            "description": ".a5c/ orchestration harness",
+            "name": "babysitter"
+          }
+        ],
+        "languages": [
+          {
+            "name": "PowerShell",
+            "role": "target runtime"
+          },
+          {
+            "name": "JavaScript/Node.js",
+            "role": "babysitter infrastructure"
+          }
+        ],
+        "packageManagers": [
+          "npm"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "kind": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Approve",
+        "Request changes"
+      ],
+      "question": "Review the architecture for agentpowershell. The project will use C#/.NET with full agentsh feature parity. Approve to proceed with implementation?",
+      "tags": [
+        "architecture-review"
+      ],
+      "title": "Architecture Review"
+    },
+    "requestedAt": "2026-04-02T14:59:01.466Z"
+  },
+  "title": "breakpoint",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7B8W6TCKWRFPMF4BDT99K9",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "agentpowershell-full-build:S000003:__sdk.breakpoint",
+  "stepId": "S000003",
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Approve",
+        "Request changes"
+      ],
+      "question": "Review the architecture for agentpowershell. The project will use C#/.NET with full agentsh feature parity. Approve to proceed with implementation?",
+      "tags": [
+        "architecture-review"
+      ],
+      "title": "Architecture Review"
+    },
+    "requestedAt": "2026-04-02T14:59:01.466Z"
+  }
+}

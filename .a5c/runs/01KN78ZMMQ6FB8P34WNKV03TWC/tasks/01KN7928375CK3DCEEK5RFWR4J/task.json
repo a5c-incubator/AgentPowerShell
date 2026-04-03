@@ -1,0 +1,177 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "cicd": {
+          "properties": {
+            "configPaths": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "pipelines": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "provider": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "containerization": {
+          "type": "object"
+        },
+        "externalIntegrations": {
+          "items": {
+            "properties": {
+              "category": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "service": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "infrastructure": {
+          "type": "object"
+        },
+        "services": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "tools": {
+          "properties": {
+            "formatting": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "linting": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "testing": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "workflows": {
+          "items": {
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "steps": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "triggers": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "tools",
+        "workflows"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "existingProfile": null,
+        "projectRoot": "C:/work/agentpowershell"
+      },
+      "instructions": [
+        "Identify all development tools configured in the project:",
+        "  - Linting tools (ESLint, Prettier, RuboCop, etc.) and their config files",
+        "  - Testing tools (Jest, Vitest, Pytest, etc.) and their config files",
+        "  - Formatting tools and their config files",
+        "  - Build tools (webpack, esbuild, vite, etc.)",
+        "Identify CI/CD configuration:",
+        "  - Check for .github/workflows/, .gitlab-ci.yml, Jenkinsfile, .circleci/, etc.",
+        "  - Parse pipeline stages and triggers",
+        "  - Note the CI/CD provider and version",
+        "Identify external services referenced in code or config:",
+        "  - API endpoints, database connections, cloud services",
+        "  - Monitoring/logging services (Datadog, Sentry, etc.)",
+        "  - Communication integrations (Slack webhooks, etc.)",
+        "Identify project workflows:",
+        "  - Git workflow (branch naming, merge strategy from git config or docs)",
+        "  - Release workflow (semantic versioning, changelogs, etc.)",
+        "  - Code review requirements (CODEOWNERS, branch protection references)",
+        "Check for Docker/containerization config",
+        "Check for infrastructure-as-code (Terraform, CloudFormation, etc.)",
+        "Identify any existing automation scripts",
+        "Do NOT access or store any secrets, tokens, or credentials"
+      ],
+      "outputFormat": "JSON with tools (object with linting, testing, formatting arrays), cicd (object with provider, configPaths, pipelines), services (array of {name, type, url}), workflows (array of {name, description, steps, triggers}), externalIntegrations (array of {service, category, enabled}), containerization (object), infrastructure (object)",
+      "role": "DevOps engineer and platform specialist",
+      "task": "Analyze the project to identify all tools, services, CI/CD configuration, workflows, and external integrations in use"
+    }
+  },
+  "description": "Identify and analyze all external tools, services, CI/CD pipelines, workflows, and integrations used by the project",
+  "io": {
+    "inputJsonPath": "tasks/01KN7928375CK3DCEEK5RFWR4J/input.json",
+    "outputJsonPath": "tasks/01KN7928375CK3DCEEK5RFWR4J/result.json"
+  },
+  "kind": "agent",
+  "labels": [
+    "agent",
+    "analysis",
+    "cradle",
+    "tools"
+  ],
+  "title": "Analyze tools, services, and workflows",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7928375CK3DCEEK5RFWR4J",
+  "taskId": "analyze-tools-services",
+  "invocationKey": "cradle/project-install:S000003:analyze-tools-services",
+  "stepId": "S000003",
+  "inputs": {
+    "existingProfile": null,
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

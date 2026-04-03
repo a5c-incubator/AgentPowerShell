@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN952CV09ST9T3FWBEKJA964",
+  "taskId": "filesystem-monitor",
+  "invocationKey": "agentpowershell-full-build:S000018:filesystem-monitor",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Daemon/FilesystemMonitor.cs",
+      "src/AgentPowerShell.Daemon/FilesystemMonitorHostedService.cs",
+      "src/AgentPowerShell.Daemon/QuarantineService.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/SessionStore.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T07:55:54.152Z",
+  "finishedAt": "2026-04-03T07:55:54.152Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Daemon/FilesystemMonitor.cs",
+      "src/AgentPowerShell.Daemon/FilesystemMonitorHostedService.cs",
+      "src/AgentPowerShell.Daemon/QuarantineService.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/SessionStore.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

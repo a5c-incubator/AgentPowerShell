@@ -1,0 +1,15 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-04-02T14:33:49.115Z",
+  "data": {
+    "runId": "01KN79TQ6SYRSZJ6DCFN77RAE5",
+    "processId": "agentpowershell-full-build",
+    "entrypoint": {
+      "importPath": "../../processes/agentpowershell.process.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json",
+    "prompt": "Build a PowerShell-based policy-enforced shell execution gateway (agentpowershell) as a drop-in replacement for agentsh, using C#/.NET, with full feature parity. Cross-platform: Windows, Linux, macOS."
+  },
+  "checksum": "4c4dbe786e2df1d078e8b8d3e1d3628a09ff887d71f40240cc03ce19273a7c87"
+}

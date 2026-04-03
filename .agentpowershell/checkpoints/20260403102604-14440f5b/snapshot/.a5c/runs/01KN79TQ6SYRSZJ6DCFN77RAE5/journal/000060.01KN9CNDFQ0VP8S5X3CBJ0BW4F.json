@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:01:49.815Z",
+  "data": {
+    "effectId": "01KN9CNDEJW0WQ500CSHCDY69W",
+    "invocationKey": "agentpowershell-full-build:S000030:integration-test",
+    "invocationHash": "4b8b10ee6077f82496e55478f4df31161656a830b02af45904170214aa9e06fd",
+    "stepId": "S000030",
+    "taskId": "integration-test",
+    "kind": "agent",
+    "label": "Integration testing (iteration 1)",
+    "taskDefRef": "tasks/01KN9CNDEJW0WQ500CSHCDY69W/task.json"
+  },
+  "checksum": "8c0b677168ca897bef39770c8a81d8f871411545d7379ab9ee9271c40621408b"
+}

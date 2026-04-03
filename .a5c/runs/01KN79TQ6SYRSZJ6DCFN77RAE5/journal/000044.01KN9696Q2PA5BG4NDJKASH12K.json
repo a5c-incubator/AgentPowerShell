@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:10:18.210Z",
+  "data": {
+    "effectId": "01KN9696NX9WE6M4V7R0VJ1ENE",
+    "invocationKey": "agentpowershell-full-build:S000022:build-and-test",
+    "invocationHash": "553e4e9aba58ba7d7f98b5a6e1dba271015fd92ffba59a2a067527d0a3b37192",
+    "stepId": "S000022",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: approval-auth",
+    "taskDefRef": "tasks/01KN9696NX9WE6M4V7R0VJ1ENE/task.json"
+  },
+  "checksum": "1f9989b440c5be5c5787adc64ed8321be7b01ab0e6820cbc584c8dc692d7f079"
+}

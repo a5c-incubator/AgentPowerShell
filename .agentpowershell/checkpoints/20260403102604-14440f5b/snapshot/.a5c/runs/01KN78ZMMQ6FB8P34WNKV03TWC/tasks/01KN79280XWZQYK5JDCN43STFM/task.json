@@ -1,0 +1,179 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "architecture": {
+          "properties": {
+            "dataFlow": {
+              "type": "string"
+            },
+            "entryPoints": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "modules": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "pattern": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "conventions": {
+          "properties": {
+            "additionalRules": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "codeStyle": {
+              "type": "object"
+            },
+            "errorHandling": {
+              "type": "string"
+            },
+            "git": {
+              "type": "object"
+            },
+            "importOrder": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "naming": {
+              "type": "object"
+            },
+            "testingConventions": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "directoryTree": {
+          "type": "object"
+        },
+        "documentation": {
+          "items": {
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "techStack": {
+          "properties": {
+            "buildTools": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "databases": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "frameworks": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "infrastructure": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "languages": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "packageManagers": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "architecture",
+        "techStack",
+        "conventions"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "existingProfile": null,
+        "projectRoot": "C:/work/agentpowershell"
+      },
+      "instructions": [
+        "Map the complete directory structure of the project",
+        "Identify the architectural pattern (monorepo, monolith, microservices, etc.)",
+        "Identify all major modules/packages and their responsibilities",
+        "Detect programming languages and their roles (primary, scripting, build, etc.)",
+        "Detect frameworks and libraries used (check package.json, requirements.txt, go.mod, Cargo.toml, etc.)",
+        "Identify databases referenced in config or code",
+        "Detect build tools and package managers in use",
+        "Find and summarize key documentation files (README, CONTRIBUTING, ARCHITECTURE, etc.)",
+        "Identify entry points for the application",
+        "Map the data flow if discernible from code structure",
+        "Detect coding conventions from existing code (naming patterns, file organization, import patterns)",
+        "Identify test organization and testing patterns",
+        "Find error handling patterns used",
+        "Note any monorepo workspace configuration",
+        "If existing profile is provided, focus on finding changes or additions since last analysis"
+      ],
+      "outputFormat": "JSON with architecture (object with pattern, modules, entryPoints, dataFlow), techStack (object with languages, frameworks, databases, buildTools, packageManagers, infrastructure), conventions (object with naming, codeStyle, importOrder, errorHandling, testingConventions), documentation (array of {path, type, summary}), directoryTree (object)",
+      "role": "senior software architect and codebase analyst",
+      "task": "Perform a comprehensive analysis of the repository structure, code organization, documentation, and architecture to build the project profile"
+    }
+  },
+  "description": "Deep analysis of the repo: directory structure, modules, architecture patterns, code organization, documentation, and entry points",
+  "io": {
+    "inputJsonPath": "tasks/01KN79280XWZQYK5JDCN43STFM/input.json",
+    "outputJsonPath": "tasks/01KN79280XWZQYK5JDCN43STFM/result.json"
+  },
+  "kind": "agent",
+  "labels": [
+    "agent",
+    "analysis",
+    "cradle",
+    "repo"
+  ],
+  "title": "Analyze repository structure and code",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN79280XWZQYK5JDCN43STFM",
+  "taskId": "analyze-repo",
+  "invocationKey": "cradle/project-install:S000002:analyze-repo",
+  "stepId": "S000002",
+  "inputs": {
+    "existingProfile": null,
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

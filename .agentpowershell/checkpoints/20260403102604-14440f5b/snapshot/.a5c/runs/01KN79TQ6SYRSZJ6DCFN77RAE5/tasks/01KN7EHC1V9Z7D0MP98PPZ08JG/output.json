@@ -1,0 +1,19 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/PolicyDecision.cs",
+    "src/AgentPowerShell.Core/PolicyModels.cs",
+    "src/AgentPowerShell.Core/PolicyRequests.cs",
+    "src/AgentPowerShell.Core/GlobMatcher.cs",
+    "src/AgentPowerShell.Core/PolicyEngine.cs",
+    "src/AgentPowerShell.Core/PortMatcher.cs",
+    "src/AgentPowerShell.Core/PolicyLoader.cs",
+    "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+    "src/AgentPowerShell.Core/CoreEvents.cs",
+    "src/AgentPowerShell.Core/Abstractions.cs"
+  ],
+  "filesModified": [
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ],
+  "testsWritten": 6,
+  "testsPassing": false
+}

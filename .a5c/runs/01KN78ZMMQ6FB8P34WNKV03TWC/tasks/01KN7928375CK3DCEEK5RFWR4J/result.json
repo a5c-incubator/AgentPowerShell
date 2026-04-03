@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7928375CK3DCEEK5RFWR4J",
+  "taskId": "analyze-tools-services",
+  "invocationKey": "cradle/project-install:S000003:analyze-tools-services",
+  "status": "ok",
+  "result": {
+    "cicd": {
+      "configPaths": [],
+      "pipelines": [],
+      "provider": "none"
+    },
+    "containerization": {},
+    "externalIntegrations": [],
+    "infrastructure": {},
+    "services": [],
+    "tools": {
+      "formatting": [],
+      "linting": [],
+      "testing": []
+    },
+    "workflows": []
+  },
+  "startedAt": "2026-04-02T14:21:29.552Z",
+  "finishedAt": "2026-04-02T14:21:29.552Z",
+  "value": {
+    "cicd": {
+      "configPaths": [],
+      "pipelines": [],
+      "provider": "none"
+    },
+    "containerization": {},
+    "externalIntegrations": [],
+    "infrastructure": {},
+    "services": [],
+    "tools": {
+      "formatting": [],
+      "linting": [],
+      "testing": []
+    },
+    "workflows": []
+  }
+}

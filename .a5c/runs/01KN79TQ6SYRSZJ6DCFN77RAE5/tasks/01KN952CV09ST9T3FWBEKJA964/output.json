@@ -1,0 +1,11 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/Abstractions.cs",
+    "src/AgentPowerShell.Daemon/FilesystemMonitor.cs",
+    "src/AgentPowerShell.Daemon/FilesystemMonitorHostedService.cs",
+    "src/AgentPowerShell.Daemon/QuarantineService.cs",
+    "src/AgentPowerShell.Daemon/Program.cs",
+    "src/AgentPowerShell.Daemon/SessionStore.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

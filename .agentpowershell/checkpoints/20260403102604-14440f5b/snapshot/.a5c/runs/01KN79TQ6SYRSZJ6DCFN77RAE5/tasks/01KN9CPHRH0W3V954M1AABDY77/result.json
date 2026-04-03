@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9CPHRH0W3V954M1AABDY77",
+  "taskId": "quality-scoring",
+  "invocationKey": "agentpowershell-full-build:S000031:quality-scoring",
+  "status": "ok",
+  "result": {
+    "dimensionScores": {
+      "codeQuality": 86,
+      "crossPlatformReadiness": 88,
+      "featureCompleteness": 87,
+      "testCoverageAndQuality": 90
+    },
+    "overallScore": 88,
+    "recommendations": [
+      "Add deeper end-to-end coverage for checkpoint restore interactions with daemon-managed sessions.",
+      "Expand cross-platform integration verification beyond build success to platform-specific runtime assertions.",
+      "Harden checkpoint management with retention and delete operations once lifecycle requirements are defined."
+    ]
+  },
+  "startedAt": "2026-04-03T10:02:49.1502450Z",
+  "finishedAt": "2026-04-03T10:02:49.1502450Z",
+  "value": {
+    "dimensionScores": {
+      "codeQuality": 86,
+      "crossPlatformReadiness": 88,
+      "featureCompleteness": 87,
+      "testCoverageAndQuality": 90
+    },
+    "overallScore": 88,
+    "recommendations": [
+      "Add deeper end-to-end coverage for checkpoint restore interactions with daemon-managed sessions.",
+      "Expand cross-platform integration verification beyond build success to platform-specific runtime assertions.",
+      "Harden checkpoint management with retention and delete operations once lifecycle requirements are defined."
+    ]
+  }
+}

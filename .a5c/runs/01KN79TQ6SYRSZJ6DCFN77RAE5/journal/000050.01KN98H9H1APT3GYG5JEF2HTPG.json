@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:49:40.385Z",
+  "data": {
+    "effectId": "01KN98H9FWFXZ10Q51KS5E7EHE",
+    "invocationKey": "agentpowershell-full-build:S000025:build-and-test",
+    "invocationHash": "9522ad0d39b0bb3261ed6358cf547e9508c390c12546df794ea2d69e0081810e",
+    "stepId": "S000025",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: llm-mcp",
+    "taskDefRef": "tasks/01KN98H9FWFXZ10Q51KS5E7EHE/task.json"
+  },
+  "checksum": "93a6c0fdd677faa84d879b4e07f73ac05716953665731184379af26bbfa9f733"
+}

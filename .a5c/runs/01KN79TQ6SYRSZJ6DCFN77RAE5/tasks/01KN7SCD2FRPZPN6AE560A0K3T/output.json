@@ -1,0 +1,14 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Platform.Windows/WindowsEnforcementPlan.cs",
+    "src/AgentPowerShell.Platform.Windows/WindowsNativeMethods.cs",
+    "src/AgentPowerShell.Platform.Windows/ConPtySessionOptions.cs",
+    "src/AgentPowerShell.Platform.Windows/WindowsServiceRegistration.cs"
+  ],
+  "platformFeatures": [
+    "Job Objects planning",
+    "AppContainer profile interop stubs",
+    "ConPTY session options",
+    "Windows service registration model"
+  ]
+}

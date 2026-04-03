@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9CK7G09J0CRBPE164PN23B",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000029:build-and-test",
+  "status": "ok",
+  "result": {
+    "buildSucceeded": true,
+    "phase": "cli-reporting-checkpoints",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  },
+  "stdoutRef": "tasks/01KN9CK7G09J0CRBPE164PN23B/stdout.log",
+  "startedAt": "2026-04-03T10:01:34.0321146Z",
+  "finishedAt": "2026-04-03T10:01:34.0321146Z",
+  "value": {
+    "buildSucceeded": true,
+    "phase": "cli-reporting-checkpoints",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9705F8Q9TSY68450N98GD0",
+  "taskId": "llm-proxy",
+  "invocationKey": "agentpowershell-full-build:S000023:llm-proxy",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.LlmProxy/Program.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyModels.cs",
+      "src/AgentPowerShell.LlmProxy/ProviderRouter.cs",
+      "src/AgentPowerShell.LlmProxy/DlpRedactor.cs",
+      "src/AgentPowerShell.LlmProxy/UsageTracker.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyTelemetry.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyService.cs",
+      "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+      "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T08:26:45.207Z",
+  "finishedAt": "2026-04-03T08:26:45.207Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.LlmProxy/Program.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyModels.cs",
+      "src/AgentPowerShell.LlmProxy/ProviderRouter.cs",
+      "src/AgentPowerShell.LlmProxy/DlpRedactor.cs",
+      "src/AgentPowerShell.LlmProxy/UsageTracker.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyTelemetry.cs",
+      "src/AgentPowerShell.LlmProxy/ProxyService.cs",
+      "src/AgentPowerShell.LlmProxy/AgentPowerShell.LlmProxy.csproj",
+      "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

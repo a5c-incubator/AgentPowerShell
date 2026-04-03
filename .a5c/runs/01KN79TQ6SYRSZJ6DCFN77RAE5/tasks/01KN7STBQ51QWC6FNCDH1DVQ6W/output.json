@@ -1,0 +1,9 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Events/EventRecords.cs",
+    "src/AgentPowerShell.Events/EventBus.cs",
+    "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+    "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+    "src/AgentPowerShell.Events/EventQuery.cs"
+  ]
+}

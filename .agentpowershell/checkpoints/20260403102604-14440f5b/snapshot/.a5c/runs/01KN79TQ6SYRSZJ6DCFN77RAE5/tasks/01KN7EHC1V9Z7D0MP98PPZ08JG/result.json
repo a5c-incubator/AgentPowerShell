@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7EHC1V9Z7D0MP98PPZ08JG",
+  "taskId": "core-infrastructure",
+  "invocationKey": "agentpowershell-full-build:S000005:core-infrastructure",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/PolicyDecision.cs",
+      "src/AgentPowerShell.Core/PolicyModels.cs",
+      "src/AgentPowerShell.Core/PolicyRequests.cs",
+      "src/AgentPowerShell.Core/GlobMatcher.cs",
+      "src/AgentPowerShell.Core/PolicyEngine.cs",
+      "src/AgentPowerShell.Core/PortMatcher.cs",
+      "src/AgentPowerShell.Core/PolicyLoader.cs",
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Core/CoreEvents.cs",
+      "src/AgentPowerShell.Core/Abstractions.cs"
+    ],
+    "filesModified": [
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ],
+    "testsPassing": false,
+    "testsWritten": 6
+  },
+  "startedAt": "2026-04-02T15:58:41.428Z",
+  "finishedAt": "2026-04-02T15:58:41.428Z",
+  "metadata": {
+    "notes": [
+      "Implemented core policy/config abstractions, a first-match-wins policy engine, YAML loaders, event records, and approval/interceptor interfaces.",
+      "Added six unit tests covering rule order, command glob alternation, port ranges, default deny behavior, YAML policy parsing, and configuration loading.",
+      "testsPassing is false because dotnet test could not run in this environment: global.json requires SDK 9.0.100 and no .NET SDK is installed."
+    ]
+  },
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/PolicyDecision.cs",
+      "src/AgentPowerShell.Core/PolicyModels.cs",
+      "src/AgentPowerShell.Core/PolicyRequests.cs",
+      "src/AgentPowerShell.Core/GlobMatcher.cs",
+      "src/AgentPowerShell.Core/PolicyEngine.cs",
+      "src/AgentPowerShell.Core/PortMatcher.cs",
+      "src/AgentPowerShell.Core/PolicyLoader.cs",
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Core/CoreEvents.cs",
+      "src/AgentPowerShell.Core/Abstractions.cs"
+    ],
+    "filesModified": [
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ],
+    "testsPassing": false,
+    "testsWritten": 6
+  }
+}

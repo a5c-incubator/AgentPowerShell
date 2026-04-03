@@ -1,0 +1,12 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Platform.MacOS/MacOsEnforcementPlan.cs",
+    "src/AgentPowerShell.Platform.MacOS/MacOsNativeMethods.cs",
+    "src/AgentPowerShell.Platform.MacOS/LaunchdPlist.cs"
+  ],
+  "platformFeatures": [
+    "Endpoint Security / sandbox-exec planning",
+    "macOS rlimit interop stubs",
+    "launchd plist rendering"
+  ]
+}

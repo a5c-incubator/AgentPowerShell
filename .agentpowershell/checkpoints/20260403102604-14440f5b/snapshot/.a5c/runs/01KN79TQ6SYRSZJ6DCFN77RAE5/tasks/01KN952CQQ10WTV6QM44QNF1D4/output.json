@@ -1,0 +1,9 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/Abstractions.cs",
+    "src/AgentPowerShell.Core/PolicyEngine.cs",
+    "src/AgentPowerShell.Daemon/NetworkMonitor.cs",
+    "src/AgentPowerShell.Daemon/Program.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

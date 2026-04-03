@@ -1,0 +1,10 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/Abstractions.cs",
+    "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+    "src/AgentPowerShell.Daemon/AuthenticationManager.cs",
+    "src/AgentPowerShell.Daemon/Program.cs",
+    "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

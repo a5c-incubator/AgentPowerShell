@@ -1,0 +1,13 @@
+{
+  "sessions": [
+    {
+      "sessionId": "1779fe5a6e7444439641b8c839f46c0a",
+      "workingDirectory": "C:\\work\\agentpowershell",
+      "policyPath": "C:\\work\\agentpowershell\\default-policy.yml",
+      "createdAt": "2026-04-03T11:47:36.5535956+00:00",
+      "lastActivityAt": "2026-04-03T11:52:24.1056665+00:00",
+      "expiresAt": "2026-04-03T12:22:24.1056665+00:00",
+      "platform": "Win32NT"
+    }
+  ]
+}

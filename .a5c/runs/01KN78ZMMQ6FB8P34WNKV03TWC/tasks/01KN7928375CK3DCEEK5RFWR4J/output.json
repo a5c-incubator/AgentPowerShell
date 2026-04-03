@@ -1,0 +1,17 @@
+{
+  "tools": {
+    "linting": [],
+    "testing": [],
+    "formatting": []
+  },
+  "cicd": {
+    "provider": "none",
+    "configPaths": [],
+    "pipelines": []
+  },
+  "services": [],
+  "workflows": [],
+  "externalIntegrations": [],
+  "containerization": {},
+  "infrastructure": {}
+}

@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T09:42:48.104Z",
+  "data": {
+    "effectId": "01KN9BJJFVA1TK8CTNA6GE754Z",
+    "invocationKey": "agentpowershell-full-build:S000028:workspace-checkpoint",
+    "invocationHash": "668c550d989005d24260104478eb673431fabb7426d4a2dfac25db6f743f5f6e",
+    "stepId": "S000028",
+    "taskId": "workspace-checkpoint",
+    "kind": "agent",
+    "label": "Implement workspace checkpoints with rollback",
+    "taskDefRef": "tasks/01KN9BJJFVA1TK8CTNA6GE754Z/task.json"
+  },
+  "checksum": "d1d922f01d3ea65694af8bdd1b83088e385317912f56891ca4f275c9594c203d"
+}

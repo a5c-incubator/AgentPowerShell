@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:19:09.569Z",
+  "data": {
+    "effectId": "01KN78ZWABQ9STWZ44R1HTFXEX",
+    "invocationKey": "cradle/project-install:S000001:check-existing-setup",
+    "invocationHash": "7222bcd93674535441c99b623c840ef2f8cc99263e9b34b81801eb6b82dba3e2",
+    "stepId": "S000001",
+    "taskId": "check-existing-setup",
+    "kind": "agent",
+    "label": "agent",
+    "taskDefRef": "tasks/01KN78ZWABQ9STWZ44R1HTFXEX/task.json",
+    "labels": [
+      "agent",
+      "cradle",
+      "setup",
+      "read-only"
+    ]
+  },
+  "checksum": "e3a86f601d2523f037bdd4d2f8c4098d55e617c8fa044767aa174531b220f75c"
+}

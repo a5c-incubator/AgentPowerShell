@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9CNDEJW0WQ500CSHCDY69W",
+  "taskId": "integration-test",
+  "invocationKey": "agentpowershell-full-build:S000030:integration-test",
+  "status": "ok",
+  "result": {
+    "buildSuccess": true,
+    "issuesFixed": [],
+    "issuesFound": [],
+    "testResults": {
+      "integrationTests": "passed",
+      "platformTests": "passed",
+      "solutionBuild": "passed",
+      "unitTests": "passed"
+    }
+  },
+  "startedAt": "2026-04-03T10:02:12.5908339Z",
+  "finishedAt": "2026-04-03T10:02:12.5908339Z",
+  "value": {
+    "buildSuccess": true,
+    "issuesFixed": [],
+    "issuesFound": [],
+    "testResults": {
+      "integrationTests": "passed",
+      "platformTests": "passed",
+      "solutionBuild": "passed",
+      "unitTests": "passed"
+    }
+  }
+}

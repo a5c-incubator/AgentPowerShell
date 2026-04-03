@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7SCD6QJGYDTQ58PMC4KH5Q",
+  "taskId": "platform-enforcement",
+  "invocationKey": "agentpowershell-full-build:S000011:platform-enforcement",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.MacOS/MacOsEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.MacOS/MacOsNativeMethods.cs",
+      "src/AgentPowerShell.Platform.MacOS/LaunchdPlist.cs"
+    ],
+    "platformFeatures": [
+      "Endpoint Security / sandbox-exec planning",
+      "macOS rlimit interop stubs",
+      "launchd plist rendering"
+    ]
+  },
+  "stdoutRef": "tasks/01KN7SCD6QJGYDTQ58PMC4KH5Q/stdout.log",
+  "startedAt": "2026-04-02T19:10:16.653Z",
+  "finishedAt": "2026-04-02T19:10:16.653Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.MacOS/MacOsEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.MacOS/MacOsNativeMethods.cs",
+      "src/AgentPowerShell.Platform.MacOS/LaunchdPlist.cs"
+    ],
+    "platformFeatures": [
+      "Endpoint Security / sandbox-exec planning",
+      "macOS rlimit interop stubs",
+      "launchd plist rendering"
+    ]
+  }
+}

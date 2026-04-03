@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:05:37.270Z",
+  "data": {
+    "effectId": "01KN7SCD6QJGYDTQ58PMC4KH5Q",
+    "invocationKey": "agentpowershell-full-build:S000011:platform-enforcement",
+    "invocationHash": "de2599b775587dcc754053ccd0fdac195799f2aafdf404d59b4d5fb5ac209ae4",
+    "stepId": "S000011",
+    "taskId": "platform-enforcement",
+    "kind": "agent",
+    "label": "Implement macos enforcement",
+    "taskDefRef": "tasks/01KN7SCD6QJGYDTQ58PMC4KH5Q/task.json"
+  },
+  "checksum": "cc5d36b6f1b35d731d085b53a5cfc7ea2323fb489d277e5843c1b11682bbbebc"
+}

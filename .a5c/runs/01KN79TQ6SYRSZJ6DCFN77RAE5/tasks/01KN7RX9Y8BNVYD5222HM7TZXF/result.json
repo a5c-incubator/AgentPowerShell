@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7RX9Y8BNVYD5222HM7TZXF",
+  "taskId": "powershell-shim",
+  "invocationKey": "agentpowershell-full-build:S000007:powershell-shim",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Protos/ShimMessages.cs",
+      "src/AgentPowerShell.Core/ShimIpcOptions.cs",
+      "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+      "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+      "src/AgentPowerShell.Shim/ShimClient.cs",
+      "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+      "src/AgentPowerShell.Shim/RealPowerShellResolver.cs"
+    ],
+    "filesModified": [
+      "src/AgentPowerShell.Protos/agentpowershell.proto",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/Worker.cs",
+      "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+      "src/AgentPowerShell.Shim/Program.cs",
+      "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+      "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+      "Directory.Build.props"
+    ],
+    "testsWritten": 1
+  },
+  "stdoutRef": "tasks/01KN7RX9Y8BNVYD5222HM7TZXF/stdout.log",
+  "startedAt": "2026-04-02T19:03:59.299Z",
+  "finishedAt": "2026-04-02T19:03:59.299Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Protos/ShimMessages.cs",
+      "src/AgentPowerShell.Core/ShimIpcOptions.cs",
+      "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+      "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+      "src/AgentPowerShell.Shim/ShimClient.cs",
+      "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+      "src/AgentPowerShell.Shim/RealPowerShellResolver.cs"
+    ],
+    "filesModified": [
+      "src/AgentPowerShell.Protos/agentpowershell.proto",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/Worker.cs",
+      "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+      "src/AgentPowerShell.Shim/Program.cs",
+      "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+      "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+      "Directory.Build.props"
+    ],
+    "testsWritten": 1
+  }
+}

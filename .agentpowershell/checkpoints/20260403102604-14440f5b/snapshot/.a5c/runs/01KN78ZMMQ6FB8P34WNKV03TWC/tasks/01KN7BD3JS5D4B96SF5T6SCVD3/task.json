@@ -1,0 +1,480 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "changesSummary": {
+          "type": "string"
+        },
+        "profile": {
+          "properties": {
+            "architecture": {
+              "type": "object"
+            },
+            "bottlenecks": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "cicd": {
+              "type": "object"
+            },
+            "claudeMdInstructions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "conventions": {
+              "type": "object"
+            },
+            "createdAt": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "externalIntegrations": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "goals": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "installedAgents": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "installedProcesses": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "installedSkills": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "painPoints": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "processes": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "projectName": {
+              "type": "string"
+            },
+            "repositories": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "services": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "team": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "techStack": {
+              "type": "object"
+            },
+            "tools": {
+              "type": "object"
+            },
+            "updatedAt": {
+              "type": "string"
+            },
+            "version": {
+              "type": "number"
+            },
+            "workflows": {
+              "items": {
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "projectName",
+            "description",
+            "goals",
+            "techStack",
+            "architecture",
+            "workflows",
+            "conventions",
+            "createdAt",
+            "updatedAt",
+            "version"
+          ],
+          "type": "object"
+        },
+        "sourcesUsed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "profile",
+        "changesSummary"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "additionalContext": "This project aims to create a PowerShell-based agent replacement similar to agentsh (https://github.com/canyonroad/agentsh), but for PowerShell instead of bash. It should be cross-platform (Windows, Linux, macOS), with sandboxing, permissions and security features similar to agentsh.",
+        "existingProfile": null,
+        "isNewProject": true,
+        "miningResult": {
+          "bottlenecks": [],
+          "branchPatterns": {
+            "averageLifetime": "N/A",
+            "mergeStrategy": "unknown - new project",
+            "namingConvention": "main branch only - too early to determine"
+          },
+          "commitPatterns": {
+            "averageFrequency": "new project - insufficient data",
+            "averageSize": {
+              "filesChanged": 2,
+              "linesAdded": 15,
+              "linesRemoved": 0
+            },
+            "conventions": [
+              "Imperative mood commit messages",
+              "Descriptive subject lines"
+            ],
+            "messageFormat": "imperative-mood, descriptive prefix (Add, Update, Fix, etc.)"
+          },
+          "contributors": [
+            {
+              "areas": [
+                "project setup"
+              ],
+              "commitCount": 2,
+              "name": "Tal Muskal"
+            }
+          ],
+          "evolution": {
+            "growthAreas": [
+              "Project is in greenfield phase - all areas will grow"
+            ],
+            "majorEvents": [
+              {
+                "date": "2026-04-02",
+                "description": "Project initialization with task outline"
+              }
+            ],
+            "technologyChanges": []
+          },
+          "implicitRules": [
+            "Project is brand new - no implicit rules established yet"
+          ],
+          "painPoints": [],
+          "releasePatterns": {
+            "frequency": "none yet",
+            "tagFormat": "none yet",
+            "versioningScheme": "not established"
+          }
+        },
+        "projectProfileSchema": {
+          "architectureSchema": "{ pattern?: string, modules?: [{name, path, description?, dependencies?}], entryPoints?: string[], dataFlow?: string }",
+          "bottleneckSchema": "{ id: string, description: string, impact: string, location?: string, frequency?: string }",
+          "cicdSchema": "{ provider?: string, configPaths?: string[], pipelines?: [{name, trigger?, stages?}], babysitterIntegration?: {enabled?, triggerOn?, processIds?} }",
+          "conventionsSchema": "{ naming?: Record<string, string>, git?: Record<string, string>, codeStyle?: Record<string, unknown>, importOrder?: string[], errorHandling?: string, testingConventions?: string, additionalRules?: string[] }",
+          "goalSchema": "{ id: string, description: string, category: string, priority?: string, status?: string }",
+          "painPointSchema": "{ id: string, description: string, severity: string, category?: string, discoveredVia?: string, suggestedRemediation?: string }",
+          "requiredFields": [
+            "projectName",
+            "description",
+            "goals",
+            "techStack",
+            "architecture",
+            "workflows",
+            "conventions",
+            "createdAt",
+            "updatedAt",
+            "version"
+          ],
+          "teamMemberSchema": "{ name: string, role: string, responsibilities?: string[] }",
+          "techStackSchema": "{ languages?: [{name, version?, role?}], frameworks?: [{name, version?, category?}], databases?: [{name, type?, version?}], infrastructure?: [{name, category?}], buildTools?: string[], packageManagers?: string[] }",
+          "workflowSchema": "{ name: string, description?: string, steps?: string[], triggers?: string[] }"
+        },
+        "projectRoot": "C:/work/agentpowershell",
+        "repoStructure": {
+          "architecture": {
+            "dataFlow": "Not yet established - project is in initial planning phase",
+            "entryPoints": [],
+            "modules": [],
+            "pattern": "new-project-scaffold"
+          },
+          "conventions": {
+            "additionalRules": [],
+            "codeStyle": {},
+            "errorHandling": "Not yet established",
+            "git": {
+              "commitStyle": "imperative-mood-prefix",
+              "mainBranch": "main"
+            },
+            "importOrder": [],
+            "naming": {},
+            "testingConventions": "Not yet established"
+          },
+          "directoryTree": {
+            "root": {
+              ".a5c/": "Babysitter orchestration infrastructure",
+              ".gitignore": "Ignores .a5c/node_modules/ and .a5c/cache/compression/",
+              "request.task.md": "Project requirements and task outline"
+            }
+          },
+          "documentation": [
+            {
+              "path": "request.task.md",
+              "summary": "Project task outline - build cross-platform PowerShell agent tool similar to agentsh with sandboxing, permissions and security features",
+              "type": "requirements"
+            }
+          ],
+          "techStack": {
+            "buildTools": [],
+            "databases": [],
+            "frameworks": [],
+            "infrastructure": [
+              {
+                "description": ".a5c/ orchestration harness",
+                "name": "babysitter"
+              }
+            ],
+            "languages": [
+              {
+                "name": "PowerShell",
+                "role": "target runtime"
+              },
+              {
+                "name": "JavaScript/Node.js",
+                "role": "babysitter infrastructure"
+              }
+            ],
+            "packageManagers": [
+              "npm"
+            ]
+          }
+        },
+        "toolsAndServices": {
+          "cicd": {
+            "configPaths": [],
+            "pipelines": [],
+            "provider": "none"
+          },
+          "containerization": {},
+          "externalIntegrations": [],
+          "infrastructure": {},
+          "services": [],
+          "tools": {
+            "formatting": [],
+            "linting": [],
+            "testing": []
+          },
+          "workflows": []
+        }
+      },
+      "instructions": [
+        "Read the breakpoint response from the user interview (Phase 4) to get user-provided information",
+        "If an existing profile exists (loaded via `babysitter profile:read --project --json` in Phase 1), use it as the base and merge new information on top",
+        "IMPORTANT: Do not import or call SDK profile functions directly — use the babysitter CLI for all profile I/O",
+        "Incorporate repo structure analysis into architecture, techStack, and conventions",
+        "Incorporate tools and services analysis into tools, services, cicd, externalIntegrations, and workflows",
+        "Incorporate process mining results into bottlenecks, painPoints, conventions (git patterns), and workflows",
+        "Incorporate user interview responses into goals, team, workflows, and preferences",
+        "Build a complete ProjectProfile object conforming to the schema described in context",
+        "For any fields not discovered or provided, use sensible defaults:",
+        "  - conventions: extract from detected code patterns or leave minimal",
+        "  - workflows: at minimum include a \"development\" workflow",
+        "Set createdAt to the existing profile createdAt if updating, or current timestamp if new",
+        "Set updatedAt to current timestamp",
+        "Set version to existing version + 1 if updating, or 1 if new",
+        "Generate unique IDs for goals (format: goal-<category>-<index>)",
+        "Generate unique IDs for pain points (format: pp-<category>-<index>)",
+        "Generate unique IDs for bottlenecks (format: bn-<location>-<index>)",
+        "Merge arrays by deduplicating on id/name fields, not replacing entire arrays",
+        "Write the preview profile to artifacts/project-profile-preview.json for the review breakpoint (this is a run artifact, NOT the actual profile — the actual profile is written later by the save task using `babysitter profile:write`)",
+        "Do NOT write to .a5c/project-profile.json or any profile path directly — that is the save task's job via the CLI"
+      ],
+      "outputFormat": "JSON with profile (complete ProjectProfile object), changesSummary (string describing what was new/changed), sourcesUsed (array of strings indicating which data sources contributed)",
+      "role": "project profile architect and data integration engineer",
+      "task": "Build a comprehensive ProjectProfile by merging all available information sources. The profile must conform to the babysitter SDK ProjectProfile schema. Use merge semantics: merge, do not overwrite. Always use the babysitter CLI for profile I/O — never import SDK profile functions directly."
+    }
+  },
+  "description": "Merge existing profile + repo research + tools analysis + process mining + user interview into a complete ProjectProfile",
+  "io": {
+    "inputJsonPath": "tasks/01KN7BD3JS5D4B96SF5T6SCVD3/input.json",
+    "outputJsonPath": "tasks/01KN7BD3JS5D4B96SF5T6SCVD3/result.json"
+  },
+  "kind": "agent",
+  "labels": [
+    "agent",
+    "build",
+    "cradle",
+    "profile"
+  ],
+  "title": "Build comprehensive project profile",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7BD3JS5D4B96SF5T6SCVD3",
+  "taskId": "build-profile",
+  "invocationKey": "cradle/project-install:S000006:build-profile",
+  "stepId": "S000006",
+  "inputs": {
+    "additionalContext": "This project aims to create a PowerShell-based agent replacement similar to agentsh (https://github.com/canyonroad/agentsh), but for PowerShell instead of bash. It should be cross-platform (Windows, Linux, macOS), with sandboxing, permissions and security features similar to agentsh.",
+    "existingProfile": null,
+    "isNewProject": true,
+    "miningResult": {
+      "bottlenecks": [],
+      "branchPatterns": {
+        "averageLifetime": "N/A",
+        "mergeStrategy": "unknown - new project",
+        "namingConvention": "main branch only - too early to determine"
+      },
+      "commitPatterns": {
+        "averageFrequency": "new project - insufficient data",
+        "averageSize": {
+          "filesChanged": 2,
+          "linesAdded": 15,
+          "linesRemoved": 0
+        },
+        "conventions": [
+          "Imperative mood commit messages",
+          "Descriptive subject lines"
+        ],
+        "messageFormat": "imperative-mood, descriptive prefix (Add, Update, Fix, etc.)"
+      },
+      "contributors": [
+        {
+          "areas": [
+            "project setup"
+          ],
+          "commitCount": 2,
+          "name": "Tal Muskal"
+        }
+      ],
+      "evolution": {
+        "growthAreas": [
+          "Project is in greenfield phase - all areas will grow"
+        ],
+        "majorEvents": [
+          {
+            "date": "2026-04-02",
+            "description": "Project initialization with task outline"
+          }
+        ],
+        "technologyChanges": []
+      },
+      "implicitRules": [
+        "Project is brand new - no implicit rules established yet"
+      ],
+      "painPoints": [],
+      "releasePatterns": {
+        "frequency": "none yet",
+        "tagFormat": "none yet",
+        "versioningScheme": "not established"
+      }
+    },
+    "projectRoot": "C:/work/agentpowershell",
+    "repoStructure": {
+      "architecture": {
+        "dataFlow": "Not yet established - project is in initial planning phase",
+        "entryPoints": [],
+        "modules": [],
+        "pattern": "new-project-scaffold"
+      },
+      "conventions": {
+        "additionalRules": [],
+        "codeStyle": {},
+        "errorHandling": "Not yet established",
+        "git": {
+          "commitStyle": "imperative-mood-prefix",
+          "mainBranch": "main"
+        },
+        "importOrder": [],
+        "naming": {},
+        "testingConventions": "Not yet established"
+      },
+      "directoryTree": {
+        "root": {
+          ".a5c/": "Babysitter orchestration infrastructure",
+          ".gitignore": "Ignores .a5c/node_modules/ and .a5c/cache/compression/",
+          "request.task.md": "Project requirements and task outline"
+        }
+      },
+      "documentation": [
+        {
+          "path": "request.task.md",
+          "summary": "Project task outline - build cross-platform PowerShell agent tool similar to agentsh with sandboxing, permissions and security features",
+          "type": "requirements"
+        }
+      ],
+      "techStack": {
+        "buildTools": [],
+        "databases": [],
+        "frameworks": [],
+        "infrastructure": [
+          {
+            "description": ".a5c/ orchestration harness",
+            "name": "babysitter"
+          }
+        ],
+        "languages": [
+          {
+            "name": "PowerShell",
+            "role": "target runtime"
+          },
+          {
+            "name": "JavaScript/Node.js",
+            "role": "babysitter infrastructure"
+          }
+        ],
+        "packageManagers": [
+          "npm"
+        ]
+      }
+    },
+    "toolsAndServices": {
+      "cicd": {
+        "configPaths": [],
+        "pipelines": [],
+        "provider": "none"
+      },
+      "containerization": {},
+      "externalIntegrations": [],
+      "infrastructure": {},
+      "services": [],
+      "tools": {
+        "formatting": [],
+        "linting": [],
+        "testing": []
+      },
+      "workflows": []
+    }
+  }
+}

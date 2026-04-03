@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T21:59:00.387Z",
+  "data": {
+    "effectId": "01KN839WFMASW43KTC6ZZDS4HK",
+    "invocationKey": "agentpowershell-full-build:S000015:build-and-test",
+    "invocationHash": "a87f7baeae0123425acc204fbd7120c941a399ce19b9d9e60d6cbf49e9d3b02a",
+    "stepId": "S000015",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: event-audit-session",
+    "taskDefRef": "tasks/01KN839WFMASW43KTC6ZZDS4HK/task.json"
+  },
+  "checksum": "8c5a3d3892e4e7f651ba6ea34f6743fd8a10fcf55af4fcc1659e1ab3779594f0"
+}

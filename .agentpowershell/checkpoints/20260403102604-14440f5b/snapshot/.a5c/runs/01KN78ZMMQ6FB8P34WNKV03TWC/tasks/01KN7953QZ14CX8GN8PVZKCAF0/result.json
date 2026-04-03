@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7953QZ14CX8GN8PVZKCAF0",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "cradle/project-install:S000005:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "response": "1. Project Goals: Drop-in bash replacement - focus on being a seamless PowerShell replacement for agentsh with identical capabilities and security model. 2. Pain Points: N/A - new project. 3. Team Structure: Solo developer (Tal Muskal). 4. Workflow Preferences: Trunk-based development, continuous releases, PRs optional. 5. CI/CD Needs: Cross-platform CI on Windows, Linux, macOS. 6. External Integrations: None specified. 7. Conventions: PowerShell best practices (PascalCase cmdlets, approved verbs), Strict TypeScript for tooling/wrappers, Pester tests required for all PowerShell modules, Cross-platform CI required. 8. Babysitter Preferences: Autonomous - run with minimal interruptions, only pause for truly destructive operations."
+  },
+  "startedAt": "2026-04-02T15:01:08.223Z",
+  "finishedAt": "2026-04-02T15:01:08.223Z",
+  "value": {
+    "approved": true,
+    "response": "1. Project Goals: Drop-in bash replacement - focus on being a seamless PowerShell replacement for agentsh with identical capabilities and security model. 2. Pain Points: N/A - new project. 3. Team Structure: Solo developer (Tal Muskal). 4. Workflow Preferences: Trunk-based development, continuous releases, PRs optional. 5. CI/CD Needs: Cross-platform CI on Windows, Linux, macOS. 6. External Integrations: None specified. 7. Conventions: PowerShell best practices (PascalCase cmdlets, approved verbs), Strict TypeScript for tooling/wrappers, Pester tests required for all PowerShell modules, Cross-platform CI required. 8. Babysitter Preferences: Autonomous - run with minimal interruptions, only pause for truly destructive operations."
+  }
+}

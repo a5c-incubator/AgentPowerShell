@@ -1,0 +1,22 @@
+{
+  "description": "Verify core types, config loading, and policy engine compile and pass tests",
+  "io": {
+    "inputJsonPath": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/input.json",
+    "outputJsonPath": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: core-infrastructure",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7EPNJKJ99VDTFZ9ENN0KVM",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000006:build-and-test",
+  "stepId": "S000006",
+  "inputs": {
+    "description": "Verify core types, config loading, and policy engine compile and pass tests",
+    "phase": "core-infrastructure",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

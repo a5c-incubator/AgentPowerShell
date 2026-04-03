@@ -1,0 +1,12 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+    "src/AgentPowerShell.Events/EventRecords.cs",
+    "src/AgentPowerShell.Daemon/ApprovalManager.cs",
+    "src/AgentPowerShell.Daemon/ApprovalSecretStore.cs",
+    "src/AgentPowerShell.Daemon/ApprovalTotp.cs",
+    "src/AgentPowerShell.Daemon/Program.cs",
+    "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

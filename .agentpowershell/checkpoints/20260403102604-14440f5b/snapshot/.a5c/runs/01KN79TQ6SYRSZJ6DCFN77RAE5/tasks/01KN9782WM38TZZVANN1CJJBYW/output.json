@@ -1,0 +1,12 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Mcp/McpServer.cs",
+    "src/AgentPowerShell.Mcp/McpModels.cs",
+    "src/AgentPowerShell.Mcp/McpRegistry.cs",
+    "src/AgentPowerShell.Mcp/McpVersionPinStore.cs",
+    "src/AgentPowerShell.Mcp/McpSessionAnalyzer.cs",
+    "src/AgentPowerShell.Mcp/McpInspector.cs",
+    "tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

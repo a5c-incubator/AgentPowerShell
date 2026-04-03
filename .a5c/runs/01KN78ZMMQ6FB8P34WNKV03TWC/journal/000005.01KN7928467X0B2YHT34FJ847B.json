@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:20:27.142Z",
+  "data": {
+    "effectId": "01KN7928375CK3DCEEK5RFWR4J",
+    "invocationKey": "cradle/project-install:S000003:analyze-tools-services",
+    "invocationHash": "11f5919a2fd8101999f809fbaa9903fa62757602028de340774e9ab9e92fc27e",
+    "stepId": "S000003",
+    "taskId": "analyze-tools-services",
+    "kind": "agent",
+    "label": "agent",
+    "taskDefRef": "tasks/01KN7928375CK3DCEEK5RFWR4J/task.json",
+    "labels": [
+      "agent",
+      "cradle",
+      "analysis",
+      "tools"
+    ]
+  },
+  "checksum": "c4638ddeab198a8d672c8fab320aeaf514ac6c30aa223da15647dad06a769c89"
+}

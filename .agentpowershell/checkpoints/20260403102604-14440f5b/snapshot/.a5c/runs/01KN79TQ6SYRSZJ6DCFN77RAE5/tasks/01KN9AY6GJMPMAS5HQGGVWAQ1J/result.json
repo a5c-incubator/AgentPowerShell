@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9AY6GJMPMAS5HQGGVWAQ1J",
+  "taskId": "reporting",
+  "invocationKey": "agentpowershell-full-build:S000027:reporting",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+      "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+      "src/AgentPowerShell.Events/SessionReport.cs",
+      "src/AgentPowerShell.Events/SessionReportGenerator.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T09:41:21.730Z",
+  "finishedAt": "2026-04-03T09:41:21.730Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+      "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+      "src/AgentPowerShell.Events/SessionReport.cs",
+      "src/AgentPowerShell.Events/SessionReportGenerator.cs",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

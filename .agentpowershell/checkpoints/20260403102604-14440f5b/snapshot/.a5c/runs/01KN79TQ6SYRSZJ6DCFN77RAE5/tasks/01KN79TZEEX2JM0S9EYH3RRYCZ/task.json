@@ -1,0 +1,96 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "architecturalInsights": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "keyFindings": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "platformApis": {
+          "type": "object"
+        },
+        "risks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary",
+        "keyFindings"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "goal": "Build a PowerShell-based policy-enforced shell execution gateway in C#/.NET with full agentsh feature parity",
+        "powershellRepoPath": "C:/Users/tmusk/AppData/Local/Temp/powershell-research",
+        "projectRoot": "C:/work/agentpowershell",
+        "referenceRepoPath": "C:/Users/tmusk/AppData/Local/Temp/agentsh-research"
+      },
+      "instructions": [
+        "Research the agentsh codebase at C:/Users/tmusk/AppData/Local/Temp/agentsh-research:",
+        "- Read cmd/agentsh/main.go and understand the CLI entry points",
+        "- Study internal/policy/ for the policy engine design",
+        "- Study internal/shim/ for the shell shim mechanism",
+        "- Study internal/server/ for the daemon architecture",
+        "- Study internal/platform/ for OS-specific implementations",
+        "- Study internal/events/ for the event system",
+        "- Study internal/session/ for session management",
+        "- Study internal/approval/ for the approval flow",
+        "- Study internal/llmproxy/ for LLM proxy features",
+        "- Study internal/mcpclient/ and internal/mcpinspect/ for MCP integration",
+        "- Study internal/netmonitor/ and internal/fsmonitor/ for monitoring",
+        "- Study internal/ptrace/ and internal/seccomp/ for Linux enforcement",
+        "- Study drivers/windows/ for Windows minifilter driver approach",
+        "- Study the default-policy.yml and config.yml for configuration format",
+        "Research PowerShell internals at C:/Users/tmusk/AppData/Local/Temp/powershell-research:",
+        "- Understand how PowerShell modules and profiles work",
+        "- Study how PowerShell handles process execution (Start-Process, Invoke-Expression)",
+        "- Understand the PowerShell host interface for building custom hosts",
+        "- Study the PowerShell remoting and session architecture",
+        "- Research .NET interop for system-level hooks (P/Invoke, ETW, minifilters)",
+        "Write all research findings to docs/research/ in the project root as markdown files",
+        "Create docs/research/agentsh-analysis.md with full architecture breakdown",
+        "Create docs/research/powershell-internals.md with relevant PS internals",
+        "Create docs/research/dotnet-platform-apis.md with .NET APIs for each enforcement mechanism"
+      ],
+      "outputFormat": "JSON with summary, keyFindings, architecturalInsights, platformApis, risks",
+      "role": "Senior systems engineer and security architect",
+      "task": "Conduct deep research on agentsh and PowerShell to inform the architecture of agentpowershell"
+    }
+  },
+  "execution": {
+    "model": "claude-opus-4-6"
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN79TZEEX2JM0S9EYH3RRYCZ/input.json",
+    "outputJsonPath": "tasks/01KN79TZEEX2JM0S9EYH3RRYCZ/output.json"
+  },
+  "kind": "agent",
+  "title": "Deep research: agentsh architecture & PowerShell internals",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN79TZEEX2JM0S9EYH3RRYCZ",
+  "taskId": "deep-research",
+  "invocationKey": "agentpowershell-full-build:S000001:deep-research",
+  "stepId": "S000001",
+  "inputs": {
+    "powershellRepoPath": "C:/Users/tmusk/AppData/Local/Temp/powershell-research",
+    "projectName": "agentpowershell",
+    "projectRoot": "C:/work/agentpowershell",
+    "referenceRepoPath": "C:/Users/tmusk/AppData/Local/Temp/agentsh-research"
+  }
+}

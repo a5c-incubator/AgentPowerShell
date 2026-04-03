@@ -1,0 +1,14 @@
+{
+  "runId": "01KN78ZMMQ6FB8P34WNKV03TWC",
+  "request": "cradle/project-install",
+  "processId": "cradle/project-install",
+  "entrypoint": {
+    "importPath": "../../../../../Users/tmusk/.a5c/process-library/babysitter-repo/plugins/babysitter/skills/babysit/process/cradle/project-install.js",
+    "exportName": "process"
+  },
+  "processPath": "../../../../../Users/tmusk/.a5c/process-library/babysitter-repo/plugins/babysitter/skills/babysit/process/cradle/project-install.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-04-02T14:19:01.690Z",
+  "prompt": "Set up babysitter for the agentpowershell project - a PowerShell-based agent replacement similar to agentsh, cross-platform with sandboxing and security features.",
+  "completionProof": "726013ed0eaaf35d3ecf540f52fd2f6b"
+}

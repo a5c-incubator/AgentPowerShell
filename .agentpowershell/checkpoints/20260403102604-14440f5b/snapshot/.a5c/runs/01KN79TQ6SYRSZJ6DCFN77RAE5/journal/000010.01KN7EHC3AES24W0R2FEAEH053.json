@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T15:56:05.610Z",
+  "data": {
+    "effectId": "01KN7EHC1V9Z7D0MP98PPZ08JG",
+    "invocationKey": "agentpowershell-full-build:S000005:core-infrastructure",
+    "invocationHash": "0ab091b99ab79c1fcb567b63f7e841fc13a51fdcc9f5e33f4c8aa535da9e0e0f",
+    "stepId": "S000005",
+    "taskId": "core-infrastructure",
+    "kind": "agent",
+    "label": "Implement core types, config, and policy engine",
+    "taskDefRef": "tasks/01KN7EHC1V9Z7D0MP98PPZ08JG/task.json"
+  },
+  "checksum": "82c8e14e48c29f3642e498377469736292800bfd2d7921e8266576b7d7233c7e"
+}

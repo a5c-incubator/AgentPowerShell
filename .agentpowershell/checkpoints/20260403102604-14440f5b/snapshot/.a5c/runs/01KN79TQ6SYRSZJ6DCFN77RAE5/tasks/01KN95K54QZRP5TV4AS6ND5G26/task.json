@@ -1,0 +1,22 @@
+{
+  "description": "Verify network and filesystem monitoring compile and pass tests",
+  "io": {
+    "inputJsonPath": "tasks/01KN95K54QZRP5TV4AS6ND5G26/input.json",
+    "outputJsonPath": "tasks/01KN95K54QZRP5TV4AS6ND5G26/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: monitors",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN95K54QZRP5TV4AS6ND5G26",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000019:build-and-test",
+  "stepId": "S000019",
+  "inputs": {
+    "description": "Verify network and filesystem monitoring compile and pass tests",
+    "phase": "monitors",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

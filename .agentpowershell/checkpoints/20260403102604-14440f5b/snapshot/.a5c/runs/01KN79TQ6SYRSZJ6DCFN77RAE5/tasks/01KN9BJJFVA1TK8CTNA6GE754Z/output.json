@@ -1,0 +1,7 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/WorkspaceCheckpointManager.cs",
+    "src/AgentPowerShell.Cli/CliApp.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+  ]
+}

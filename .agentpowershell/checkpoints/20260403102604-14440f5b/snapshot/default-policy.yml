@@ -1,0 +1,87 @@
+version: "1"
+name: default
+description: Default agentpowershell policy
+
+file_rules:
+  - name: allow-workspace-read
+    pattern: "${WORKSPACE}/**"
+    operations: [read, stat]
+    decision: allow
+
+  - name: allow-workspace-write
+    pattern: "${WORKSPACE}/**"
+    operations: [write, create]
+    decision: allow
+
+  - name: deny-etc
+    pattern: "/etc/**"
+    operations: [write, create, delete]
+    decision: deny
+    message: "Writing to /etc is not allowed"
+
+  - name: deny-home-dotfiles
+    pattern: "${HOME}/.*"
+    operations: [write, create, delete]
+    decision: deny
+    message: "Modifying dotfiles is not allowed"
+
+  - name: allow-tmp
+    pattern: "/tmp/**"
+    operations: [read, write, create, delete]
+    decision: allow
+
+  - name: default-file-deny
+    pattern: "/**"
+    operations: [write, create, delete]
+    decision: deny
+    message: "File write outside workspace not allowed"
+
+command_rules:
+  - name: allow-common-commands
+    pattern: "{ls,cat,echo,pwd,whoami,date,head,tail,wc,sort,uniq,grep,find,which}"
+    decision: allow
+
+  - name: allow-git
+    pattern: "git"
+    decision: allow
+
+  - name: allow-dotnet
+    pattern: "dotnet"
+    decision: allow
+
+  - name: deny-dangerous
+    pattern: "{rm,shutdown,reboot,mkfs,dd,format}"
+    decision: deny
+    message: "Dangerous command blocked"
+
+  - name: approve-install
+    pattern: "{apt,yum,brew,choco,winget,pip,npm}"
+    decision: approve
+    message: "Package installation requires approval"
+
+  - name: default-command-approve
+    pattern: "*"
+    decision: approve
+    message: "Command requires approval"
+
+network_rules:
+  - name: allow-localhost
+    domain: "localhost"
+    ports: [1-65535]
+    decision: allow
+
+  - name: allow-common-apis
+    domain: "*.githubusercontent.com"
+    ports: [443]
+    decision: allow
+
+  - name: allow-nuget
+    domain: "api.nuget.org"
+    ports: [443]
+    decision: allow
+
+  - name: deny-all-network
+    domain: "*"
+    ports: [1-65535]
+    decision: deny
+    message: "Network access not allowed by default"

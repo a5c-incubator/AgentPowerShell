@@ -1,0 +1,7 @@
+{
+  "verified": true,
+  "phase": "cli-reporting-checkpoints",
+  "sdk": "9.0.312",
+  "buildSucceeded": true,
+  "testsPassed": true
+}

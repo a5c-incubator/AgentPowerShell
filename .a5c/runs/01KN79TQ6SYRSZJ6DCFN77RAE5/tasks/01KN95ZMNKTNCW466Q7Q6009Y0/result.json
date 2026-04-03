@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN95ZMNKTNCW466Q7Q6009Y0",
+  "taskId": "authentication",
+  "invocationKey": "agentpowershell-full-build:S000021:authentication",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Daemon/AuthenticationManager.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  },
+  "startedAt": "2026-04-03T08:09:55.594Z",
+  "finishedAt": "2026-04-03T08:09:55.594Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Core/Abstractions.cs",
+      "src/AgentPowerShell.Core/AgentPowerShellConfig.cs",
+      "src/AgentPowerShell.Daemon/AuthenticationManager.cs",
+      "src/AgentPowerShell.Daemon/Program.cs",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+      "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs"
+    ]
+  }
+}

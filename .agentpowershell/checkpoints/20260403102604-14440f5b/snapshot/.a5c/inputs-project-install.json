@@ -1,0 +1,5 @@
+{
+  "projectRoot": "C:/work/agentpowershell",
+  "isNewProject": true,
+  "additionalContext": "This project aims to create a PowerShell-based agent replacement similar to agentsh (https://github.com/canyonroad/agentsh), but for PowerShell instead of bash. It should be cross-platform (Windows, Linux, macOS), with sandboxing, permissions and security features similar to agentsh."
+}

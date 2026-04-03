@@ -1,0 +1,49 @@
+server:
+  ipc_socket: /tmp/agentpowershell.sock
+  http_port: 9120
+  http_bind: 127.0.0.1
+
+auth:
+  mode: none  # none, api_key, oidc, hybrid
+  api_key: ""
+  oidc:
+    issuer: ""
+    audience: ""
+
+logging:
+  level: Information
+  console: true
+  file: logs/agentpowershell.log
+  structured: true
+
+sessions:
+  max_concurrent: 10
+  idle_timeout_minutes: 30
+  max_lifetime_minutes: 480
+  reap_interval_seconds: 60
+
+policy:
+  default_policy: default-policy.yml
+  watch_for_changes: true
+
+events:
+  stores:
+    - type: sqlite
+      path: data/events.db
+    - type: jsonl
+      path: data/events.jsonl
+      max_size_mb: 100
+      max_backups: 5
+
+approval:
+  mode: tty  # tty, api, totp, webauthn, dialog
+  timeout_seconds: 120
+
+llm_proxy:
+  enabled: false
+  listen_port: 9121
+  providers: []
+
+shim:
+  fail_mode: closed  # open or closed
+  max_consecutive_failures: 3

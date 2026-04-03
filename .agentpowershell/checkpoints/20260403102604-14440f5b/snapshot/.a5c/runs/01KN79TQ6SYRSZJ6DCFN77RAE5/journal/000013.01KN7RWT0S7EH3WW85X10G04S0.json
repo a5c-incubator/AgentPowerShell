@@ -1,0 +1,13 @@
+{
+  "type": "EFFECT_RESOLVED",
+  "recordedAt": "2026-04-02T18:57:06.073Z",
+  "data": {
+    "effectId": "01KN7EPNJKJ99VDTFZ9ENN0KVM",
+    "status": "ok",
+    "resultRef": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/result.json",
+    "stdoutRef": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/stdout.log",
+    "startedAt": "2026-04-02T18:57:05.988Z",
+    "finishedAt": "2026-04-02T18:57:05.988Z"
+  },
+  "checksum": "9963068c7d42f1ac430e3066dfdc7a5f04d93f8e0ea80d10a0e4053f9192cb6e"
+}

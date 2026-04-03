@@ -1,0 +1,22 @@
+{
+  "description": "Verify LLM proxy and MCP integration pass tests",
+  "io": {
+    "inputJsonPath": "tasks/01KN98H9FWFXZ10Q51KS5E7EHE/input.json",
+    "outputJsonPath": "tasks/01KN98H9FWFXZ10Q51KS5E7EHE/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: llm-mcp",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN98H9FWFXZ10Q51KS5E7EHE",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000025:build-and-test",
+  "stepId": "S000025",
+  "inputs": {
+    "description": "Verify LLM proxy and MCP integration pass tests",
+    "phase": "llm-mcp",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

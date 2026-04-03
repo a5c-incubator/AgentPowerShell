@@ -1,0 +1,7 @@
+{
+  "notes": [
+    "Implemented core policy/config abstractions, a first-match-wins policy engine, YAML loaders, event records, and approval/interceptor interfaces.",
+    "Added six unit tests covering rule order, command glob alternation, port ranges, default deny behavior, YAML policy parsing, and configuration loading.",
+    "testsPassing is false because dotnet test could not run in this environment: global.json requires SDK 9.0.100 and no .NET SDK is installed."
+  ]
+}

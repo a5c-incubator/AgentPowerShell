@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7SCD4S65661AANVTZE2FQD",
+  "taskId": "platform-enforcement",
+  "invocationKey": "agentpowershell-full-build:S000010:platform-enforcement",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.Linux/LinuxEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.Linux/LinuxNativeMethods.cs",
+      "src/AgentPowerShell.Platform.Linux/SystemdUnitFile.cs"
+    ],
+    "platformFeatures": [
+      "seccomp/ptrace/Landlock planning",
+      "Linux syscall interop stubs",
+      "systemd unit rendering"
+    ]
+  },
+  "stdoutRef": "tasks/01KN7SCD4S65661AANVTZE2FQD/stdout.log",
+  "startedAt": "2026-04-02T19:10:16.653Z",
+  "finishedAt": "2026-04-02T19:10:16.653Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Platform.Linux/LinuxEnforcementPlan.cs",
+      "src/AgentPowerShell.Platform.Linux/LinuxNativeMethods.cs",
+      "src/AgentPowerShell.Platform.Linux/SystemdUnitFile.cs"
+    ],
+    "platformFeatures": [
+      "seccomp/ptrace/Landlock planning",
+      "Linux syscall interop stubs",
+      "systemd unit rendering"
+    ]
+  }
+}

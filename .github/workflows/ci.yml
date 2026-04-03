@@ -1,0 +1,80 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  packages: read
+
+env:
+  DOTNET_NOLOGO: true
+  REGISTRY_IMAGE: ghcr.io/a5c-ai/agentpowershell
+
+jobs:
+  dotnet:
+    name: ci / dotnet / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Build and test (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./eng/ci/test.ps1
+
+      - name: Build and test (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          chmod +x eng/ci/test.sh
+          ./eng/ci/test.sh
+
+  docker-linux:
+    name: ci / docker / linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Docker smoke test
+        run: |
+          chmod +x eng/ci/docker-smoke.sh
+          ./eng/ci/docker-smoke.sh agentpowershell:linux-ci
+
+  docker-windows:
+    name: ci / docker / windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Docker smoke test
+        shell: pwsh
+        run: |
+          ./eng/ci/docker-smoke.ps1 -ImageTag agentpowershell:windows-ci
+
+  docker-macos-note:
+    name: ci / docker / macos-note
+    runs-on: macos-latest
+    steps:
+      - name: Explain hosted-runner limitation
+        run: |
+          echo "GitHub-hosted macOS runners do not provide a Docker daemon."
+          echo "The .NET test matrix covers macOS directly, while Docker smoke coverage runs on Linux and Windows runners."

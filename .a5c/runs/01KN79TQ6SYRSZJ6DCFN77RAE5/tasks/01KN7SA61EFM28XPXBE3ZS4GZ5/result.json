@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7SA61EFM28XPXBE3ZS4GZ5",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000008:build-and-test",
+  "status": "ok",
+  "result": {
+    "buildSucceeded": true,
+    "phase": "powershell-shim",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  },
+  "stdoutRef": "tasks/01KN7SA61EFM28XPXBE3ZS4GZ5/stdout.log",
+  "startedAt": "2026-04-02T19:05:15.053Z",
+  "finishedAt": "2026-04-02T19:05:15.053Z",
+  "value": {
+    "buildSucceeded": true,
+    "phase": "powershell-shim",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7STBQ51QWC6FNCDH1DVQ6W",
+  "taskId": "event-system",
+  "invocationKey": "agentpowershell-full-build:S000013:event-system",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "src/AgentPowerShell.Events/EventRecords.cs",
+      "src/AgentPowerShell.Events/EventBus.cs",
+      "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+      "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+      "src/AgentPowerShell.Events/EventQuery.cs"
+    ]
+  },
+  "stdoutRef": "tasks/01KN7STBQ51QWC6FNCDH1DVQ6W/stdout.log",
+  "startedAt": "2026-04-02T19:17:18.793Z",
+  "finishedAt": "2026-04-02T19:17:18.793Z",
+  "value": {
+    "filesCreated": [
+      "src/AgentPowerShell.Events/EventRecords.cs",
+      "src/AgentPowerShell.Events/EventBus.cs",
+      "src/AgentPowerShell.Events/JsonEventSerializer.cs",
+      "src/AgentPowerShell.Events/AppendOnlyEventStore.cs",
+      "src/AgentPowerShell.Events/EventQuery.cs"
+    ]
+  }
+}

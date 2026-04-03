@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T15:58:59.201Z",
+  "data": {
+    "effectId": "01KN7EPNJKJ99VDTFZ9ENN0KVM",
+    "invocationKey": "agentpowershell-full-build:S000006:build-and-test",
+    "invocationHash": "bedf62572938a9541e3c99c7938f6272ba2f652d92ad01dfd4eb33892c03e688",
+    "stepId": "S000006",
+    "taskId": "build-and-test",
+    "kind": "shell",
+    "label": "Build and test: core-infrastructure",
+    "taskDefRef": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/task.json"
+  },
+  "checksum": "75d4a0e776cf3b7c9b408d0e540d9a273e60182d483b89d3c62a7895d11ddd10"
+}

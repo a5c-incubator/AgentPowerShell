@@ -1,0 +1,7 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Core/SessionModels.cs",
+    "src/AgentPowerShell.Daemon/SessionStore.cs",
+    "src/AgentPowerShell.Daemon/SessionLifecycleService.cs"
+  ]
+}

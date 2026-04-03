@@ -1,0 +1,23 @@
+{
+  "filesCreated": [
+    "src/AgentPowerShell.Protos/ShimMessages.cs",
+    "src/AgentPowerShell.Core/ShimIpcOptions.cs",
+    "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+    "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+    "src/AgentPowerShell.Shim/ShimClient.cs",
+    "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+    "src/AgentPowerShell.Shim/RealPowerShellResolver.cs"
+  ],
+  "filesModified": [
+    "src/AgentPowerShell.Protos/agentpowershell.proto",
+    "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj",
+    "src/AgentPowerShell.Daemon/Program.cs",
+    "src/AgentPowerShell.Daemon/Worker.cs",
+    "src/AgentPowerShell.Shim/AgentPowerShell.Shim.csproj",
+    "src/AgentPowerShell.Shim/Program.cs",
+    "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+    "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+    "Directory.Build.props"
+  ],
+  "testsWritten": 1
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+  <ItemGroup>
+    <ProjectReference Include="..\AgentPowerShell.Core\AgentPowerShell.Core.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Events\AgentPowerShell.Events.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Protos\AgentPowerShell.Protos.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Platform.Windows\AgentPowerShell.Platform.Windows.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Platform.Linux\AgentPowerShell.Platform.Linux.csproj" />
+    <ProjectReference Include="..\AgentPowerShell.Platform.MacOS\AgentPowerShell.Platform.MacOS.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.10" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.12.1" />
+  </ItemGroup>
+</Project>

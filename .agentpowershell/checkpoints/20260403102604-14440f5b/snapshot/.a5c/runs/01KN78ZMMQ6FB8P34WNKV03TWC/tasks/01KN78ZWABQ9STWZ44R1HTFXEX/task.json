@@ -1,0 +1,106 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "a5cDirExists": {
+          "type": "boolean"
+        },
+        "a5cFiles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "cicdConfigFiles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "claudeMdContent": {
+          "type": "string"
+        },
+        "claudeMdExists": {
+          "type": "boolean"
+        },
+        "existingProfile": {
+          "oneOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gitCommitCount": {
+          "type": "number"
+        },
+        "isFirstRun": {
+          "type": "boolean"
+        },
+        "isNewProject": {
+          "type": "boolean"
+        },
+        "profileVersion": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "existingProfile",
+        "isFirstRun",
+        "isNewProject"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "additionalContext": "This project aims to create a PowerShell-based agent replacement similar to agentsh (https://github.com/canyonroad/agentsh), but for PowerShell instead of bash. It should be cross-platform (Windows, Linux, macOS), with sandboxing, permissions and security features similar to agentsh.",
+        "defaultProfilePath": ".a5c/project-profile.json",
+        "projectRoot": "C:/work/agentpowershell"
+      },
+      "instructions": [
+        "Run `babysitter profile:read --project --json` to check for an existing project profile (add `--dir <dir>` if a custom projectRoot is provided)",
+        "If the command succeeds (exit 0), parse the JSON output as the existing profile",
+        "If the command fails (exit 1), there is no existing profile",
+        "Check if .a5c/ directory exists and list its contents",
+        "Determine if this is a new project by checking:",
+        "  - Is the git repo empty or has only 1-2 initial commits?",
+        "  - Are there only scaffold/template files (e.g., just a README, .gitignore, package.json with no src/)?",
+        "  - Is there no meaningful source code yet?",
+        "Check for existing CLAUDE.md and note its contents",
+        "Check for existing CI/CD configuration files (.github/workflows/, .gitlab-ci.yml, Jenkinsfile, etc.)",
+        "Report whether this is a fresh install, an update, or a new project",
+        "If an existing profile is found, include it in full in the output so it can be used as a merge base",
+        "Do NOT modify any files - this is a read-only check",
+        "IMPORTANT: Always use the babysitter CLI for profile operations — never import SDK profile functions directly"
+      ],
+      "outputFormat": "JSON with existingProfile (full profile object or null), isFirstRun (boolean), isNewProject (boolean), a5cDirExists (boolean), a5cFiles (array), claudeMdExists (boolean), cicdConfigFiles (array of paths found), gitCommitCount (number)",
+      "role": "system administrator and configuration specialist",
+      "task": "Check if a babysitter project profile already exists and determine if this is a new or existing project. Read any existing profile for merge-based updates."
+    }
+  },
+  "description": "Read existing project profile and configuration to support idempotent re-runs. Detect if this is a new or existing project.",
+  "io": {
+    "inputJsonPath": "tasks/01KN78ZWABQ9STWZ44R1HTFXEX/input.json",
+    "outputJsonPath": "tasks/01KN78ZWABQ9STWZ44R1HTFXEX/result.json"
+  },
+  "kind": "agent",
+  "labels": [
+    "agent",
+    "cradle",
+    "read-only",
+    "setup"
+  ],
+  "title": "Check existing project setup",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN78ZWABQ9STWZ44R1HTFXEX",
+  "taskId": "check-existing-setup",
+  "invocationKey": "cradle/project-install:S000001:check-existing-setup",
+  "stepId": "S000001",
+  "inputs": {
+    "additionalContext": "This project aims to create a PowerShell-based agent replacement similar to agentsh (https://github.com/canyonroad/agentsh), but for PowerShell instead of bash. It should be cross-platform (Windows, Linux, macOS), with sandboxing, permissions and security features similar to agentsh.",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

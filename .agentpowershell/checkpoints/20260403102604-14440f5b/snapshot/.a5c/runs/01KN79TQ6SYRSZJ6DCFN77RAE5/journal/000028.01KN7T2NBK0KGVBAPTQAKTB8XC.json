@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T19:17:46.484Z",
+  "data": {
+    "effectId": "01KN7T2NAE5A6QJAQWEZSQPTM6",
+    "invocationKey": "agentpowershell-full-build:S000014:session-management",
+    "invocationHash": "bf71add30ae05af9657ca2a9b6aba48b0411d91824a3dafccb0a95141421d11a",
+    "stepId": "S000014",
+    "taskId": "session-management",
+    "kind": "agent",
+    "label": "Implement session management",
+    "taskDefRef": "tasks/01KN7T2NAE5A6QJAQWEZSQPTM6/task.json"
+  },
+  "checksum": "6c0f891482da2a327ddf20f4c4ab4fa5ec7aa0f2ce51fa5ed85d40234af9a0af"
+}

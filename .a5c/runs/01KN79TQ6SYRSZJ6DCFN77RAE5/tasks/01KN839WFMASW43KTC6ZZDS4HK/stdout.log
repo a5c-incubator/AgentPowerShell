@@ -1,0 +1,7 @@
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 11 ms - AgentPowerShell.Platform.Tests.dll (net9.0)
+Passed!  - Failed:     0, Passed:    10, Skipped:     0, Total:    10, Duration: 158 ms - AgentPowerShell.Tests.dll (net9.0)
+Passed!  - Failed:     0, Passed:     2, Skipped:     0, Total:     2, Duration: 210 ms - AgentPowerShell.IntegrationTests.dll (net9.0)

@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T07:49:06.575Z",
+  "data": {
+    "effectId": "01KN952CV09ST9T3FWBEKJA964",
+    "invocationKey": "agentpowershell-full-build:S000018:filesystem-monitor",
+    "invocationHash": "660b10994e48237a35f1a4969cb21ef2b5ee283798474c59c75f9e339a2fb50f",
+    "stepId": "S000018",
+    "taskId": "filesystem-monitor",
+    "kind": "agent",
+    "label": "Implement filesystem monitoring",
+    "taskDefRef": "tasks/01KN952CV09ST9T3FWBEKJA964/task.json"
+  },
+  "checksum": "ef43a5c96ff5953cb8be08c62f8c734e550eed5a9ba511bc53d08cee6bdcd821"
+}

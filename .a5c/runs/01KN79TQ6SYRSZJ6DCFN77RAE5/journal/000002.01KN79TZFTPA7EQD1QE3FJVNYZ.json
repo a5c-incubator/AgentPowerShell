@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:33:57.498Z",
+  "data": {
+    "effectId": "01KN79TZEEX2JM0S9EYH3RRYCZ",
+    "invocationKey": "agentpowershell-full-build:S000001:deep-research",
+    "invocationHash": "70a35f8496b3669285ec991d6716ad24fd033902d0c795265823f17b3e4c6380",
+    "stepId": "S000001",
+    "taskId": "deep-research",
+    "kind": "agent",
+    "label": "Deep research: agentsh architecture & PowerShell internals",
+    "taskDefRef": "tasks/01KN79TZEEX2JM0S9EYH3RRYCZ/task.json"
+  },
+  "checksum": "81d72ea570c01920afb81dfba3eb1a0910a43d30c01d33e669d7d1314df69ce5"
+}

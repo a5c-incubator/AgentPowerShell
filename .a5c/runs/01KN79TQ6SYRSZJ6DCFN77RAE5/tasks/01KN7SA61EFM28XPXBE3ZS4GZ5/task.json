@@ -1,0 +1,22 @@
+{
+  "description": "Verify PowerShell shim interception works on the current platform",
+  "io": {
+    "inputJsonPath": "tasks/01KN7SA61EFM28XPXBE3ZS4GZ5/input.json",
+    "outputJsonPath": "tasks/01KN7SA61EFM28XPXBE3ZS4GZ5/output.json"
+  },
+  "kind": "shell",
+  "shell": {
+    "command": "cd \"C:/work/agentpowershell\" && dotnet build --verbosity minimal 2>&1 && dotnet test --verbosity minimal 2>&1"
+  },
+  "title": "Build and test: powershell-shim",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7SA61EFM28XPXBE3ZS4GZ5",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000008:build-and-test",
+  "stepId": "S000008",
+  "inputs": {
+    "description": "Verify PowerShell shim interception works on the current platform",
+    "phase": "powershell-shim",
+    "projectRoot": "C:/work/agentpowershell"
+  }
+}

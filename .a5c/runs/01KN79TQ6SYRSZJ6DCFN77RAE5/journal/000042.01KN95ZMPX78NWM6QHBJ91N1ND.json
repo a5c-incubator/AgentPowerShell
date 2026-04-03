@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T08:05:04.861Z",
+  "data": {
+    "effectId": "01KN95ZMNKTNCW466Q7Q6009Y0",
+    "invocationKey": "agentpowershell-full-build:S000021:authentication",
+    "invocationHash": "73a6ce018e6e69a078d08b29cff19f60d6f4dd9811f0aa1a3d02348c47834d1e",
+    "stepId": "S000021",
+    "taskId": "authentication",
+    "kind": "agent",
+    "label": "Implement authentication (API key, OIDC, hybrid)",
+    "taskDefRef": "tasks/01KN95ZMNKTNCW466Q7Q6009Y0/task.json"
+  },
+  "checksum": "06380cdd0f61deaaa416501fcc6f41b24ddac4886d4988a4986771ee383812a3"
+}

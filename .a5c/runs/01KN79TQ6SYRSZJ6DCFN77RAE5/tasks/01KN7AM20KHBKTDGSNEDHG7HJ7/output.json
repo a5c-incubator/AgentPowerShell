@@ -1,0 +1,28 @@
+{
+  "summary": "Complete architecture for agentpowershell -- a C#/.NET 9 PowerShell policy-enforced shell execution gateway with daemon+shim pattern, gRPC IPC, YAML-based first-match-wins policy engine, 70+ event types with composite fan-out store, cross-platform enforcement via platform abstraction, LLM reverse proxy with DLP, MCP security monitoring, and multi-modal approval system.",
+  "solutionStructure": {
+    "projects": ["AgentPowerShell.Core", "AgentPowerShell.Protos", "AgentPowerShell.Daemon", "AgentPowerShell.Shim", "AgentPowerShell.Cli", "AgentPowerShell.Events", "AgentPowerShell.LlmProxy", "AgentPowerShell.Mcp", "AgentPowerShell.Platform.Windows", "AgentPowerShell.Platform.Linux", "AgentPowerShell.Platform.MacOS", "AgentPowerShell.Tests", "AgentPowerShell.IntegrationTests", "AgentPowerShell.Platform.Tests"],
+    "totalProjects": 14
+  },
+  "designDecisions": [
+    "PATH-based shim instead of binary replacement",
+    "Native AOT for shim binary -- sub-50ms cold start",
+    "gRPC over named pipes/Unix domain sockets for IPC",
+    "Protobuf wire protocol for schema-first compatibility",
+    "Generic Host for daemon lifecycle and DI",
+    "ConstrainedLanguage mode as baseline PowerShell enforcement",
+    "Custom PSHost + InitialSessionState for PowerShell interception",
+    "Platform enforcer abstraction with factory pattern",
+    "Composite event store with fan-out (SQLite + JSONL + webhook + OTEL)",
+    "System.Threading.Channels for pub/sub event broker",
+    "YAML policy format compatible with agentsh",
+    "YARP reverse proxy for LLM proxy",
+    "Native helper binaries for high-risk platform features",
+    "Minifilter driver communication via fltlib.dll P/Invoke"
+  ],
+  "platformStrategies": {
+    "windows": "Job Objects + minifilter + ETW + AppContainer + AMSI + ConPTY + named pipes",
+    "linux": "cgroups v2 + Landlock + seccomp-bpf + ptrace + eBPF + namespaces + Unix sockets",
+    "macos": "Endpoint Security + sandbox-exec + Network Extension + FSEvents + RLIMIT + XPC"
+  }
+}

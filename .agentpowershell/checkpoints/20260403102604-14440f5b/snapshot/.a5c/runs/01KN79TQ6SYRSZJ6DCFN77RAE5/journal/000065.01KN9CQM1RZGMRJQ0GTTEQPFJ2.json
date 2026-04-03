@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T10:03:02.072Z",
+  "data": {
+    "effectId": "01KN9CQM0R40D4KKCXV0PJ9NQD",
+    "invocationKey": "agentpowershell-full-build:S000033:packaging",
+    "invocationHash": "8ecde8ec9feff18065e4955567a7efa06f3dbee6a88c91918643f99829813022",
+    "stepId": "S000033",
+    "taskId": "packaging",
+    "kind": "agent",
+    "label": "Set up packaging and distribution",
+    "taskDefRef": "tasks/01KN9CQM0R40D4KKCXV0PJ9NQD/task.json"
+  },
+  "checksum": "24410e80720d26075cef7fdc3c3a03ede382e10988e9f0d472dbabcc9cfd957c"
+}

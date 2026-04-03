@@ -1,0 +1,41 @@
+{
+  "kind": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Approve",
+        "Request changes"
+      ],
+      "question": "agentpowershell implementation complete. Quality: 88/85. Approved with follow-up work focused on platform-native hardening and release operationalization.. Approve?",
+      "tags": [
+        "final-approval"
+      ],
+      "title": "Final Project Review"
+    },
+    "requestedAt": "2026-04-03T10:07:28.293Z"
+  },
+  "title": "breakpoint",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9CZR152NCQBKCAPSPVFR6N",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "agentpowershell-full-build:S000035:__sdk.breakpoint",
+  "stepId": "S000035",
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "expert": "owner",
+      "options": [
+        "Approve",
+        "Request changes"
+      ],
+      "question": "agentpowershell implementation complete. Quality: 88/85. Approved with follow-up work focused on platform-native hardening and release operationalization.. Approve?",
+      "tags": [
+        "final-approval"
+      ],
+      "title": "Final Project Review"
+    },
+    "requestedAt": "2026-04-03T10:07:28.293Z"
+  }
+}

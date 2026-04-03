@@ -1,0 +1,43 @@
+{
+  "kind": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "existingProfile": "No existing profile found",
+        "isNewProject": true,
+        "researchSummary": {
+          "gitHistoryMined": true,
+          "repoAnalyzed": true,
+          "toolsAnalyzed": true
+        }
+      },
+      "question": "Welcome to babysitter project setup! Please tell us about this project so we can customize your experience.\n\n(This is a fresh project setup. We will create the project profile from scratch.)\n\nWe have already analyzed the repository and mined its git history. Now we need your input.\n\nPlease provide the following information:\n\n1. **Project Goals**: What are the primary goals and objectives for this project?\n2. **Pain Points**: What are your biggest pain points in the current workflow? (e.g., slow CI, flaky tests, manual deploys)\n3. **Team Structure**: Who works on this project? What are the roles and responsibilities?\n4. **Workflow Preferences**:\n   - Branch strategy: gitflow / trunk-based / feature-branches / other\n   - Code review process: PRs required / optional / pair programming\n   - Release cadence: continuous / weekly / scheduled / manual\n5. **CI/CD Needs**: Do you want babysitter integrated into your CI/CD pipeline? If so, which events should trigger it? (e.g., PR opened, push to main, release)\n6. **External Integrations**: What external tools and services do you use? (e.g., Jira, Slack, Datadog, PagerDuty, Sentry)\n7. **Conventions**: Any specific coding conventions, naming rules, or standards you want enforced?\n8. **Babysitter Preferences**: How autonomous should babysitter be for this project? (supervised / semi-autonomous / autonomous)\n\nAnswer as much or as little as you like. We will fill in sensible defaults for anything you skip.",
+      "title": "Project Onboarding Interview"
+    },
+    "requestedAt": "2026-04-02T14:22:00.959Z"
+  },
+  "title": "breakpoint",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN7953QZ14CX8GN8PVZKCAF0",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "cradle/project-install:S000005:__sdk.breakpoint",
+  "stepId": "S000005",
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "existingProfile": "No existing profile found",
+        "isNewProject": true,
+        "researchSummary": {
+          "gitHistoryMined": true,
+          "repoAnalyzed": true,
+          "toolsAnalyzed": true
+        }
+      },
+      "question": "Welcome to babysitter project setup! Please tell us about this project so we can customize your experience.\n\n(This is a fresh project setup. We will create the project profile from scratch.)\n\nWe have already analyzed the repository and mined its git history. Now we need your input.\n\nPlease provide the following information:\n\n1. **Project Goals**: What are the primary goals and objectives for this project?\n2. **Pain Points**: What are your biggest pain points in the current workflow? (e.g., slow CI, flaky tests, manual deploys)\n3. **Team Structure**: Who works on this project? What are the roles and responsibilities?\n4. **Workflow Preferences**:\n   - Branch strategy: gitflow / trunk-based / feature-branches / other\n   - Code review process: PRs required / optional / pair programming\n   - Release cadence: continuous / weekly / scheduled / manual\n5. **CI/CD Needs**: Do you want babysitter integrated into your CI/CD pipeline? If so, which events should trigger it? (e.g., PR opened, push to main, release)\n6. **External Integrations**: What external tools and services do you use? (e.g., Jira, Slack, Datadog, PagerDuty, Sentry)\n7. **Conventions**: Any specific coding conventions, naming rules, or standards you want enforced?\n8. **Babysitter Preferences**: How autonomous should babysitter be for this project? (supervised / semi-autonomous / autonomous)\n\nAnswer as much or as little as you like. We will fill in sensible defaults for anything you skip.",
+      "title": "Project Onboarding Interview"
+    },
+    "requestedAt": "2026-04-02T14:22:00.959Z"
+  }
+}

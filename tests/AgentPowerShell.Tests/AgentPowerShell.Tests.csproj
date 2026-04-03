@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\AgentPowerShell.Core\AgentPowerShell.Core.csproj" />
+    <ProjectReference Include="..\..\src\AgentPowerShell.Cli\AgentPowerShell.Cli.csproj" />
+    <ProjectReference Include="..\..\src\AgentPowerShell.Daemon\AgentPowerShell.Daemon.csproj" />
+    <ProjectReference Include="..\..\src\AgentPowerShell.Events\AgentPowerShell.Events.csproj" />
+    <ProjectReference Include="..\..\src\AgentPowerShell.LlmProxy\AgentPowerShell.LlmProxy.csproj" />
+    <ProjectReference Include="..\..\src\AgentPowerShell.Mcp\AgentPowerShell.Mcp.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

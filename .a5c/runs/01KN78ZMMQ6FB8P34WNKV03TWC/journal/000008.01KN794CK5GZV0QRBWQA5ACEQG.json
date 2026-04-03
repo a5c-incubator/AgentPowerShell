@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-02T14:21:37.253Z",
+  "data": {
+    "effectId": "01KN794CHY930RC9NBWZ2Y9QTW",
+    "invocationKey": "cradle/project-install:S000004:process-mining",
+    "invocationHash": "3091a867b84379f4d4771dd3e8762a0e84378dfc8175fb239b08f4142f177f3f",
+    "stepId": "S000004",
+    "taskId": "process-mining",
+    "kind": "agent",
+    "label": "agent",
+    "taskDefRef": "tasks/01KN794CHY930RC9NBWZ2Y9QTW/task.json",
+    "labels": [
+      "agent",
+      "cradle",
+      "mining",
+      "git-history"
+    ]
+  },
+  "checksum": "f0148fa881a40cbf7d85e5bf64dd6de47efb351d80654334d0c34e0713028cc3"
+}

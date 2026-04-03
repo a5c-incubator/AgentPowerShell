@@ -1,0 +1,14 @@
+.git
+.github
+.a5c
+.agentpowershell
+**/bin
+**/obj
+**/.vs
+**/.idea
+**/.vscode
+*.user
+*.suo
+*.nupkg
+*.snupkg
+README.md.bak

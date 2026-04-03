@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN7EPNJKJ99VDTFZ9ENN0KVM",
+  "taskId": "build-and-test",
+  "invocationKey": "agentpowershell-full-build:S000006:build-and-test",
+  "status": "ok",
+  "result": {
+    "buildSucceeded": true,
+    "command": "dotnet build agentpowershell.sln --verbosity minimal && dotnet test agentpowershell.sln --verbosity minimal --no-build",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  },
+  "stdoutRef": "tasks/01KN7EPNJKJ99VDTFZ9ENN0KVM/stdout.log",
+  "startedAt": "2026-04-02T18:57:05.988Z",
+  "finishedAt": "2026-04-02T18:57:05.988Z",
+  "value": {
+    "buildSucceeded": true,
+    "command": "dotnet build agentpowershell.sln --verbosity minimal && dotnet test agentpowershell.sln --verbosity minimal --no-build",
+    "sdk": "9.0.312",
+    "testsPassed": true,
+    "verified": true
+  }
+}
