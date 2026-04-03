@@ -104,6 +104,7 @@ Example binary invocation:
 Current observed Windows behavior for that case is:
 
 - `policyDecision` remains `allow` because command policy allowed the launch.
+- `eventType` shows `process.executed.native.appcontainer`, which tells you the host-level Windows sandbox path was used.
 - The native command actually starts.
 - The process then fails inside the sandbox, for example with `curl: (6) Could not resolve host: example.com`.
 

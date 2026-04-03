@@ -98,6 +98,7 @@ public static class CliApp
                 arguments,
                 exitCode = response.ExitCode,
                 policyDecision = response.PolicyDecision,
+                eventType = response.Events.LastOrDefault()?.EventType,
                 stdout = response.Stdout,
                 stderr = response.Stderr,
                 denialReason = response.DenialReason

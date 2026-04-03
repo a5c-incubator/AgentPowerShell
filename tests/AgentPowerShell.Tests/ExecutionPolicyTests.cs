@@ -959,6 +959,7 @@ public sealed class ExecutionPolicyTests
             Assert.Contains("\"sessionId\":\"session-a\"", payload, StringComparison.Ordinal);
             Assert.Contains("\"exitCode\":0", payload, StringComparison.Ordinal);
             Assert.Contains("\"policyDecision\":\"allow\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"eventType\":\"process.executed.native\"", payload, StringComparison.Ordinal);
 
             using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
             await store.LoadAsync(CancellationToken.None);

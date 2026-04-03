@@ -116,6 +116,7 @@ public sealed class SmokeTests
             Assert.NotEqual(0, exitCode);
             Assert.Contains("\"policyDecision\":\"allow\"", payload, StringComparison.Ordinal);
             Assert.Contains("\"exitCode\":", payload, StringComparison.Ordinal);
+            Assert.Contains("\"eventType\":\"process.executed.native.appcontainer\"", payload, StringComparison.Ordinal);
             Assert.DoesNotContain("No matching network rule.", payload, StringComparison.Ordinal);
         }
         finally
