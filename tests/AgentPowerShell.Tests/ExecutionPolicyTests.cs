@@ -794,6 +794,7 @@ public sealed class ExecutionPolicyTests
         Assert.Empty(parser.Parse(["session", "create"]).Errors);
         Assert.Empty(parser.Parse(["session", "list"]).Errors);
         Assert.Empty(parser.Parse(["session", "destroy", "session-a"]).Errors);
+        Assert.Empty(parser.Parse(["network", "check", "session-a", "api.nuget.org", "443"]).Errors);
         Assert.Empty(parser.Parse(["policy", "validate", "default-policy.yml"]).Errors);
         Assert.Empty(parser.Parse(["policy", "show", "default-policy.yml"]).Errors);
         Assert.Empty(parser.Parse(["report", "--session-id", "session-a", "--events", "detailed"]).Errors);
@@ -999,6 +1000,45 @@ public sealed class ExecutionPolicyTests
             var payload = writer.ToString();
             Assert.Contains("\"exitCode\":2", payload, StringComparison.Ordinal);
             Assert.Contains("Interactive shell sessions are not supported", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task CliApp_NetworkCheck_Reports_Denied_Connections()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-network-check");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                network_rules:
+                  - name: allow-localhost
+                    domain: "localhost"
+                    ports: ["443"]
+                    decision: allow
+                """);
+
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(0, CliApp.Run(["network", "check", "session-a", "example.com", "443", "--output", "json"]));
+            var payload = writer.ToString();
+            Assert.Contains("\"decision\":\"deny\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"allowed\":false", payload, StringComparison.Ordinal);
+            Assert.Contains("\"rule\":\"default-network-deny\"", payload, StringComparison.Ordinal);
         }
         finally
         {

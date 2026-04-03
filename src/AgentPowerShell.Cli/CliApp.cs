@@ -27,6 +27,7 @@ public static class CliApp
         root.AddCommand(BuildStartCommand(outputOption));
         root.AddCommand(BuildStopCommand(outputOption));
         root.AddCommand(BuildSessionCommand(outputOption));
+        root.AddCommand(BuildNetworkCommand(outputOption));
         root.AddCommand(BuildPolicyCommand(outputOption));
         root.AddCommand(BuildReportCommand(outputOption, eventsOption));
         root.AddCommand(BuildStatusCommand(outputOption));
@@ -235,6 +236,47 @@ public static class CliApp
 
         command.AddCommand(validate);
         command.AddCommand(show);
+        return command;
+    }
+
+    private static Command BuildNetworkCommand(Option<string> outputOption)
+    {
+        var command = new Command("network", "Network policy tools");
+        var check = new Command("check", "Check whether a network connection would be allowed");
+        var sessionIdArgument = new Argument<string>("session-id");
+        var destinationArgument = new Argument<string>("destination");
+        var portArgument = new Argument<int>("port");
+        var protocolOption = new Option<string>("--protocol", () => "tcp");
+        check.AddArgument(sessionIdArgument);
+        check.AddArgument(destinationArgument);
+        check.AddArgument(portArgument);
+        check.AddOption(protocolOption);
+        check.SetHandler(async (string sessionId, string destination, int port, string protocol, string output) =>
+        {
+            var config = LoadConfig();
+            using var store = new SessionStore(GetSessionsPath());
+            await store.LoadAsync(CancellationToken.None).ConfigureAwait(false);
+            var bus = new EventBus();
+            var monitor = new NetworkMonitor(store, config, bus);
+            var result = await monitor.InspectConnectionAsync(
+                new NetworkConnectionObservation(sessionId, destination, port, protocol),
+                CancellationToken.None).ConfigureAwait(false);
+
+            Emit(output, new
+            {
+                command = "network check",
+                sessionId,
+                destination,
+                port,
+                protocol,
+                decision = result.Evaluation.Decision.ToString().ToLowerInvariant(),
+                rule = result.Evaluation.RuleName,
+                message = result.Evaluation.Message,
+                allowed = result.Evaluation.Decision is PolicyDecision.Allow or PolicyDecision.Approve
+            });
+        }, sessionIdArgument, destinationArgument, portArgument, protocolOption, outputOption);
+
+        command.AddCommand(check);
         return command;
     }
 

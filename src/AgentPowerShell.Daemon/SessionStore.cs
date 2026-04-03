@@ -7,6 +7,7 @@ namespace AgentPowerShell.Daemon;
 public sealed class SessionStore : IDisposable
 {
     private static readonly JsonSerializerOptions JsonOptions = new(JsonSerializerDefaults.Web) { WriteIndented = true };
+    private static readonly TimeSpan PersistRetryDelay = TimeSpan.FromMilliseconds(50);
     private readonly string _path;
     private readonly SemaphoreSlim _gate = new(1, 1);
     private readonly Dictionary<string, AgentSession> _sessions = new(StringComparer.OrdinalIgnoreCase);
@@ -28,7 +29,7 @@ public sealed class SessionStore : IDisposable
             }
 
             var snapshot = JsonSerializer.Deserialize<SessionSnapshot>(
-                await File.ReadAllTextAsync(_path, cancellationToken).ConfigureAwait(false),
+                await ReadSharedTextAsync(_path, cancellationToken).ConfigureAwait(false),
                 JsonOptions);
 
             foreach (var session in snapshot?.Sessions ?? [])
@@ -162,7 +163,63 @@ public sealed class SessionStore : IDisposable
     {
         Directory.CreateDirectory(Path.GetDirectoryName(_path)!);
         var snapshot = new SessionSnapshot { Sessions = new Collection<AgentSession>(_sessions.Values.OrderBy(session => session.CreatedAt).ToList()) };
-        await File.WriteAllTextAsync(_path, JsonSerializer.Serialize(snapshot, JsonOptions), cancellationToken).ConfigureAwait(false);
+        var json = JsonSerializer.Serialize(snapshot, JsonOptions);
+        await WriteAtomicallyAsync(_path, json, cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task<string> ReadSharedTextAsync(string path, CancellationToken cancellationToken)
+    {
+        await using var stream = new FileStream(
+            path,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.ReadWrite | FileShare.Delete,
+            4096,
+            FileOptions.Asynchronous);
+        using var reader = new StreamReader(stream);
+        return await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+    }
+
+    private static async Task WriteAtomicallyAsync(string path, string contents, CancellationToken cancellationToken)
+    {
+        var directory = Path.GetDirectoryName(path)!;
+        var tempPath = System.IO.Path.Combine(directory, $"{System.IO.Path.GetFileName(path)}.{Guid.NewGuid():N}.tmp");
+
+        try
+        {
+            await File.WriteAllTextAsync(tempPath, contents, cancellationToken).ConfigureAwait(false);
+
+            for (var attempt = 0; attempt < 5; attempt++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+
+                try
+                {
+                    if (File.Exists(path))
+                    {
+                        File.Copy(tempPath, path, overwrite: true);
+                    }
+                    else
+                    {
+                        File.Move(tempPath, path);
+                        tempPath = string.Empty;
+                    }
+
+                    return;
+                }
+                catch (IOException) when (attempt < 4)
+                {
+                    await Task.Delay(PersistRetryDelay, cancellationToken).ConfigureAwait(false);
+                }
+            }
+        }
+        finally
+        {
+            if (!string.IsNullOrWhiteSpace(tempPath) && File.Exists(tempPath))
+            {
+                File.Delete(tempPath);
+            }
+        }
     }
 
     public void Dispose() => _gate.Dispose();
