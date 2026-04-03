@@ -1198,6 +1198,68 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task ShimProcessor_Uses_AppContainer_For_Native_Network_Client_When_Network_Is_Denied()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
+        var curlExecutable = TryGetCurlExecutable();
+        if (curlExecutable is null)
+        {
+            return;
+        }
+
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-native-appcontainer");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                command_rules:
+                  - name: allow-curl
+                    pattern: "curl"
+                    decision: allow
+                network_rules:
+                  - name: deny-all
+                    domain: "*"
+                    ports: ["1-65535"]
+                    decision: deny
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+
+            var response = await processor.ExecuteAsync(
+                new ShimCommandRequest
+                {
+                    SessionId = "session-with-a-very-long-id-for-appcontainer-launch",
+                    InvocationName = "curl",
+                    ExecutablePath = curlExecutable,
+                    Arguments = ["https://example.com"],
+                    WorkingDirectory = root
+                },
+                CancellationToken.None);
+
+            Assert.NotEqual(0, response.ExitCode);
+            Assert.Equal("allow", response.PolicyDecision);
+            Assert.Contains(response.Events, item => item.EventType == "process.executed.native.appcontainer");
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task ShimProcessor_Denies_Disallowed_Environment_Overrides()
     {
         var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-env-deny");
@@ -1556,6 +1618,22 @@ public sealed class ExecutionPolicyTests
     private static string[] GetShellEchoEnvironmentArguments(string variableName) => OperatingSystem.IsWindows()
         ? ["/c", "echo", $"%{variableName}%"]
         : ["-c", $"printf '%s' \"${variableName}\""];
+
+    private static string? TryGetCurlExecutable()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return null;
+        }
+
+        var candidates = new[]
+        {
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "curl.exe"),
+            @"C:\Program Files\Git\mingw64\bin\curl.exe"
+        };
+
+        return candidates.FirstOrDefault(File.Exists);
+    }
 
     private sealed class StubHttpMessageHandler(Func<HttpRequestMessage, HttpResponseMessage> responder) : HttpMessageHandler
     {

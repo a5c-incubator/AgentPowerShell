@@ -13,9 +13,10 @@ The repository has verified behavior for:
 - inline `powershell` and `pwsh` `-Command` execution through the hosted execution path
 - policy-backed command checks, explicit network-target checks, and environment override filtering
 - first-pass Windows Job Object process control for native child processes
+- Windows AppContainer isolation for direct native network-client commands when the policy denies all network
 - self-contained install and Docker packaging flows that now have real smoke coverage
 
-The repository does **not** yet provide a completed `agentsh`-style drop-in shell replacement, interactive `exec` sessions, OS-level outbound network interception, or runtime-complete Linux/macOS sandboxing.
+The repository does **not** yet provide a completed `agentsh`-style drop-in shell replacement, interactive `exec` sessions, runtime-complete Linux/macOS sandboxing, or full host-level network allowlist enforcement across platforms.
 
 ## Runtime Flow
 
@@ -80,6 +81,7 @@ Policy evaluation exists today, but some richer architecture-doc concepts from e
 The platform projects do not have parity with the original target vision:
 
 - Windows: has the most concrete runtime slice today, centered on Job Object based process control
+- Windows native deny-all network policies can also route selected native network clients through AppContainer for host-level blocking
 - Linux: currently builds policy-derived enforcement plans but does not provide runtime-complete cgroups/Landlock/seccomp/eBPF enforcement
 - macOS: currently builds policy-derived enforcement plans but does not provide runtime-complete Endpoint Security / Network Extension / sandbox execution enforcement
 
@@ -102,8 +104,8 @@ Do not treat the repository as having finished parity with `agentsh`. The bigges
 
 - `exec` is explicit-command oriented and intentionally non-interactive
 - the shim is not yet a polished drop-in shell replacement experience
-- network blocking is policy-aware pre-execution filtering, not OS-level egress interception
-- Windows enforcement is partial and Linux/macOS enforcement is mostly structural
+- Windows now has a narrow host-level network block path for direct native clients under deny-all policy, but broader network enforcement is still mostly policy-aware pre-execution filtering
+- Windows enforcement is still partial and Linux/macOS enforcement is mostly structural
 - architecture-level claims about PSHost, ConstrainedLanguage, driver-backed file interception, and deep platform-native controls are not all backed by the current runtime
 
 ## Target Direction

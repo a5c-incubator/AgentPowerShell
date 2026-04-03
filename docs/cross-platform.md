@@ -4,7 +4,14 @@ AgentPowerShell targets Windows, Linux, and macOS through shared abstractions pl
 
 ## Windows
 
-The repository currently has the first real Windows-specific enforcement slice in place through Job Object assignment for native child processes. Other Windows-oriented capabilities discussed in the architecture, such as ETW, AppContainer, AMSI, ConPTY, named pipes, and minifilter-oriented integration points, are still design direction rather than completed runtime coverage.
+The repository currently has two concrete Windows-specific runtime slices:
+
+- Job Object assignment for native child processes.
+- AppContainer launch for native network-client commands when the effective network policy is deny-all.
+
+That AppContainer path gives a verified host-level block for direct native commands such as `curl.exe https://example.com` under a deny-all policy. It is intentionally conservative today: mixed allowlists still use explicit-target policy checks rather than claiming full host-level outbound allow/deny parity.
+
+Other Windows-oriented capabilities discussed in the architecture, such as ETW, AMSI, ConPTY, named pipes, and minifilter-oriented integration points, are still design direction rather than completed runtime coverage.
 
 ## Linux
 

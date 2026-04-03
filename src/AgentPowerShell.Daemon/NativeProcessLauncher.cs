@@ -7,16 +7,63 @@ namespace AgentPowerShell.Daemon;
 
 internal sealed class NativeProcessLauncher
 {
+    private readonly WindowsAppContainerProcessLauncher _appContainerLauncher;
+
+    public NativeProcessLauncher()
+        : this(new WindowsAppContainerProcessLauncher())
+    {
+    }
+
+    internal NativeProcessLauncher(WindowsAppContainerProcessLauncher appContainerLauncher)
+    {
+        _appContainerLauncher = appContainerLauncher;
+    }
+
     public async Task<CommandExecutionResult> ExecuteAsync(
         ShimCommandRequest request,
         AgentSession session,
         IReadOnlyDictionary<string, string> allowedEnvironmentOverrides,
+        bool useWindowsAppContainer,
         CancellationToken cancellationToken)
     {
+        var executablePath = ResolveExecutablePath(request.ExecutablePath);
+        var workingDirectory = string.IsNullOrWhiteSpace(request.WorkingDirectory) ? Environment.CurrentDirectory : request.WorkingDirectory;
+        var environment = BuildEnvironment(allowedEnvironmentOverrides, session.SessionId);
+
+        if (useWindowsAppContainer)
+        {
+            try
+            {
+                var isolated = await _appContainerLauncher.ExecuteAsync(
+                    executablePath,
+                    request.Arguments,
+                    workingDirectory,
+                    environment,
+                    session.SessionId,
+                    cancellationToken).ConfigureAwait(false);
+
+                return new CommandExecutionResult(
+                    isolated.ExitCode,
+                    isolated.Stdout,
+                    isolated.Stderr,
+                    "process.executed.native.appcontainer",
+                    request.ExecutablePath);
+            }
+            catch (Exception exception) when (exception is not OperationCanceledException)
+            {
+                return new CommandExecutionResult(
+                    126,
+                    string.Empty,
+                    $"Failed to start Windows AppContainer sandbox: {exception.Message}",
+                    "process.blocked.native.appcontainer",
+                    request.ExecutablePath);
+            }
+        }
+
         var startInfo = new ProcessStartInfo
         {
-            FileName = ResolveExecutablePath(request.ExecutablePath),
-            WorkingDirectory = string.IsNullOrWhiteSpace(request.WorkingDirectory) ? Environment.CurrentDirectory : request.WorkingDirectory,
+            FileName = executablePath,
+            WorkingDirectory = workingDirectory,
             RedirectStandardError = true,
             RedirectStandardOutput = true,
             RedirectStandardInput = false,
@@ -28,13 +75,10 @@ internal sealed class NativeProcessLauncher
             startInfo.ArgumentList.Add(argument);
         }
 
-        foreach (var pair in allowedEnvironmentOverrides)
+        foreach (var pair in environment)
         {
             startInfo.Environment[pair.Key] = pair.Value;
         }
-
-        startInfo.Environment["AGENTPOWERSHELL_IN_SESSION"] = "1";
-        startInfo.Environment["AGENTPOWERSHELL_SESSION_ID"] = session.SessionId;
 
         using var process = new Process { StartInfo = startInfo };
         process.Start();
@@ -52,6 +96,29 @@ internal sealed class NativeProcessLauncher
             await stderrTask.ConfigureAwait(false),
             "process.executed.native",
             request.ExecutablePath);
+    }
+
+    private static Dictionary<string, string> BuildEnvironment(
+        IReadOnlyDictionary<string, string> allowedEnvironmentOverrides,
+        string sessionId)
+    {
+        var environment = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        foreach (System.Collections.DictionaryEntry pair in Environment.GetEnvironmentVariables())
+        {
+            if (pair.Key is string key && pair.Value is string value)
+            {
+                environment[key] = value;
+            }
+        }
+
+        foreach (var pair in allowedEnvironmentOverrides)
+        {
+            environment[pair.Key] = pair.Value;
+        }
+
+        environment["AGENTPOWERSHELL_IN_SESSION"] = "1";
+        environment["AGENTPOWERSHELL_SESSION_ID"] = sessionId;
+        return environment;
     }
 
     private static string ResolveExecutablePath(string executablePath)

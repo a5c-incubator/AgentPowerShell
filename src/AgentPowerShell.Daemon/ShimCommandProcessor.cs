@@ -35,7 +35,8 @@ public sealed class ShimCommandProcessor
             _config.Sessions,
             cancellationToken).ConfigureAwait(false);
 
-        var decision = EvaluatePolicy(request, session);
+        var policy = LoadPolicy(session);
+        var decision = EvaluatePolicy(request, policy);
         if (decision.Decision == PolicyDecision.Deny)
         {
             return new ShimCommandResponse
@@ -48,7 +49,10 @@ public sealed class ShimCommandProcessor
             };
         }
 
-        var networkDecision = EvaluateExplicitNetworkTargets(request, session);
+        var useWindowsAppContainer = !_hostedPowerShellExecutor.CanExecute(request)
+            && WindowsHostNetworkIsolation.ShouldUseAppContainer(policy, request);
+
+        var networkDecision = useWindowsAppContainer ? null : EvaluateExplicitNetworkTargets(request, policy);
         if (networkDecision is not null)
         {
             return new ShimCommandResponse
@@ -89,7 +93,7 @@ public sealed class ShimCommandProcessor
 
         var execution = _hostedPowerShellExecutor.CanExecute(request)
             ? await _hostedPowerShellExecutor.ExecuteAsync(request, session, cancellationToken).ConfigureAwait(false)
-            : await _nativeProcessLauncher.ExecuteAsync(request, session, environmentDecision.AllowedOverrides, cancellationToken).ConfigureAwait(false);
+            : await _nativeProcessLauncher.ExecuteAsync(request, session, environmentDecision.AllowedOverrides, useWindowsAppContainer, cancellationToken).ConfigureAwait(false);
 
         return new ShimCommandResponse
         {
@@ -105,15 +109,24 @@ public sealed class ShimCommandProcessor
         };
     }
 
-    private static EvaluationResult EvaluatePolicy(ShimCommandRequest request, AgentSession session)
+    private static ExecutionPolicy? LoadPolicy(AgentSession session)
     {
         var policyPath = session.PolicyPath;
         if (!File.Exists(policyPath))
         {
+            return null;
+        }
+
+        return new PolicyLoader().LoadFromFile(policyPath);
+    }
+
+    private static EvaluationResult EvaluatePolicy(ShimCommandRequest request, ExecutionPolicy? policy)
+    {
+        if (policy is null)
+        {
             return new EvaluationResult(PolicyDecision.Allow, "no-policy");
         }
 
-        var policy = new PolicyLoader().LoadFromFile(policyPath);
         var commandText = string.Join(' ', new[] { request.InvocationName }.Concat(request.Arguments));
         var engine = new PolicyEngine(policy);
         var result = engine.EvaluateCommand(new CommandRequest(commandText));
@@ -122,15 +135,13 @@ public sealed class ShimCommandProcessor
             : result;
     }
 
-    private static EvaluationResult? EvaluateExplicitNetworkTargets(ShimCommandRequest request, AgentSession session)
+    private static EvaluationResult? EvaluateExplicitNetworkTargets(ShimCommandRequest request, ExecutionPolicy? policy)
     {
-        var policyPath = session.PolicyPath;
-        if (!File.Exists(policyPath))
+        if (policy is null)
         {
             return null;
         }
 
-        var policy = new PolicyLoader().LoadFromFile(policyPath);
         var engine = new PolicyEngine(policy);
         foreach (var observation in NetworkIntentInspector.Extract(request))
         {
