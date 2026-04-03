@@ -1,5 +1,7 @@
 .a5c/node_modules/
 .a5c/cache/compression/
+.a5c/runs/
+.artifacts/
 
 ## .NET
 bin/
