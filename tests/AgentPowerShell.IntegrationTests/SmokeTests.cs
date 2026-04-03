@@ -35,7 +35,7 @@ public sealed class SmokeTests
             using var writer = new StringWriter();
             Console.SetOut(writer);
 
-            Assert.Equal(0, CliApp.Run([
+            Assert.Equal(126, CliApp.Run([
                 "exec",
                 "session-integration",
                 "powershell",

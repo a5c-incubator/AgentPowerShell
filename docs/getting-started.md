@@ -15,6 +15,18 @@ dotnet test agentpowershell.sln --verbosity minimal --no-build
 
 ## First Commands
 
+If you want self-contained binaries instead of `dotnet run`, use:
+
+```powershell
+./install.ps1
+```
+
+or on native Unix shells:
+
+```bash
+./install.sh
+```
+
 Print the CLI version:
 
 ```powershell
@@ -73,7 +85,9 @@ dotnet run --project src/AgentPowerShell.Cli -- checkpoint restore latest --dry-
 ## Current Boundaries
 
 - `exec` supports explicit commands; it does not yet provide an interactive shell session.
-- Inline PowerShell commands route through a hosted constrained runspace.
+- Inline PowerShell commands route through the hosted execution path that exists today; the broader PSHost/ConstrainedLanguage architecture remains target direction, not a fully verified parity story.
 - Native commands use the daemon processor path and current policy prechecks.
+- `exec` now returns the underlying command or policy exit code to the calling shell, so denials and runtime failures are observable to automation.
 - The shim will attempt to connect to the daemon first and will auto-start it only when a daemon command, binary, or source project can be discovered.
 - Cross-platform sandboxing is still uneven; Windows has the most concrete runtime enforcement today.
+- Network blocking currently means explicit-target policy filtering, not full OS-level egress interception.

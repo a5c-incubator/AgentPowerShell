@@ -8,11 +8,11 @@ The repository currently has the first real Windows-specific enforcement slice i
 
 ## Linux
 
-The Linux project captures the intended abstraction boundaries, but the repository does not yet provide runtime-complete cgroups, Landlock, seccomp-bpf, ptrace, eBPF, or namespace enforcement. Current Linux support should be treated as buildable structure plus shared policy behavior, not production-grade sandboxing.
+The Linux project captures the intended abstraction boundaries, but the repository does not yet provide runtime-complete cgroups, Landlock, seccomp-bpf, ptrace, eBPF, or namespace enforcement. Today the Linux platform code primarily turns policy into enforcement plans plus shared behavior; it should not be treated as production-grade sandboxing.
 
 ## macOS
 
-The macOS project likewise reflects the planned abstraction surface for Endpoint Security, sandbox-exec, Network Extension, FSEvents, RLIMIT, and XPC, but those integrations are not yet wired into a verified runtime enforcement path.
+The macOS project likewise reflects the planned abstraction surface for Endpoint Security, sandbox-exec, Network Extension, FSEvents, RLIMIT, and XPC, but those integrations are not yet wired into a verified runtime enforcement path. As with Linux, the current macOS code is closer to planning/scaffolding than finished native enforcement.
 
 ## Practical Guidance
 
@@ -20,5 +20,6 @@ The macOS project likewise reflects the planned abstraction surface for Endpoint
 - Put platform-native behavior behind explicit abstractions.
 - Validate cross-platform projects in CI for every change.
 - Treat Docker support as Linux-container packaging that is smoke-tested on Linux and Windows runners; GitHub-hosted macOS runners do not provide Docker.
+- Treat native Linux/macOS install validation as a separate verification step from Windows install coverage.
 - Prefer runtime-specific integration tests before claiming full feature parity on a platform.
 - Phrase current support in terms of verified behavior, not architectural intent.

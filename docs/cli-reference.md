@@ -22,7 +22,7 @@ Resolution order:
 - sibling `AgentPowerShell.Daemon(.exe|.dll)` next to the current binaries
 - `src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj` from the repo root
 
-If no launch target is discoverable, the command returns `status: unavailable` with guidance.
+If no launch target is discoverable, the command returns `status: unavailable` with guidance and exits non-zero.
 
 ### `stop`
 
@@ -30,7 +30,7 @@ Stop the tracked daemon PID from `.agentpowershell/daemon.json` and remove that 
 
 ### `exec <session-id> <command...>`
 
-Execute an explicit command in a session through the current daemon processor path. Inline PowerShell commands route through the hosted constrained runspace when supported. Interactive shell launches such as bare `powershell` or `pwsh` are rejected by design.
+Execute an explicit command in a session through the current daemon processor path. Inline PowerShell commands route through the hosted constrained runspace when supported. Interactive shell launches such as bare `powershell` or `pwsh` are rejected by design. The CLI process exits with the underlying command or policy result code.
 
 ### `session create`
 

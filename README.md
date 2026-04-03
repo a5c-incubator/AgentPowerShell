@@ -58,9 +58,10 @@ dotnet run --project src/AgentPowerShell.Cli -- policy validate default-policy.y
 ## Release And CI
 
 - Pull requests and pushes to `main` and `master` run .NET build/test jobs on Windows, Linux, and macOS.
+- The CI matrix now also smoke-tests published install outputs, not just repo-local `dotnet` execution paths.
 - Docker smoke coverage runs on Linux and Windows GitHub-hosted runners. macOS runners only execute the direct .NET test matrix because hosted macOS runners do not expose a Docker daemon.
 - Release tags use semantic versioning in the form `vMAJOR.MINOR.PATCH`.
-- Tagged releases publish CLI artifacts and Linux multi-arch Docker images under the `a5c-ai` GitHub organization.
+- Tagged releases publish packaged CLI + daemon artifacts and Linux multi-arch Docker images under the `a5c-ai` GitHub organization.
 - The nightly workflow publishes `edge` container images to `ghcr.io/a5c-ai/agentpowershell`.
 
 ## Status

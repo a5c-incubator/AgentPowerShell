@@ -1044,7 +1044,7 @@ public sealed class ExecutionPolicyTests
             using var writer = new StringWriter();
             Console.SetOut(writer);
 
-            Assert.Equal(0, CliApp.Run(["exec", "session-a", "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "--output", "json"]));
+            Assert.Equal(2, CliApp.Run(["exec", "session-a", "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "--output", "json"]));
             var payload = writer.ToString();
             Assert.Contains("\"exitCode\":2", payload, StringComparison.Ordinal);
             Assert.Contains("Interactive shell sessions are not supported", payload, StringComparison.Ordinal);
@@ -1372,6 +1372,34 @@ public sealed class ExecutionPolicyTests
         {
             Console.SetOut(originalOut);
             Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public void DaemonLaunchResolver_Returns_Null_When_No_Candidates_Are_Available()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-daemon-launch-missing");
+        Directory.CreateDirectory(root);
+        var originalPath = Environment.GetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH");
+        var originalCommand = Environment.GetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_CMD");
+
+        try
+        {
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH", null);
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_CMD", null);
+
+            var plan = DaemonLaunchResolver.Resolve(root, root);
+
+            Assert.Null(plan);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH", originalPath);
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_CMD", originalCommand);
             if (Directory.Exists(root))
             {
                 Directory.Delete(root, recursive: true);

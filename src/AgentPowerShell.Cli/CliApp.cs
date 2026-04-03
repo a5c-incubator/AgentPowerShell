@@ -12,7 +12,21 @@ namespace AgentPowerShell.Cli;
 
 public static class CliApp
 {
-    public static int Run(string[] args) => BuildRootCommand().Invoke(args);
+    public static int Run(string[] args)
+    {
+        var previousExitCode = Environment.ExitCode;
+        Environment.ExitCode = 0;
+
+        try
+        {
+            var invokeResult = BuildRootCommand().Invoke(args);
+            return invokeResult != 0 ? invokeResult : Environment.ExitCode;
+        }
+        finally
+        {
+            Environment.ExitCode = previousExitCode;
+        }
+    }
 
     public static RootCommand BuildRootCommand()
     {
@@ -88,6 +102,7 @@ public static class CliApp
                 stderr = response.Stderr,
                 denialReason = response.DenialReason
             });
+            Environment.ExitCode = response.ExitCode;
         }, sessionIdArgument, commandArgument, outputOption);
         return command;
     }
@@ -114,6 +129,7 @@ public static class CliApp
                     status = "unavailable",
                     message = "Unable to locate a daemon command, binary, or project. Set AGENTPOWERSHELL_DAEMON_PATH or AGENTPOWERSHELL_DAEMON_CMD."
                 });
+                Environment.ExitCode = 1;
                 return;
             }
 
