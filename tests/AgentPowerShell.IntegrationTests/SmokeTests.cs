@@ -67,6 +67,69 @@ public sealed class SmokeTests
     }
 
     [Fact]
+    public async Task Cli_Exec_Runs_Native_Network_Client_In_AppContainer_When_Network_Is_Denied()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return;
+        }
+
+        var curlExecutable = TryGetCurlExecutable();
+        if (curlExecutable is null)
+        {
+            return;
+        }
+
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-native-network-appcontainer");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                command_rules:
+                  - name: allow-all
+                    pattern: "*"
+                    decision: allow
+                network_rules:
+                  - name: deny-all
+                    domain: "*"
+                    ports: ["1-65535"]
+                    decision: deny
+                """);
+
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            var exitCode = CliApp.Run([
+                "exec",
+                "session-native-appcontainer",
+                curlExecutable,
+                "https://example.com",
+                "--output",
+                "json"
+            ]);
+
+            var payload = writer.ToString();
+            Assert.NotEqual(0, exitCode);
+            Assert.Contains("\"policyDecision\":\"allow\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"exitCode\":", payload, StringComparison.Ordinal);
+            Assert.DoesNotContain("No matching network rule.", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task ShimProcessor_Runs_PowerShell_Command()
     {
         var shell = RealPowerShellResolver.Resolve("pwsh");
@@ -132,5 +195,21 @@ public sealed class SmokeTests
                 Directory.Delete(root, recursive: true);
             }
         }
+    }
+
+    private static string? TryGetCurlExecutable()
+    {
+        if (!OperatingSystem.IsWindows())
+        {
+            return null;
+        }
+
+        var candidates = new[]
+        {
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "curl.exe"),
+            @"C:\Program Files\Git\mingw64\bin\curl.exe"
+        };
+
+        return candidates.FirstOrDefault(File.Exists);
     }
 }
