@@ -71,6 +71,11 @@ jobs:
           chmod +x eng/ci/docker-smoke.sh
           ./eng/ci/docker-smoke.sh agentpowershell:linux-ci
 
+      - name: Linux install and release-package smoke
+        run: |
+          chmod +x eng/ci/linux-package-smoke.sh eng/ci/release-package-smoke.sh eng/ci/install-smoke.sh install.sh
+          ./eng/ci/linux-package-smoke.sh linux-x64
+
   docker-windows:
     name: ci / docker / windows
     runs-on: windows-latest
@@ -81,6 +86,11 @@ jobs:
         shell: pwsh
         run: |
           ./eng/ci/docker-smoke.ps1 -ImageTag agentpowershell:windows-ci
+
+      - name: Linux install and release-package smoke
+        shell: pwsh
+        run: |
+          ./eng/ci/linux-package-smoke.ps1 -Rid linux-x64
 
   docker-macos-note:
     name: ci / docker / macos-note
