@@ -5,6 +5,7 @@ DESTINATION="${1:-$HOME/.local/bin}"
 CONFIGURATION="${CONFIGURATION:-Release}"
 RID="${RID:-}"
 SELF_CONTAINED="${SELF_CONTAINED:-true}"
+SKIP_PROFILE_UPDATE="${SKIP_PROFILE_UPDATE:-false}"
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
 REPO_ROOT="$SCRIPT_DIR"
 
@@ -59,10 +60,14 @@ cp -R "$DAEMON_OUT"/. "$DESTINATION/daemon"/
 
 PROFILE_FILE="${PROFILE_FILE:-$HOME/.profile}"
 DAEMON_BINARY="$DESTINATION/daemon/AgentPowerShell.Daemon"
-if [ -f "$DAEMON_BINARY" ] && ! grep -q "AGENTPOWERSHELL_DAEMON_PATH=" "$PROFILE_FILE" 2>/dev/null; then
+if [ "$SKIP_PROFILE_UPDATE" != "true" ] && [ -f "$DAEMON_BINARY" ] && ! grep -q "AGENTPOWERSHELL_DAEMON_PATH=" "$PROFILE_FILE" 2>/dev/null; then
   printf '\nexport AGENTPOWERSHELL_DAEMON_PATH="%s"\n' "$DAEMON_BINARY" >> "$PROFILE_FILE"
 fi
 
 echo "Installed AgentPowerShell to $DESTINATION"
 echo "RID: $RID"
-echo "If needed, reload your shell profile from $PROFILE_FILE"
+if [ "$SKIP_PROFILE_UPDATE" = "true" ]; then
+  echo "Skipped shell profile update."
+else
+  echo "If needed, reload your shell profile from $PROFILE_FILE"
+fi

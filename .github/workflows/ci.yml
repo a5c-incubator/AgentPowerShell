@@ -39,12 +39,24 @@ jobs:
         shell: pwsh
         run: ./eng/ci/test.ps1
 
+      - name: Install smoke test (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./eng/ci/install-smoke.ps1
+
       - name: Build and test (Unix)
         if: runner.os != 'Windows'
         shell: bash
         run: |
           chmod +x eng/ci/test.sh
           ./eng/ci/test.sh
+
+      - name: Install smoke test (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          chmod +x install.sh eng/ci/install-smoke.sh
+          ./eng/ci/install-smoke.sh
 
   docker-linux:
     name: ci / docker / linux

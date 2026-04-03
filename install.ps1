@@ -2,7 +2,8 @@ param(
     [string]$Destination = "$HOME\\.local\\bin",
     [string]$Configuration = "Release",
     [string]$Rid,
-    [switch]$SelfContained = $true
+    [switch]$SelfContained = $true,
+    [switch]$SkipUserEnvironmentUpdate
 )
 
 $ErrorActionPreference = "Stop"
@@ -11,13 +12,13 @@ Set-Location $repoRoot
 
 if (-not $Rid) {
     $architecture = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
-    if ($IsWindows) {
+    if ([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows)) {
         if ($architecture -eq "Arm64") {
             $Rid = "win-arm64"
         } else {
             $Rid = "win-x64"
         }
-    } elseif ($IsMacOS) {
+    } elseif ([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::OSX)) {
         if ($architecture -eq "Arm64") {
             $Rid = "osx-arm64"
         } else {
@@ -79,13 +80,16 @@ $daemonTarget = Join-Path $Destination "daemon"
 New-Item -ItemType Directory -Force -Path $daemonTarget | Out-Null
 Copy-Item (Join-Path $daemonOut "*") -Destination $daemonTarget -Recurse -Force
 
-$daemonBinary = Join-Path $daemonTarget "AgentPowerShell.Daemon.exe"
-if (Test-Path $daemonBinary) {
+$daemonBinaryName = if ($Rid.StartsWith("win-", [System.StringComparison]::OrdinalIgnoreCase)) { "AgentPowerShell.Daemon.exe" } else { "AgentPowerShell.Daemon" }
+$daemonBinary = Join-Path $daemonTarget $daemonBinaryName
+if ((Test-Path $daemonBinary) -and -not $SkipUserEnvironmentUpdate) {
     [Environment]::SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH", $daemonBinary, "User")
 }
 
 Write-Host "Installed AgentPowerShell to $Destination"
 Write-Host "RID: $Rid"
-if (Test-Path $daemonBinary) {
+if ((Test-Path $daemonBinary) -and -not $SkipUserEnvironmentUpdate) {
     Write-Host "Configured AGENTPOWERSHELL_DAEMON_PATH for the current user."
+} elseif ((Test-Path $daemonBinary) -and $SkipUserEnvironmentUpdate) {
+    Write-Host "Skipped AGENTPOWERSHELL_DAEMON_PATH user-environment update."
 }

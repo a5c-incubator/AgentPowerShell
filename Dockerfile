@@ -3,12 +3,12 @@ ARG TARGETARCH
 WORKDIR /src
 
 COPY . .
-RUN dotnet restore agentpowershell.sln
 RUN case "$TARGETARCH" in \
       "amd64") RID="linux-x64" ;; \
       "arm64") RID="linux-arm64" ;; \
       *) echo "Unsupported TARGETARCH: $TARGETARCH" && exit 1 ;; \
     esac \
+    && dotnet restore agentpowershell.sln -r "$RID" \
     && dotnet publish src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj -c Release -r "$RID" --self-contained true -p:PublishSingleFile=true --no-restore -o /out/cli \
     && dotnet publish src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj -c Release -r "$RID" --self-contained true -p:PublishSingleFile=true --no-restore -o /out/daemon
 

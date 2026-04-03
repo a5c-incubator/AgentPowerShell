@@ -43,7 +43,7 @@ jobs:
           global-json-file: global.json
 
       - name: Restore
-        run: dotnet restore agentpowershell.sln
+        run: dotnet restore agentpowershell.sln -r ${{ matrix.rid }}
 
       - name: Build
         run: dotnet build agentpowershell.sln --configuration Release --no-restore
@@ -52,12 +52,24 @@ jobs:
         run: dotnet test agentpowershell.sln --configuration Release --no-build
 
       - name: Publish CLI
-        run: dotnet publish src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj --configuration Release -p:PublishProfile=${{ matrix.rid }}
+        run: dotnet publish src/AgentPowerShell.Cli/AgentPowerShell.Cli.csproj --configuration Release -r ${{ matrix.rid }} --self-contained true -p:PublishSingleFile=true --no-restore -o publish/cli
+
+      - name: Publish daemon
+        run: dotnet publish src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj --configuration Release -r ${{ matrix.rid }} --self-contained true -p:PublishSingleFile=true --no-restore -o publish/daemon
+
+      - name: Stage release payload
+        shell: bash
+        run: |
+          mkdir -p "publish/package/daemon"
+          cp -R publish/cli/. "publish/package/"
+          cp -R publish/daemon/. "publish/package/daemon/"
+          cp default-policy.yml publish/package/default-policy.yml
+          cp config.yml publish/package/config.yml
 
       - name: Archive artifact
         shell: bash
         run: |
-          cd "src/AgentPowerShell.Cli/bin/Release/net9.0/${{ matrix.rid }}/publish"
+          cd publish/package
           if [[ "${{ matrix.rid }}" == win-* ]]; then
             7z a "${{ github.workspace }}/agentpowershell-${{ matrix.rid }}.zip" .
           else
