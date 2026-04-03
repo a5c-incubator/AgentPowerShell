@@ -1,0 +1,251 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "nextFocus": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "parityScore": {
+          "type": "number"
+        },
+        "remainingGaps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "strengths": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "parityScore",
+        "strengths",
+        "remainingGaps",
+        "nextFocus"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "batchNumber": 1,
+        "implementation": {
+          "blockers": [],
+          "commandsRun": [
+            "dotnet build agentpowershell.sln --no-restore --verbosity minimal",
+            "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+            "dotnet build tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --verbosity minimal",
+            "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal"
+          ],
+          "filesChanged": [
+            "README.md",
+            "docs/architecture.md",
+            "docs/cross-platform.md",
+            "docs/final-report.md",
+            "docs/getting-started.md",
+            "src/AgentPowerShell.Daemon/Worker.cs",
+            "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+            "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+            "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj"
+          ],
+          "outcomes": [
+            "README status language now states the verified product surface and explicitly names the current unsupported or incomplete areas.",
+            "Cross-platform and architecture docs now frame platform-native enforcement as target direction where it is not yet runtime-complete.",
+            "The daemon worker no longer logs itself as a placeholder service.",
+            "The placeholder integration test was replaced with real coverage for CLI network blocking and hosted runspace execution behavior.",
+            "Integration test runtime dependency closure for hosted PowerShell was fixed by carrying the PowerShell SDK into the integration test host."
+          ],
+          "remainingWithinBatch": [
+            "Further end-to-end daemon-plus-shim coverage is still desirable beyond the current integration additions.",
+            "docs/cli-reference.md was not revised in this batch and may still need tightening during the usability-focused batch."
+          ],
+          "selectedBatch": {
+            "goal": "Align README/docs and integration coverage with what the product actually does today, while removing the most misleading placeholders.",
+            "name": "Batch 1 - Honest product surface and integration hardening"
+          }
+        },
+        "projectRoot": "C:/work/agentpowershell",
+        "specification": {
+          "backlogSeed": [
+            "Batch 1: Spec and documentation alignment plus integration-test hardening around the currently implemented CLI/daemon/shim surface.",
+            "Batch 2: Usability-focused execution path completion for shim and daemon orchestration, including clearer boundaries for supported interactive and non-interactive behaviors.",
+            "Batch 3: Deeper enforcement work, prioritizing the most realistic next OS-level controls and policy-backed behavior that can actually be verified in tests.",
+            "Batch 4: Cross-platform support tightening, including Linux/macOS fallback behavior, platform capability reporting, and honest packaging/runtime docs.",
+            "Batch 5: Broader parity review against request.task.md and docs/architecture.md, removing or implementing any remaining high-impact mismatches."
+          ],
+          "implementedAreas": [
+            "CLI commands for exec, session, checkpoint, config, network check, report, status, start, and stop now exercise real code paths rather than placeholder payloads.",
+            "Policy loading and first-match-wins evaluation for command, file, network, and environment rules are implemented with automated coverage.",
+            "Session persistence, checkpoint persistence, report generation, approval flows, authentication modes, LLM proxy routing, and MCP inspection all have concrete repository implementations with tests.",
+            "Hosted PowerShell execution for inline commands now exists via a constrained runspace path, and native process launches have a first OS-level Windows Job Object control."
+          ],
+          "initialParityScore": 58,
+          "missingAreas": [
+            "Usable shim installation and drop-in PATH replacement flow matching the stated agentsh-style usage is not complete.",
+            "True platform-native sandbox enforcement on Linux and macOS is missing, and Windows enforcement is only partially started.",
+            "End-to-end daemon plus shim integration remains thin, with integration coverage still limited and one integration test still named Placeholder_Integration_Test.",
+            "Documentation still contains explicit work-in-progress framing and parity claims that are broader than the verified runtime behavior.",
+            "Spec-complete cross-platform behavioral testing, especially real Docker and OS-matrix execution of the product surface, is not yet matched by product-level runtime maturity."
+          ],
+          "partialAreas": [
+            "PowerShell execution is usable for explicit inline commands, but interactive shell sessions remain intentionally unsupported and full shell replacement behavior is not complete.",
+            "Network enforcement exists as policy evaluation plus explicit pre-launch target blocking, but not as true OS-level egress interception across platforms.",
+            "Cross-platform support exists at the project layout, docs, build, and packaging level, but Linux and macOS platform enforcers remain mostly plan/scaffold implementations instead of runtime-complete enforcement layers.",
+            "Daemon lifecycle exists for local state tracking and IPC hosting, but the broader architecture described in docs/architecture.md still overstates current transport and platform capabilities."
+          ],
+          "prioritizedGaps": [
+            "Close the largest usability gap between the documented agentsh-like model and the actual executable product surface, especially shim/daemon execution flow and unsupported shell interaction boundaries.",
+            "Bring docs and packaging claims back into alignment with verified behavior while the implementation is improved, so the project is honest and testable.",
+            "Strengthen integration and end-to-end tests around daemon, shim, hosted PowerShell execution, policy enforcement, and blocked-vs-allowed scenarios.",
+            "Implement the next real platform-native enforcement slices beyond Windows Job Objects, especially Linux/macOS process and network controls or explicit constrained fallbacks.",
+            "Reduce remaining placeholder/scaffold areas in daemon and platform projects, starting with the pieces that directly affect user-facing trust and security expectations."
+          ]
+        },
+        "targetParityScore": 90,
+        "verification": {
+          "evidence": [
+            "dotnet build agentpowershell.sln --no-restore --verbosity minimal succeeded after the batch edits.",
+            "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal passed with 35/35 tests.",
+            "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal passed with 3/3 tests after fixing the hosted PowerShell runtime dependency closure.",
+            "README.md, docs/cross-platform.md, docs/getting-started.md, docs/final-report.md, and docs/architecture.md now describe the current verified surface more honestly than before the batch.",
+            "The placeholder integration test was replaced with real checks for CLI-level network denial and hosted PowerShell runspace behavior."
+          ],
+          "passed": true,
+          "regressions": [],
+          "testGaps": [
+            "Integration coverage is still lightweight and does not yet exercise a long-running daemon plus external shim process end to end.",
+            "CLI reference documentation was not tightened in this batch and may still lag the now-explicit runtime boundaries.",
+            "Cross-platform runtime behavior is still not validated by platform-specific end-to-end execution in this batch."
+          ],
+          "unresolvedIssues": [
+            "The repository is still short of full agentsh-style parity, especially around interactive shell replacement and non-Windows enforcement depth.",
+            "The hosted PowerShell dependency fix was applied for the integration-test host, but broader packaging/runtime verification should continue in later batches."
+          ]
+        }
+      },
+      "instructions": [
+        "Score the repository from 0-100 against the requested spec and documented architecture.",
+        "Weight real usability and tested behavior more heavily than documented intent.",
+        "Explain the highest-impact remaining gaps that still block a claim of spec fulfillment.",
+        "Recommend the next batch focus if the target score has not been reached."
+      ],
+      "outputFormat": "JSON with parityScore, strengths, remainingGaps, and nextFocus",
+      "role": "technical reviewer scoring project parity against an explicit product spec",
+      "task": "Score how close the repository is to fulfilling the requested agentpowershell specification after the latest batch"
+    }
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9TESMBW24K85CFJVH602TW/input.json",
+    "outputJsonPath": "tasks/01KN9TESMBW24K85CFJVH602TW/output.json"
+  },
+  "kind": "agent",
+  "title": "Score parity after batch 1",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9TESMBW24K85CFJVH602TW",
+  "taskId": "parity-scoring",
+  "invocationKey": "agentpowershell/spec-convergence:S000005:parity-scoring",
+  "stepId": "S000005",
+  "inputs": {
+    "batchNumber": 1,
+    "implementation": {
+      "blockers": [],
+      "commandsRun": [
+        "dotnet build agentpowershell.sln --no-restore --verbosity minimal",
+        "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+        "dotnet build tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --verbosity minimal",
+        "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal"
+      ],
+      "filesChanged": [
+        "README.md",
+        "docs/architecture.md",
+        "docs/cross-platform.md",
+        "docs/final-report.md",
+        "docs/getting-started.md",
+        "src/AgentPowerShell.Daemon/Worker.cs",
+        "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+        "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+        "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj"
+      ],
+      "outcomes": [
+        "README status language now states the verified product surface and explicitly names the current unsupported or incomplete areas.",
+        "Cross-platform and architecture docs now frame platform-native enforcement as target direction where it is not yet runtime-complete.",
+        "The daemon worker no longer logs itself as a placeholder service.",
+        "The placeholder integration test was replaced with real coverage for CLI network blocking and hosted runspace execution behavior.",
+        "Integration test runtime dependency closure for hosted PowerShell was fixed by carrying the PowerShell SDK into the integration test host."
+      ],
+      "remainingWithinBatch": [
+        "Further end-to-end daemon-plus-shim coverage is still desirable beyond the current integration additions.",
+        "docs/cli-reference.md was not revised in this batch and may still need tightening during the usability-focused batch."
+      ],
+      "selectedBatch": {
+        "goal": "Align README/docs and integration coverage with what the product actually does today, while removing the most misleading placeholders.",
+        "name": "Batch 1 - Honest product surface and integration hardening"
+      }
+    },
+    "projectRoot": "C:/work/agentpowershell",
+    "specification": {
+      "backlogSeed": [
+        "Batch 1: Spec and documentation alignment plus integration-test hardening around the currently implemented CLI/daemon/shim surface.",
+        "Batch 2: Usability-focused execution path completion for shim and daemon orchestration, including clearer boundaries for supported interactive and non-interactive behaviors.",
+        "Batch 3: Deeper enforcement work, prioritizing the most realistic next OS-level controls and policy-backed behavior that can actually be verified in tests.",
+        "Batch 4: Cross-platform support tightening, including Linux/macOS fallback behavior, platform capability reporting, and honest packaging/runtime docs.",
+        "Batch 5: Broader parity review against request.task.md and docs/architecture.md, removing or implementing any remaining high-impact mismatches."
+      ],
+      "implementedAreas": [
+        "CLI commands for exec, session, checkpoint, config, network check, report, status, start, and stop now exercise real code paths rather than placeholder payloads.",
+        "Policy loading and first-match-wins evaluation for command, file, network, and environment rules are implemented with automated coverage.",
+        "Session persistence, checkpoint persistence, report generation, approval flows, authentication modes, LLM proxy routing, and MCP inspection all have concrete repository implementations with tests.",
+        "Hosted PowerShell execution for inline commands now exists via a constrained runspace path, and native process launches have a first OS-level Windows Job Object control."
+      ],
+      "initialParityScore": 58,
+      "missingAreas": [
+        "Usable shim installation and drop-in PATH replacement flow matching the stated agentsh-style usage is not complete.",
+        "True platform-native sandbox enforcement on Linux and macOS is missing, and Windows enforcement is only partially started.",
+        "End-to-end daemon plus shim integration remains thin, with integration coverage still limited and one integration test still named Placeholder_Integration_Test.",
+        "Documentation still contains explicit work-in-progress framing and parity claims that are broader than the verified runtime behavior.",
+        "Spec-complete cross-platform behavioral testing, especially real Docker and OS-matrix execution of the product surface, is not yet matched by product-level runtime maturity."
+      ],
+      "partialAreas": [
+        "PowerShell execution is usable for explicit inline commands, but interactive shell sessions remain intentionally unsupported and full shell replacement behavior is not complete.",
+        "Network enforcement exists as policy evaluation plus explicit pre-launch target blocking, but not as true OS-level egress interception across platforms.",
+        "Cross-platform support exists at the project layout, docs, build, and packaging level, but Linux and macOS platform enforcers remain mostly plan/scaffold implementations instead of runtime-complete enforcement layers.",
+        "Daemon lifecycle exists for local state tracking and IPC hosting, but the broader architecture described in docs/architecture.md still overstates current transport and platform capabilities."
+      ],
+      "prioritizedGaps": [
+        "Close the largest usability gap between the documented agentsh-like model and the actual executable product surface, especially shim/daemon execution flow and unsupported shell interaction boundaries.",
+        "Bring docs and packaging claims back into alignment with verified behavior while the implementation is improved, so the project is honest and testable.",
+        "Strengthen integration and end-to-end tests around daemon, shim, hosted PowerShell execution, policy enforcement, and blocked-vs-allowed scenarios.",
+        "Implement the next real platform-native enforcement slices beyond Windows Job Objects, especially Linux/macOS process and network controls or explicit constrained fallbacks.",
+        "Reduce remaining placeholder/scaffold areas in daemon and platform projects, starting with the pieces that directly affect user-facing trust and security expectations."
+      ]
+    },
+    "targetParityScore": 90,
+    "verification": {
+      "evidence": [
+        "dotnet build agentpowershell.sln --no-restore --verbosity minimal succeeded after the batch edits.",
+        "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal passed with 35/35 tests.",
+        "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal passed with 3/3 tests after fixing the hosted PowerShell runtime dependency closure.",
+        "README.md, docs/cross-platform.md, docs/getting-started.md, docs/final-report.md, and docs/architecture.md now describe the current verified surface more honestly than before the batch.",
+        "The placeholder integration test was replaced with real checks for CLI-level network denial and hosted PowerShell runspace behavior."
+      ],
+      "passed": true,
+      "regressions": [],
+      "testGaps": [
+        "Integration coverage is still lightweight and does not yet exercise a long-running daemon plus external shim process end to end.",
+        "CLI reference documentation was not tightened in this batch and may still lag the now-explicit runtime boundaries.",
+        "Cross-platform runtime behavior is still not validated by platform-specific end-to-end execution in this batch."
+      ],
+      "unresolvedIssues": [
+        "The repository is still short of full agentsh-style parity, especially around interactive shell replacement and non-Windows enforcement depth.",
+        "The hosted PowerShell dependency fix was applied for the integration-test host, but broader packaging/runtime verification should continue in later batches."
+      ]
+    }
+  }
+}

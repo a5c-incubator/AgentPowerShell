@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9VD84YKF2M471G7A2C2KXE",
+  "taskId": "verification-batch",
+  "invocationKey": "agentpowershell/spec-convergence:S000012:verification-batch",
+  "status": "ok",
+  "result": {
+    "evidence": [
+      "`dotnet build agentpowershell.sln --no-restore --verbosity minimal` succeeded after the Batch 3 changes.",
+      "`dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 40/40 tests.",
+      "`dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 2/2 tests.",
+      "New regression coverage proves that blocked explicit environment overrides are denied before process start.",
+      "New regression coverage proves that allowed explicit environment overrides reach native child process launches."
+    ],
+    "passed": true,
+    "regressions": [],
+    "testGaps": [
+      "The hosted PowerShell path still lacks a dedicated isolated per-request environment block; the current slice verifies denial of disallowed overrides rather than full environment virtualization.",
+      "Linux and macOS platform adapters still do not expose comparable runtime-verified OS-level enforcement behavior."
+    ],
+    "unresolvedIssues": [
+      "Environment policy is now enforced for explicit overrides, but it is not yet a full process-environment sandbox equivalent to the broader spec.",
+      "Platform-native network and filesystem interception beyond current policy prechecks remains incomplete."
+    ]
+  },
+  "startedAt": "2026-04-03T14:19:46.923Z",
+  "finishedAt": "2026-04-03T14:19:46.923Z",
+  "value": {
+    "evidence": [
+      "`dotnet build agentpowershell.sln --no-restore --verbosity minimal` succeeded after the Batch 3 changes.",
+      "`dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 40/40 tests.",
+      "`dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 2/2 tests.",
+      "New regression coverage proves that blocked explicit environment overrides are denied before process start.",
+      "New regression coverage proves that allowed explicit environment overrides reach native child process launches."
+    ],
+    "passed": true,
+    "regressions": [],
+    "testGaps": [
+      "The hosted PowerShell path still lacks a dedicated isolated per-request environment block; the current slice verifies denial of disallowed overrides rather than full environment virtualization.",
+      "Linux and macOS platform adapters still do not expose comparable runtime-verified OS-level enforcement behavior."
+    ],
+    "unresolvedIssues": [
+      "Environment policy is now enforced for explicit overrides, but it is not yet a full process-environment sandbox equivalent to the broader spec.",
+      "Platform-native network and filesystem interception beyond current policy prechecks remains incomplete."
+    ]
+  }
+}

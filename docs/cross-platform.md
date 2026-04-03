@@ -4,15 +4,15 @@ AgentPowerShell targets Windows, Linux, and macOS through shared abstractions pl
 
 ## Windows
 
-The architecture is designed around Job Objects, ETW, AppContainer, AMSI, ConPTY, named pipes, and minifilter-oriented integration points. The repository currently contains the managed scaffolding and tests needed to evolve these integrations.
+The repository currently has the first real Windows-specific enforcement slice in place through Job Object assignment for native child processes. Other Windows-oriented capabilities discussed in the architecture, such as ETW, AppContainer, AMSI, ConPTY, named pipes, and minifilter-oriented integration points, are still design direction rather than completed runtime coverage.
 
 ## Linux
 
-The platform plan is based on cgroups v2, Landlock, seccomp-bpf, ptrace, eBPF, namespaces, and Unix sockets. Build validation exists in the solution; runtime hardening work should continue in platform-specific integration tests.
+The Linux project captures the intended abstraction boundaries, but the repository does not yet provide runtime-complete cgroups, Landlock, seccomp-bpf, ptrace, eBPF, or namespace enforcement. Current Linux support should be treated as buildable structure plus shared policy behavior, not production-grade sandboxing.
 
 ## macOS
 
-The design references Endpoint Security, sandbox-exec, Network Extension, FSEvents, RLIMIT, and XPC. As with Linux and Windows, the current repository emphasizes cross-platform structure and shared contracts over full production wiring.
+The macOS project likewise reflects the planned abstraction surface for Endpoint Security, sandbox-exec, Network Extension, FSEvents, RLIMIT, and XPC, but those integrations are not yet wired into a verified runtime enforcement path.
 
 ## Practical Guidance
 
@@ -20,3 +20,4 @@ The design references Endpoint Security, sandbox-exec, Network Extension, FSEven
 - Put platform-native behavior behind explicit abstractions.
 - Validate cross-platform projects in CI for every change.
 - Prefer runtime-specific integration tests before claiming full feature parity on a platform.
+- Phrase current support in terms of verified behavior, not architectural intent.

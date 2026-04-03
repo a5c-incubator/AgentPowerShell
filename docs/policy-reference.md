@@ -74,7 +74,7 @@ Fields:
 
 ## Environment Rules
 
-Environment rules use variable name patterns and action lists. The tests exercise `read` actions and default-deny behavior when no rule matches.
+Environment rules use variable name patterns and action lists. The current runtime enforces `read` checks for explicit environment overrides that differ from the daemon's own baseline environment before command execution. If `env_rules` are present, unmatched override variables are denied by default.
 
 ## Authoring Guidance
 

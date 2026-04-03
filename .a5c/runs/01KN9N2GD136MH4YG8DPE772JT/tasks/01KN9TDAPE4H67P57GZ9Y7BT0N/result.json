@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9TDAPE4H67P57GZ9Y7BT0N",
+  "taskId": "verification-batch",
+  "invocationKey": "agentpowershell/spec-convergence:S000004:verification-batch",
+  "status": "ok",
+  "result": {
+    "evidence": [
+      "dotnet build agentpowershell.sln --no-restore --verbosity minimal succeeded after the batch edits.",
+      "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal passed with 35/35 tests.",
+      "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal passed with 3/3 tests after fixing the hosted PowerShell runtime dependency closure.",
+      "README.md, docs/cross-platform.md, docs/getting-started.md, docs/final-report.md, and docs/architecture.md now describe the current verified surface more honestly than before the batch.",
+      "The placeholder integration test was replaced with real checks for CLI-level network denial and hosted PowerShell runspace behavior."
+    ],
+    "passed": true,
+    "regressions": [],
+    "testGaps": [
+      "Integration coverage is still lightweight and does not yet exercise a long-running daemon plus external shim process end to end.",
+      "CLI reference documentation was not tightened in this batch and may still lag the now-explicit runtime boundaries.",
+      "Cross-platform runtime behavior is still not validated by platform-specific end-to-end execution in this batch."
+    ],
+    "unresolvedIssues": [
+      "The repository is still short of full agentsh-style parity, especially around interactive shell replacement and non-Windows enforcement depth.",
+      "The hosted PowerShell dependency fix was applied for the integration-test host, but broader packaging/runtime verification should continue in later batches."
+    ]
+  },
+  "startedAt": "2026-04-03T14:02:38.304Z",
+  "finishedAt": "2026-04-03T14:02:38.304Z",
+  "value": {
+    "evidence": [
+      "dotnet build agentpowershell.sln --no-restore --verbosity minimal succeeded after the batch edits.",
+      "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal passed with 35/35 tests.",
+      "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal passed with 3/3 tests after fixing the hosted PowerShell runtime dependency closure.",
+      "README.md, docs/cross-platform.md, docs/getting-started.md, docs/final-report.md, and docs/architecture.md now describe the current verified surface more honestly than before the batch.",
+      "The placeholder integration test was replaced with real checks for CLI-level network denial and hosted PowerShell runspace behavior."
+    ],
+    "passed": true,
+    "regressions": [],
+    "testGaps": [
+      "Integration coverage is still lightweight and does not yet exercise a long-running daemon plus external shim process end to end.",
+      "CLI reference documentation was not tightened in this batch and may still lag the now-explicit runtime boundaries.",
+      "Cross-platform runtime behavior is still not validated by platform-specific end-to-end execution in this batch."
+    ],
+    "unresolvedIssues": [
+      "The repository is still short of full agentsh-style parity, especially around interactive shell replacement and non-Windows enforcement depth.",
+      "The hosted PowerShell dependency fix was applied for the integration-test host, but broader packaging/runtime verification should continue in later batches."
+    ]
+  }
+}

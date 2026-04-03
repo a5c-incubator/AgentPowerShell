@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9SZG6P30120NJ695QCXJSM",
+  "taskId": "implementation-batch",
+  "invocationKey": "agentpowershell/spec-convergence:S000003:implementation-batch",
+  "status": "ok",
+  "result": {
+    "blockers": [],
+    "commandsRun": [
+      "dotnet build agentpowershell.sln --no-restore --verbosity minimal",
+      "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+      "dotnet build tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --verbosity minimal",
+      "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal"
+    ],
+    "filesChanged": [
+      "README.md",
+      "docs/architecture.md",
+      "docs/cross-platform.md",
+      "docs/final-report.md",
+      "docs/getting-started.md",
+      "src/AgentPowerShell.Daemon/Worker.cs",
+      "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+      "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj"
+    ],
+    "outcomes": [
+      "README status language now states the verified product surface and explicitly names the current unsupported or incomplete areas.",
+      "Cross-platform and architecture docs now frame platform-native enforcement as target direction where it is not yet runtime-complete.",
+      "The daemon worker no longer logs itself as a placeholder service.",
+      "The placeholder integration test was replaced with real coverage for CLI network blocking and hosted runspace execution behavior.",
+      "Integration test runtime dependency closure for hosted PowerShell was fixed by carrying the PowerShell SDK into the integration test host."
+    ],
+    "remainingWithinBatch": [
+      "Further end-to-end daemon-plus-shim coverage is still desirable beyond the current integration additions.",
+      "docs/cli-reference.md was not revised in this batch and may still need tightening during the usability-focused batch."
+    ],
+    "selectedBatch": {
+      "goal": "Align README/docs and integration coverage with what the product actually does today, while removing the most misleading placeholders.",
+      "name": "Batch 1 - Honest product surface and integration hardening"
+    }
+  },
+  "startedAt": "2026-04-03T14:01:49.982Z",
+  "finishedAt": "2026-04-03T14:01:49.982Z",
+  "value": {
+    "blockers": [],
+    "commandsRun": [
+      "dotnet build agentpowershell.sln --no-restore --verbosity minimal",
+      "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+      "dotnet build tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --verbosity minimal",
+      "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal"
+    ],
+    "filesChanged": [
+      "README.md",
+      "docs/architecture.md",
+      "docs/cross-platform.md",
+      "docs/final-report.md",
+      "docs/getting-started.md",
+      "src/AgentPowerShell.Daemon/Worker.cs",
+      "tests/AgentPowerShell.IntegrationTests/SmokeTests.cs",
+      "tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj",
+      "src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj"
+    ],
+    "outcomes": [
+      "README status language now states the verified product surface and explicitly names the current unsupported or incomplete areas.",
+      "Cross-platform and architecture docs now frame platform-native enforcement as target direction where it is not yet runtime-complete.",
+      "The daemon worker no longer logs itself as a placeholder service.",
+      "The placeholder integration test was replaced with real coverage for CLI network blocking and hosted runspace execution behavior.",
+      "Integration test runtime dependency closure for hosted PowerShell was fixed by carrying the PowerShell SDK into the integration test host."
+    ],
+    "remainingWithinBatch": [
+      "Further end-to-end daemon-plus-shim coverage is still desirable beyond the current integration additions.",
+      "docs/cli-reference.md was not revised in this batch and may still need tightening during the usability-focused batch."
+    ],
+    "selectedBatch": {
+      "goal": "Align README/docs and integration coverage with what the product actually does today, while removing the most misleading placeholders.",
+      "name": "Batch 1 - Honest product surface and integration hardening"
+    }
+  }
+}

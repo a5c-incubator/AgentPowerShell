@@ -2,7 +2,7 @@
 
 ## Verdict
 
-AgentPowerShell is approved as a strong repository-level implementation of the planned architecture, with a passing build, passing automated tests, a defined CLI surface, documentation, packaging scaffolding, and concrete implementations for sessions, events, approvals, authentication, LLM proxying, MCP inspection, reporting, and workspace checkpoints.
+AgentPowerShell is a strong repository-level baseline, not yet a finished fulfillment of the broader `agentsh`-style specification. It has a passing build, passing automated tests, a defined CLI surface, and concrete implementations for sessions, events, approvals, authentication, LLM proxying, MCP inspection, reporting, checkpoints, and the current command-execution path.
 
 ## Strengths
 
@@ -10,7 +10,7 @@ AgentPowerShell is approved as a strong repository-level implementation of the p
 - Policy and config primitives are simple, testable, and easy to extend
 - End-to-end build and test verification is green across unit, integration, and platform test projects
 - The CLI now executes real checkpoint operations instead of placeholder output
-- Documentation and release scaffolding are present and consistent with the current repository surface
+- Hosted PowerShell execution and explicit policy-backed command blocking are now exercised through the tested runtime surface
 
 ## Concerns
 

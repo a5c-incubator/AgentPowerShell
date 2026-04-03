@@ -41,11 +41,10 @@ try
 {
     response = await client.ExecuteAsync(request, CancellationToken.None).ConfigureAwait(false);
 }
-catch
+catch (Exception firstFailure)
 {
-    DaemonLauncher.TryStart();
-    await Task.Delay(1000).ConfigureAwait(false);
-    response = await client.ExecuteAsync(request, CancellationToken.None).ConfigureAwait(false);
+    _ = DaemonLauncher.TryStart(request.WorkingDirectory);
+    response = await RetryUntilAvailableAsync(client, request, firstFailure, CancellationToken.None).ConfigureAwait(false);
 }
 
 if (!string.IsNullOrEmpty(response.Stdout))
@@ -59,3 +58,34 @@ if (!string.IsNullOrEmpty(response.Stderr))
 }
 
 return response.ExitCode;
+
+static async Task<ShimCommandResponse> RetryUntilAvailableAsync(
+    ShimClient client,
+    ShimCommandRequest request,
+    Exception firstFailure,
+    CancellationToken cancellationToken)
+{
+    var lastFailure = firstFailure;
+    for (var attempt = 0; attempt < 10; attempt++)
+    {
+        try
+        {
+            await Task.Delay(500, cancellationToken).ConfigureAwait(false);
+            return await client.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+        catch (Exception retryFailure)
+        {
+            lastFailure = retryFailure;
+        }
+    }
+
+    Console.Error.WriteLine($"AgentPowerShell daemon is unavailable for shim execution. {lastFailure.Message}");
+    return new ShimCommandResponse
+    {
+        SessionId = request.SessionId,
+        ExitCode = 70,
+        PolicyDecision = "error",
+        DenialReason = "Daemon unavailable.",
+        Stderr = $"AgentPowerShell daemon is unavailable for shim execution. {lastFailure.Message}"
+    };
+}

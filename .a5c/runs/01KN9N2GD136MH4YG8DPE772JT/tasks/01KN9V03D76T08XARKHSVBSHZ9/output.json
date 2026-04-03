@@ -1,0 +1,17 @@
+{
+  "parityScore": 72,
+  "strengths": [
+    "The core CLI surface now performs real work for sessions, exec, checkpoints, reports, config, status, start, and stop.",
+    "Batch 2 materially improved non-interactive daemon usability by making CLI and shim share the same daemon launch discovery path and by validating it with tests and manual smoke checks.",
+    "Policy-backed command and explicit network blocking behavior is exercised through passing automated tests and manual validation on Windows."
+  ],
+  "remainingGaps": [
+    "The project still does not provide a finished, installable drop-in shell replacement flow equivalent to the broader agentsh-style spec.",
+    "OS-level sandbox enforcement remains shallow: Windows has initial job-object containment, but Linux and macOS enforcement are still mostly scaffolded and network blocking is still pre-launch policy evaluation rather than true egress interception.",
+    "End-to-end published-binary and real shim-to-daemon IPC coverage are still limited relative to the architecture claims."
+  ],
+  "nextFocus": [
+    "Implement the next real enforcement slice with behavior that is testable, starting from the currently partial Windows and cross-platform policy-backed controls.",
+    "Prefer runtime-verified enforcement and honest docs over additional surface-area claims or placeholders."
+  ]
+}

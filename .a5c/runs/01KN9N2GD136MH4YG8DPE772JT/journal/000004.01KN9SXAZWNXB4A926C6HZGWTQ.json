@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T13:53:20.892Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9SXAY8T744BFP8HBFD11P3",
+    "invocationKey": "agentpowershell/spec-convergence:S000002:backlog-planning",
+    "invocationHash": "fb96f135ad43d5b6f246c49bb935bc71ab763c4f7a7543758254c9634cddd4fb",
+    "stepId": "S000002",
+    "taskId": "backlog-planning",
+    "kind": "agent",
+    "label": "Plan convergence backlog",
+    "taskDefRef": "tasks/01KN9SXAY8T744BFP8HBFD11P3/task.json"
+  },
+  "checksum": "2d6ce67a58d853fd87a01da84bcb8ed6f0667f3bff74cf2efa6dd68ac3a1746f"
+}

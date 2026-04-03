@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T14:12:40.131Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9V0Q0SRHH3D3QE9BGKE198",
+    "invocationKey": "agentpowershell/spec-convergence:S000010:backlog-refinement",
+    "invocationHash": "c189d1e8d520464086eb4bc22e0133c4788384c5839b35b671decd9d4f212305",
+    "stepId": "S000010",
+    "taskId": "backlog-refinement",
+    "kind": "agent",
+    "label": "Refine backlog after batch 2",
+    "taskDefRef": "tasks/01KN9V0Q0SRHH3D3QE9BGKE198/task.json"
+  },
+  "checksum": "011576e7415a62e1018efb67b1be7562f99f82414b17201dca208cb9c368668d"
+}

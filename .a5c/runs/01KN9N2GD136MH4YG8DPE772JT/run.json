@@ -1,0 +1,16 @@
+{
+  "runId": "01KN9N2GD136MH4YG8DPE772JT",
+  "request": "agentpowershell/spec-convergence",
+  "processId": "agentpowershell/spec-convergence",
+  "harness": "codex",
+  "entrypoint": {
+    "importPath": "../../processes/agentpowershell-spec-convergence.process.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/agentpowershell-spec-convergence.process.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-04-03T12:28:47.437Z",
+  "prompt": "keep improving and completing the entire project until it fulfill the entire specs",
+  "nonInteractive": true,
+  "completionProof": "00e52476735fe63f4eef100d969732e8"
+}

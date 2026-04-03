@@ -64,4 +64,18 @@ dotnet run --project src/AgentPowerShell.Cli -- policy validate default-policy.y
 
 ## Status
 
-The repository now supports a tested CLI baseline for policy inspection, session persistence, checkpoint management, configuration updates, and markdown report generation. Daemon lifecycle control, shell execution orchestration, and several platform-native enforcement paths are still scaffolded and should be treated as implementation work in progress rather than production-ready behavior.
+The repository currently delivers a usable, tested baseline for:
+
+- CLI-driven session management, checkpointing, config updates, reporting, and policy inspection
+- `exec` for explicit commands through the shim/daemon processor path
+- hosted PowerShell execution for inline `powershell` and `pwsh` `-Command` invocations
+- command policy checks, explicit-network prechecks, and first-pass Windows Job Object process control
+
+The repository does not yet fulfill the full `agentsh`-style specification described in `request.task.md` and `docs/architecture.md`. In particular:
+
+- interactive shell sessions through `exec` are still intentionally unsupported
+- Linux and macOS platform enforcers remain mostly structural scaffolding
+- network blocking is policy-aware pre-execution filtering, not full OS-level egress interception
+- the documented long-term architecture is broader than the currently verified runtime behavior
+
+Treat the project as an actively converging implementation rather than a finished parity clone.

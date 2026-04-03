@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T14:13:04.083Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9V1ED80AD1QYW68ZGDCJVE",
+    "invocationKey": "agentpowershell/spec-convergence:S000011:implementation-batch",
+    "invocationHash": "83989605ce73be619d954072ef0fc72161188043ddb173a550540a269362ebaa",
+    "stepId": "S000011",
+    "taskId": "implementation-batch",
+    "kind": "agent",
+    "label": "Implement prioritized batch 3",
+    "taskDefRef": "tasks/01KN9V1ED80AD1QYW68ZGDCJVE/task.json"
+  },
+  "checksum": "8700ab61ec602c1dbdd90ee595c49750a9b81bea87254124ea1071591bd3e470"
+}

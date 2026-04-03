@@ -15,15 +15,22 @@ Print the CLI version string.
 
 ### `start`
 
-Emit daemon start intent. The current implementation does not launch a long-running daemon process yet.
+Start the local daemon process and persist its PID under `.agentpowershell/daemon.json`.
+Resolution order:
+- `AGENTPOWERSHELL_DAEMON_CMD`
+- `AGENTPOWERSHELL_DAEMON_PATH`
+- sibling `AgentPowerShell.Daemon(.exe|.dll)` next to the current binaries
+- `src/AgentPowerShell.Daemon/AgentPowerShell.Daemon.csproj` from the repo root
+
+If no launch target is discoverable, the command returns `status: unavailable` with guidance.
 
 ### `stop`
 
-Emit daemon stop intent. The current implementation does not stop a managed daemon process yet.
+Stop the tracked daemon PID from `.agentpowershell/daemon.json` and remove that state file. If the process is already gone, the command still cleans up the stale state.
 
 ### `exec <session-id> <command...>`
 
-Emit a request to execute a command in a session.
+Execute an explicit command in a session through the current daemon processor path. Inline PowerShell commands route through the hosted constrained runspace when supported. Interactive shell launches such as bare `powershell` or `pwsh` are rejected by design.
 
 ### `session create`
 
@@ -31,7 +38,7 @@ Create a new session identifier.
 
 ### `session list`
 
-List persisted sessions from `.agentpowershell/sessions.json`.
+List persisted sessions from `.agentpowershell/sessions.json`. Text mode includes the active flag, working directory, created/last/expires timestamps, and policy path. JSON mode emits a stable summary shape.
 
 ### `session destroy <session-id>`
 
@@ -51,7 +58,7 @@ Generate a markdown session report from the configured JSONL event store and wri
 
 ### `status`
 
-Show daemon/session status summary.
+Show daemon/session status summary, including daemon PID, start time, process name, and tracked working directory when available.
 
 ### `checkpoint create [--name <name>]`
 

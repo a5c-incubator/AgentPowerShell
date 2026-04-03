@@ -1198,6 +1198,128 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task ShimProcessor_Denies_Disallowed_Environment_Overrides()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-env-deny");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), $$"""
+                command_rules:
+                  - name: allow-shell
+                    pattern: "{{GetShellPattern()}}"
+                    decision: allow
+                env_rules:
+                  - name: deny-secret
+                    pattern: "MY_BLOCKED_*"
+                    actions: [read]
+                    decision: deny
+                    message: "Blocked environment override."
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+            var environment = CaptureCurrentEnvironment();
+            environment["MY_BLOCKED_TOKEN"] = "secret";
+            var request = new ShimCommandRequest
+            {
+                SessionId = "session-a",
+                InvocationName = GetShellInvocation(),
+                ExecutablePath = GetShellExecutable(),
+                WorkingDirectory = root
+            };
+            foreach (var argument in GetShellEchoArguments("ok"))
+            {
+                request.Arguments.Add(argument);
+            }
+
+            foreach (var pair in environment)
+            {
+                request.Environment[pair.Key] = pair.Value;
+            }
+
+            var response = await processor.ExecuteAsync(request, CancellationToken.None);
+
+            Assert.Equal(126, response.ExitCode);
+            Assert.Equal("deny", response.PolicyDecision);
+            Assert.Contains("Blocked environment override.", response.Stderr, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task ShimProcessor_Allows_Approved_Environment_Overrides_For_Native_Commands()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-env-allow");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), $$"""
+                command_rules:
+                  - name: allow-shell
+                    pattern: "{{GetShellPattern()}}"
+                    decision: allow
+                env_rules:
+                  - name: allow-my-env
+                    pattern: "MY_ALLOWED_*"
+                    actions: [read]
+                    decision: allow
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+            var environment = CaptureCurrentEnvironment();
+            environment["MY_ALLOWED_TOKEN"] = "env-ok";
+            var request = new ShimCommandRequest
+            {
+                SessionId = "session-a",
+                InvocationName = GetShellInvocation(),
+                ExecutablePath = GetShellExecutable(),
+                WorkingDirectory = root
+            };
+            foreach (var argument in GetShellEchoEnvironmentArguments("MY_ALLOWED_TOKEN"))
+            {
+                request.Arguments.Add(argument);
+            }
+
+            foreach (var pair in environment)
+            {
+                request.Environment[pair.Key] = pair.Value;
+            }
+
+            var response = await processor.ExecuteAsync(request, CancellationToken.None);
+
+            Assert.Equal(0, response.ExitCode);
+            Assert.Equal("allow", response.PolicyDecision);
+            Assert.Contains("env-ok", response.Stdout, StringComparison.Ordinal);
+            Assert.Contains(response.Events, item => item.EventType == "process.executed.native");
+        }
+        finally
+        {
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task CliApp_Start_Stop_And_Status_Track_Daemon_State_File()
     {
         var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-daemon");
@@ -1258,6 +1380,105 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task CliApp_SessionList_Text_Mode_Includes_Usable_Metadata()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-session-list-text");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+
+            using (var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json")))
+            {
+                await store.LoadAsync(CancellationToken.None);
+                await store.GetOrCreateAsync("session-a", root, new AgentPowerShellConfig().Sessions, CancellationToken.None);
+            }
+
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(0, CliApp.Run(["session", "list"]));
+            var payload = writer.ToString();
+            Assert.Contains("session-a", payload, StringComparison.Ordinal);
+            Assert.Contains("active=", payload, StringComparison.Ordinal);
+            Assert.Contains("created=", payload, StringComparison.Ordinal);
+            Assert.Contains("expires=", payload, StringComparison.Ordinal);
+            Assert.Contains("policy=", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public void DaemonLaunchResolver_Uses_Explicit_Dll_Path_When_Configured()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-daemon-launch-explicit");
+        Directory.CreateDirectory(root);
+        var daemonDll = Path.Combine(root, "AgentPowerShell.Daemon.dll");
+        File.WriteAllText(daemonDll, string.Empty);
+        var originalPath = Environment.GetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH");
+
+        try
+        {
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH", daemonDll);
+            var plan = DaemonLaunchResolver.Resolve(root, root);
+
+            Assert.NotNull(plan);
+            Assert.Equal(root, plan!.WorkingDirectory);
+            Assert.Single(plan.Arguments);
+            Assert.Equal(daemonDll, plan.Arguments[0]);
+            Assert.EndsWith(OperatingSystem.IsWindows() ? "dotnet.exe" : "dotnet", plan.FileName, StringComparison.OrdinalIgnoreCase);
+        }
+        finally
+        {
+            Environment.SetEnvironmentVariable("AGENTPOWERSHELL_DAEMON_PATH", originalPath);
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public void DaemonLaunchResolver_Falls_Back_To_Source_Project_When_Repo_Is_Available()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-daemon-launch-project");
+        var nested = Path.Combine(root, "tools", "shim");
+        Directory.CreateDirectory(Path.Combine(root, "src", "AgentPowerShell.Daemon"));
+        Directory.CreateDirectory(nested);
+        File.WriteAllText(Path.Combine(root, "src", "AgentPowerShell.Daemon", "AgentPowerShell.Daemon.csproj"), "<Project />");
+
+        try
+        {
+            var plan = DaemonLaunchResolver.Resolve(nested, nested);
+
+            Assert.NotNull(plan);
+            Assert.Equal(root, plan!.WorkingDirectory);
+            Assert.Equal("run", plan.Arguments[0]);
+            Assert.Equal("--project", plan.Arguments[1]);
+            Assert.EndsWith(Path.Combine("src", "AgentPowerShell.Daemon", "AgentPowerShell.Daemon.csproj"), plan.Arguments[2], StringComparison.OrdinalIgnoreCase);
+            Assert.Equal("--no-build", plan.Arguments[3]);
+        }
+        finally
+        {
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task SessionReportGenerator_Builds_Markdown_And_Findings()
     {
         var storePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-report.jsonl");
@@ -1286,6 +1507,27 @@ public sealed class ExecutionPolicyTests
             }
         }
     }
+
+    private static Dictionary<string, string> CaptureCurrentEnvironment() =>
+        Environment.GetEnvironmentVariables()
+            .Cast<System.Collections.DictionaryEntry>()
+            .ToDictionary(entry => entry.Key.ToString()!, entry => entry.Value?.ToString() ?? string.Empty, StringComparer.OrdinalIgnoreCase);
+
+    private static string GetShellInvocation() => OperatingSystem.IsWindows() ? "cmd" : "sh";
+
+    private static string GetShellPattern() => OperatingSystem.IsWindows() ? "cmd" : "sh";
+
+    private static string GetShellExecutable() => OperatingSystem.IsWindows()
+        ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "cmd.exe")
+        : "/bin/sh";
+
+    private static string[] GetShellEchoArguments(string value) => OperatingSystem.IsWindows()
+        ? ["/c", "echo", value]
+        : ["-c", $"printf '%s' '{value}'"];
+
+    private static string[] GetShellEchoEnvironmentArguments(string variableName) => OperatingSystem.IsWindows()
+        ? ["/c", "echo", $"%{variableName}%"]
+        : ["-c", $"printf '%s' \"${variableName}\""];
 
     private sealed class StubHttpMessageHandler(Func<HttpRequestMessage, HttpResponseMessage> responder) : HttpMessageHandler
     {

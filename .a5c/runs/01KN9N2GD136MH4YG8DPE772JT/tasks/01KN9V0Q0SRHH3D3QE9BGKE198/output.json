@@ -1,0 +1,68 @@
+{
+  "batches": [
+    {
+      "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+      "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control while preserving honest claims and good tests.",
+      "expectedOutcome": "The security story becomes less scaffolded and more behaviorally verified where feasible.",
+      "targets": [
+        "src/AgentPowerShell.Platform.Windows/*",
+        "src/AgentPowerShell.Platform.Linux/*",
+        "src/AgentPowerShell.Platform.MacOS/*",
+        "src/AgentPowerShell.Daemon/*Monitor*",
+        "src/AgentPowerShell.Core/*",
+        "tests/AgentPowerShell.Platform.Tests/*",
+        "tests/AgentPowerShell.Tests/*"
+      ],
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build",
+        "targeted policy enforcement regression tests"
+      ]
+    },
+    {
+      "name": "Batch 4 - Cross-platform and packaging truthfulness",
+      "goal": "Tighten install, Docker, CI, and release behavior so repo guidance matches real support.",
+      "expectedOutcome": "Cross-platform install and release guidance become defensible against the current runtime maturity.",
+      "targets": [
+        ".github/workflows/*",
+        "Dockerfile",
+        "install.ps1",
+        "install.sh",
+        "docs/cross-platform.md",
+        "README.md",
+        "eng/*"
+      ],
+      "verification": [
+        "docker build .",
+        "documented workflow checks",
+        "dotnet publish checks for documented RIDs"
+      ]
+    },
+    {
+      "name": "Batch 5 - Final parity closure",
+      "goal": "Reassess remaining gaps against request.task.md and either implement the last high-impact items or reduce claims to the exact truth.",
+      "expectedOutcome": "The project ends in an honestly reviewable state with explicit remaining blockers if full spec fulfillment is still not reached.",
+      "targets": [
+        "request.task.md",
+        "README.md",
+        "docs/architecture.md",
+        "docs/final-report.md",
+        "remaining code hotspots identified by earlier batches"
+      ],
+      "verification": [
+        "full solution build and test run",
+        "manual end-to-end validation of the supported product surface",
+        "final parity review against request.task.md"
+      ]
+    }
+  ],
+  "risks": [
+    "The remaining parity gap is now dominated by runtime enforcement depth rather than surface usability, so the next batch is more likely to expose platform limitations or require reduced claims.",
+    "Cross-platform packaging and Docker validation may still reveal support claims that need to be narrowed even after technical fixes."
+  ],
+  "rationale": [
+    "Batch 2 is complete and verified, so it should be removed from the execution queue.",
+    "The next highest-value work is the enforcement layer because the current parity delta is still mostly explained by shallow OS-level controls and limited end-to-end security verification.",
+    "Packaging and CI remain important, but they should follow the next enforcement slice so the release surface reflects more of the real runtime behavior."
+  ]
+}

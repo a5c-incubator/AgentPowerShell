@@ -1,0 +1,35 @@
+{
+  "selectedBatch": {
+    "name": "Batch 2 - Shim and daemon usability completion",
+    "goal": "Make the actual shim/daemon execution path more usable and explicit for supported scenarios, especially around PowerShell command routing, session flow, and installation/status behavior.",
+    "expectedOutcome": "Supported non-interactive execution paths are more coherent from shim to CLI to daemon, and the docs describe those paths precisely."
+  },
+  "filesChanged": [
+    "src/AgentPowerShell.Core/DaemonLaunchResolver.cs",
+    "src/AgentPowerShell.Shim/DaemonLauncher.cs",
+    "src/AgentPowerShell.Shim/Program.cs",
+    "src/AgentPowerShell.Cli/CliApp.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs",
+    "docs/cli-reference.md",
+    "docs/getting-started.md"
+  ],
+  "commandsRun": [
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" build agentpowershell.sln --no-restore --verbosity minimal",
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal",
+    "manual smoke: session list",
+    "manual smoke: exec session-smoke powershell -Command \"Invoke-WebRequest https://example.com\" --output json",
+    "manual smoke: start/status/stop"
+  ],
+  "outcomes": [
+    "Shared daemon launch discovery now works for both CLI start and shim auto-start, with override env vars plus fallback to sibling daemon binaries or the source project.",
+    "Shim execution now retries daemon connection during auto-start and returns a clear daemon-unavailable error instead of failing silently after a single fixed wait.",
+    "CLI session list text mode now includes active state, timestamps, working directory, and policy path so the command is usable without JSON parsing.",
+    "CLI status now reports daemon working directory and process name, and docs now match the implemented start/stop/exec/session behavior.",
+    "Added focused tests for daemon launch resolution and text session listing, and the full targeted build/test/manual validation passed on Windows."
+  ],
+  "remainingWithinBatch": [
+    "No additional Batch 2 items remain after the implemented runtime and docs alignment work."
+  ],
+  "blockers": []
+}

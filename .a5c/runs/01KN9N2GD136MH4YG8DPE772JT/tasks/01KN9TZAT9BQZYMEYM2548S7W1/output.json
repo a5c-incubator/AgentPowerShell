@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "evidence": [
+    "`dotnet build agentpowershell.sln --no-restore --verbosity minimal` succeeded after the Batch 2 changes.",
+    "`dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 35/35 tests.",
+    "`dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal` passed with 3/3 tests.",
+    "Manual smoke test for `session list` in text mode returned the supported human-readable output (`No sessions.` on a clean store).",
+    "Manual smoke test for blocked network execution returned `exitCode: 126`, `policyDecision: deny`, and `No matching network rule.`.",
+    "Manual smoke test for `start`, `status`, and `stop` showed the daemon process being launched, reported as running with PID/process name/working directory, and then stopped cleanly."
+  ],
+  "regressions": [],
+  "testGaps": [
+    "There is still no end-to-end integration test that launches the real shim binary, auto-starts the daemon, and round-trips through IPC in one test.",
+    "The new daemon launch discovery path is covered by focused unit tests, but not yet by a published-binary packaging test."
+  ],
+  "unresolvedIssues": [
+    "Interactive shell replacement and fully installable PATH shim behavior remain incomplete by design and are still broader parity gaps outside this batch."
+  ]
+}

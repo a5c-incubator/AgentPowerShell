@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Worker">
+  <PropertyGroup>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\AgentPowerShell.Core\AgentPowerShell.Core.csproj" />
     <ProjectReference Include="..\AgentPowerShell.Events\AgentPowerShell.Events.csproj" />

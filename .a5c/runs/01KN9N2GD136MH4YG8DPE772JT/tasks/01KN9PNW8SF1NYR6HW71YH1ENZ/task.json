@@ -1,0 +1,88 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "backlogSeed": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "implementedAreas": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "initialParityScore": {
+          "type": "number"
+        },
+        "missingAreas": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "partialAreas": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "prioritizedGaps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "implementedAreas",
+        "partialAreas",
+        "missingAreas",
+        "prioritizedGaps",
+        "initialParityScore",
+        "backlogSeed"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "architectureDoc": "docs/architecture.md",
+        "projectRoot": "C:/work/agentpowershell",
+        "readmePath": "README.md",
+        "requestPath": "request.task.md"
+      },
+      "instructions": [
+        "Read the requested specification from request.task.md.",
+        "Read README.md and docs/architecture.md to understand the documented intent.",
+        "Inspect the current repository state, especially src/, tests/, docs/, .github/, Dockerfile, install scripts, and platform projects.",
+        "Identify what is already implemented, partially implemented, scaffolded, or missing.",
+        "Produce a parity assessment against the stated goals: PowerShell execution parity direction, daemon+shim usability, policy enforcement, sandboxing/security, cross-platform support, packaging, CI/CD, and documentation.",
+        "Prioritize the gaps by user impact and implementation dependency order.",
+        "Return a concrete backlog seed that can drive implementation batches."
+      ],
+      "outputFormat": "JSON with implementedAreas, partialAreas, missingAreas, prioritizedGaps, initialParityScore, and backlogSeed",
+      "role": "principal engineer conducting spec-to-implementation gap analysis",
+      "task": "Audit the current repository against the requested agentpowershell specification and identify the highest-impact gaps"
+    }
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9PNW8SF1NYR6HW71YH1ENZ/input.json",
+    "outputJsonPath": "tasks/01KN9PNW8SF1NYR6HW71YH1ENZ/output.json"
+  },
+  "kind": "agent",
+  "title": "Audit requested spec against current repo state",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9PNW8SF1NYR6HW71YH1ENZ",
+  "taskId": "specification-audit",
+  "invocationKey": "agentpowershell/spec-convergence:S000001:specification-audit",
+  "stepId": "S000001",
+  "inputs": {
+    "architectureDoc": "docs/architecture.md",
+    "projectRoot": "C:/work/agentpowershell",
+    "readmePath": "README.md",
+    "requestPath": "request.task.md"
+  }
+}

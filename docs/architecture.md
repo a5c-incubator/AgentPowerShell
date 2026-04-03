@@ -1,6 +1,6 @@
 # agentpowershell Architecture
 
-> Full architecture document for the agentpowershell project -- a C#/.NET PowerShell policy-enforced shell execution gateway with feature parity with agentsh.
+> Target architecture document for the agentpowershell project. This file describes the intended end-state and defense-in-depth direction; parts of it are broader than the current verified runtime implementation.
 
 ## 1. System Overview
 

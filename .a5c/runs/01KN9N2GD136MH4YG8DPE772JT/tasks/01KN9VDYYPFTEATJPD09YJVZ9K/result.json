@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KN9VDYYPFTEATJPD09YJVZ9K",
+  "taskId": "parity-scoring",
+  "invocationKey": "agentpowershell/spec-convergence:S000013:parity-scoring",
+  "status": "ok",
+  "result": {
+    "nextFocus": [
+      "Take Batch 4 next: tighten CI, Docker, install/release paths, and cross-platform docs so the release surface reflects the real runtime maturity.",
+      "Keep reducing unverified claims while adding the next runtime-complete slices only where they can be built and tested honestly."
+    ],
+    "parityScore": 76,
+    "remainingGaps": [
+      "The project still lacks a finished agentsh-style installable drop-in shell replacement and broader end-to-end shim deployment story.",
+      "Platform-native enforcement remains partial: Linux and macOS are still largely planning surfaces, Windows containment is still limited, and network blocking is not yet true OS-level interception.",
+      "Cross-platform packaging, Docker validation, and release automation are still behind the remaining product claims."
+    ],
+    "strengths": [
+      "The repository now enforces command, network, and explicit environment override policies through the live execution path with automated regression coverage.",
+      "Daemon usability for supported non-interactive flows improved materially in Batch 2, and Batch 3 removed one more dead-config gap by turning env_rules into runtime behavior.",
+      "The tested CLI and daemon surface is increasingly honest: docs and current behavior now align more closely for start/stop/status/session and policy handling."
+    ]
+  },
+  "startedAt": "2026-04-03T14:20:15.442Z",
+  "finishedAt": "2026-04-03T14:20:15.442Z",
+  "value": {
+    "nextFocus": [
+      "Take Batch 4 next: tighten CI, Docker, install/release paths, and cross-platform docs so the release surface reflects the real runtime maturity.",
+      "Keep reducing unverified claims while adding the next runtime-complete slices only where they can be built and tested honestly."
+    ],
+    "parityScore": 76,
+    "remainingGaps": [
+      "The project still lacks a finished agentsh-style installable drop-in shell replacement and broader end-to-end shim deployment story.",
+      "Platform-native enforcement remains partial: Linux and macOS are still largely planning surfaces, Windows containment is still limited, and network blocking is not yet true OS-level interception.",
+      "Cross-platform packaging, Docker validation, and release automation are still behind the remaining product claims."
+    ],
+    "strengths": [
+      "The repository now enforces command, network, and explicit environment override policies through the live execution path with automated regression coverage.",
+      "Daemon usability for supported non-interactive flows improved materially in Batch 2, and Batch 3 removed one more dead-config gap by turning env_rules into runtime behavior.",
+      "The tested CLI and daemon surface is increasingly honest: docs and current behavior now align more closely for start/stop/status/session and policy handling."
+    ]
+  }
+}

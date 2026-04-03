@@ -10,6 +10,7 @@ internal sealed class NativeProcessLauncher
     public async Task<CommandExecutionResult> ExecuteAsync(
         ShimCommandRequest request,
         AgentSession session,
+        IReadOnlyDictionary<string, string> allowedEnvironmentOverrides,
         CancellationToken cancellationToken)
     {
         var startInfo = new ProcessStartInfo
@@ -27,7 +28,7 @@ internal sealed class NativeProcessLauncher
             startInfo.ArgumentList.Add(argument);
         }
 
-        foreach (var pair in request.Environment)
+        foreach (var pair in allowedEnvironmentOverrides)
         {
             startInfo.Environment[pair.Key] = pair.Value;
         }

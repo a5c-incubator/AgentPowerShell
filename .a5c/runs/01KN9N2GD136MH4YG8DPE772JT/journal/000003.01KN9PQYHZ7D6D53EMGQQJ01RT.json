@@ -1,0 +1,13 @@
+{
+  "type": "EFFECT_RESOLVED",
+  "recordedAt": "2026-04-03T12:57:58.591Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9PNW8SF1NYR6HW71YH1ENZ",
+    "status": "ok",
+    "resultRef": "tasks/01KN9PNW8SF1NYR6HW71YH1ENZ/result.json",
+    "startedAt": "2026-04-03T12:57:58.545Z",
+    "finishedAt": "2026-04-03T12:57:58.545Z"
+  },
+  "checksum": "96335bc4f47e9bdd4d068158e7118177461cd41cebaa20ffd251a442df6a4dbe"
+}

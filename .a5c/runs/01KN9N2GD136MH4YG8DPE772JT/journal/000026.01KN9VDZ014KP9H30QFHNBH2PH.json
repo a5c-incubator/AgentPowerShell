@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T14:19:54.241Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9VDYYPFTEATJPD09YJVZ9K",
+    "invocationKey": "agentpowershell/spec-convergence:S000013:parity-scoring",
+    "invocationHash": "f73e1240852b51ed4e462195db6b000dde9171de9756a2228ec0326f998ea366",
+    "stepId": "S000013",
+    "taskId": "parity-scoring",
+    "kind": "agent",
+    "label": "Score parity after batch 3",
+    "taskDefRef": "tasks/01KN9VDYYPFTEATJPD09YJVZ9K/task.json"
+  },
+  "checksum": "9a6c64cb27c97c07b746206f7e03700292d75a3ea712b78316d273e5f04eee1b"
+}

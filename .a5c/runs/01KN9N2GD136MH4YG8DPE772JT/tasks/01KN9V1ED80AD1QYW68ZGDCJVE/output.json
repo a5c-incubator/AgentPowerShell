@@ -1,0 +1,31 @@
+{
+  "selectedBatch": {
+    "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+    "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control while preserving honest claims and good tests.",
+    "expectedOutcome": "The security story becomes less scaffolded and more behaviorally verified where feasible."
+  },
+  "filesChanged": [
+    "src/AgentPowerShell.Daemon/EnvironmentPolicyFilter.cs",
+    "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+    "src/AgentPowerShell.Daemon/NativeProcessLauncher.cs",
+    "tests/AgentPowerShell.Tests/ExecutionPolicyTests.cs",
+    "docs/policy-reference.md"
+  ],
+  "commandsRun": [
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" build agentpowershell.sln --no-restore --verbosity minimal",
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal",
+    "& \"$env:USERPROFILE\\.dotnet\\dotnet.exe\" test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build --no-restore --verbosity minimal"
+  ],
+  "outcomes": [
+    "Environment variable policy rules are now enforced during command execution instead of being parsed but ignored.",
+    "When env rules are present, explicit environment overrides that differ from the daemon baseline are evaluated with the existing policy engine before execution.",
+    "Blocked environment overrides now fail fast with a policy denial before process start.",
+    "Allowed environment overrides now flow into native child process launches and are covered by new regression tests.",
+    "The policy reference now describes the actual environment-rule behavior implemented by the runtime."
+  ],
+  "remainingWithinBatch": [
+    "Platform-native enforcement is still shallow beyond this slice; Linux and macOS platform adapters remain largely planning surfaces and Windows still only has partial OS-level containment.",
+    "The hosted PowerShell path still denies disallowed environment overrides but does not provide a separately isolated per-request environment block."
+  ],
+  "blockers": []
+}

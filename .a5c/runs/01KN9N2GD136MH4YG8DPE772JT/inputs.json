@@ -1,0 +1,8 @@
+{
+  "projectRoot": "C:/work/agentpowershell",
+  "requestPath": "request.task.md",
+  "architectureDoc": "docs/architecture.md",
+  "readmePath": "README.md",
+  "targetParityScore": 90,
+  "maxImplementationBatches": 6
+}

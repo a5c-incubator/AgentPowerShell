@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T14:19:30.884Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9VD84YKF2M471G7A2C2KXE",
+    "invocationKey": "agentpowershell/spec-convergence:S000012:verification-batch",
+    "invocationHash": "5fbdd1c8fb5fd033813f7f910002bbff293512474efd9a81b7639dca387f06c1",
+    "stepId": "S000012",
+    "taskId": "verification-batch",
+    "kind": "agent",
+    "label": "Verify implementation batch 3",
+    "taskDefRef": "tasks/01KN9VD84YKF2M471G7A2C2KXE/task.json"
+  },
+  "checksum": "c01c1f87814afe4e76a6ac75c0c3c63edb36f1b290e222325f0b5f0378c68fe0"
+}

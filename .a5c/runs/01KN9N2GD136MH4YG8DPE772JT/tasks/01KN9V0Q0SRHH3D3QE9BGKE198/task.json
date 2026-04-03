@@ -1,0 +1,383 @@
+{
+  "agent": {
+    "name": "general-purpose",
+    "outputSchema": {
+      "properties": {
+        "batches": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "rationale": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "risks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "batches",
+        "risks",
+        "rationale"
+      ],
+      "type": "object"
+    },
+    "prompt": {
+      "context": {
+        "batchNumber": 2,
+        "parityReview": {
+          "nextFocus": [
+            "Implement the next real enforcement slice with behavior that is testable, starting from the currently partial Windows and cross-platform policy-backed controls.",
+            "Prefer runtime-verified enforcement and honest docs over additional surface-area claims or placeholders."
+          ],
+          "parityScore": 72,
+          "remainingGaps": [
+            "The project still does not provide a finished, installable drop-in shell replacement flow equivalent to the broader agentsh-style spec.",
+            "OS-level sandbox enforcement remains shallow: Windows has initial job-object containment, but Linux and macOS enforcement are still mostly scaffolded and network blocking is still pre-launch policy evaluation rather than true egress interception.",
+            "End-to-end published-binary and real shim-to-daemon IPC coverage are still limited relative to the architecture claims."
+          ],
+          "strengths": [
+            "The core CLI surface now performs real work for sessions, exec, checkpoints, reports, config, status, start, and stop.",
+            "Batch 2 materially improved non-interactive daemon usability by making CLI and shim share the same daemon launch discovery path and by validating it with tests and manual smoke checks.",
+            "Policy-backed command and explicit network blocking behavior is exercised through passing automated tests and manual validation on Windows."
+          ]
+        },
+        "previousBacklog": {
+          "batches": [
+            {
+              "expectedOutcome": "Supported non-interactive execution paths are more coherent from shim to CLI to daemon, and the docs describe those paths precisely.",
+              "goal": "Make the actual shim/daemon execution path more usable and explicit for supported scenarios, especially around PowerShell command routing, session flow, and installation/status behavior.",
+              "name": "Batch 2 - Shim and daemon usability completion",
+              "targets": [
+                "src/AgentPowerShell.Shim/*",
+                "src/AgentPowerShell.Cli/CliApp.cs",
+                "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+                "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+                "tests/AgentPowerShell.IntegrationTests/*",
+                "docs/getting-started.md",
+                "docs/cli-reference.md"
+              ],
+              "verification": [
+                "dotnet build agentpowershell.sln",
+                "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build",
+                "manual CLI and shim smoke tests for supported exec flows on the current platform"
+              ]
+            },
+            {
+              "expectedOutcome": "The security story becomes less scaffolded and more behaviorally verified where feasible.",
+              "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control while preserving honest claims and good tests.",
+              "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+              "targets": [
+                "src/AgentPowerShell.Platform.Windows/*",
+                "src/AgentPowerShell.Platform.Linux/*",
+                "src/AgentPowerShell.Platform.MacOS/*",
+                "src/AgentPowerShell.Daemon/*Monitor*",
+                "src/AgentPowerShell.Core/*",
+                "tests/AgentPowerShell.Platform.Tests/*",
+                "tests/AgentPowerShell.Tests/*"
+              ],
+              "verification": [
+                "dotnet build agentpowershell.sln",
+                "dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build",
+                "targeted policy enforcement regression tests"
+              ]
+            },
+            {
+              "expectedOutcome": "Cross-platform install and release guidance become defensible against the current runtime maturity.",
+              "goal": "Tighten install, Docker, CI, and release behavior so repo guidance matches real support.",
+              "name": "Batch 4 - Cross-platform and packaging truthfulness",
+              "targets": [
+                ".github/workflows/*",
+                "Dockerfile",
+                "install.ps1",
+                "install.sh",
+                "docs/cross-platform.md",
+                "README.md",
+                "eng/*"
+              ],
+              "verification": [
+                "docker build .",
+                "documented workflow checks",
+                "dotnet publish checks for documented RIDs"
+              ]
+            },
+            {
+              "expectedOutcome": "The project ends in an honestly reviewable state with explicit remaining blockers if full spec fulfillment is still not reached.",
+              "goal": "Reassess remaining gaps against request.task.md and either implement the last high-impact items or reduce claims to the exact truth.",
+              "name": "Batch 5 - Final parity closure",
+              "targets": [
+                "request.task.md",
+                "README.md",
+                "docs/architecture.md",
+                "docs/final-report.md",
+                "remaining code hotspots identified by earlier batches"
+              ],
+              "verification": [
+                "full solution build and test run",
+                "manual end-to-end validation of the supported product surface",
+                "final parity review against request.task.md"
+              ]
+            }
+          ],
+          "rationale": [
+            "Batch 1 is complete enough to remove from the front of the queue.",
+            "The parity score only moved from 58 to 66, which means the next work must target the actual runtime usability gap rather than more surface cleanup.",
+            "CLI reference and stronger shim/daemon execution validation became more urgent because they directly affect whether the project can be used as instructed."
+          ],
+          "risks": [
+            "The biggest remaining parity gaps are now concentrated in runtime behavior, not docs, so future batches are likely to surface deeper architectural limitations.",
+            "Shim and daemon end-to-end behavior may require changing user-facing boundaries rather than just adding code.",
+            "Some platform-native enforcement goals may still need to be documented as future work even after additional implementation."
+          ]
+        },
+        "projectRoot": "C:/work/agentpowershell",
+        "specification": {
+          "backlogSeed": [
+            "Batch 1: Spec and documentation alignment plus integration-test hardening around the currently implemented CLI/daemon/shim surface.",
+            "Batch 2: Usability-focused execution path completion for shim and daemon orchestration, including clearer boundaries for supported interactive and non-interactive behaviors.",
+            "Batch 3: Deeper enforcement work, prioritizing the most realistic next OS-level controls and policy-backed behavior that can actually be verified in tests.",
+            "Batch 4: Cross-platform support tightening, including Linux/macOS fallback behavior, platform capability reporting, and honest packaging/runtime docs.",
+            "Batch 5: Broader parity review against request.task.md and docs/architecture.md, removing or implementing any remaining high-impact mismatches."
+          ],
+          "implementedAreas": [
+            "CLI commands for exec, session, checkpoint, config, network check, report, status, start, and stop now exercise real code paths rather than placeholder payloads.",
+            "Policy loading and first-match-wins evaluation for command, file, network, and environment rules are implemented with automated coverage.",
+            "Session persistence, checkpoint persistence, report generation, approval flows, authentication modes, LLM proxy routing, and MCP inspection all have concrete repository implementations with tests.",
+            "Hosted PowerShell execution for inline commands now exists via a constrained runspace path, and native process launches have a first OS-level Windows Job Object control."
+          ],
+          "initialParityScore": 58,
+          "missingAreas": [
+            "Usable shim installation and drop-in PATH replacement flow matching the stated agentsh-style usage is not complete.",
+            "True platform-native sandbox enforcement on Linux and macOS is missing, and Windows enforcement is only partially started.",
+            "End-to-end daemon plus shim integration remains thin, with integration coverage still limited and one integration test still named Placeholder_Integration_Test.",
+            "Documentation still contains explicit work-in-progress framing and parity claims that are broader than the verified runtime behavior.",
+            "Spec-complete cross-platform behavioral testing, especially real Docker and OS-matrix execution of the product surface, is not yet matched by product-level runtime maturity."
+          ],
+          "partialAreas": [
+            "PowerShell execution is usable for explicit inline commands, but interactive shell sessions remain intentionally unsupported and full shell replacement behavior is not complete.",
+            "Network enforcement exists as policy evaluation plus explicit pre-launch target blocking, but not as true OS-level egress interception across platforms.",
+            "Cross-platform support exists at the project layout, docs, build, and packaging level, but Linux and macOS platform enforcers remain mostly plan/scaffold implementations instead of runtime-complete enforcement layers.",
+            "Daemon lifecycle exists for local state tracking and IPC hosting, but the broader architecture described in docs/architecture.md still overstates current transport and platform capabilities."
+          ],
+          "prioritizedGaps": [
+            "Close the largest usability gap between the documented agentsh-like model and the actual executable product surface, especially shim/daemon execution flow and unsupported shell interaction boundaries.",
+            "Bring docs and packaging claims back into alignment with verified behavior while the implementation is improved, so the project is honest and testable.",
+            "Strengthen integration and end-to-end tests around daemon, shim, hosted PowerShell execution, policy enforcement, and blocked-vs-allowed scenarios.",
+            "Implement the next real platform-native enforcement slices beyond Windows Job Objects, especially Linux/macOS process and network controls or explicit constrained fallbacks.",
+            "Reduce remaining placeholder/scaffold areas in daemon and platform projects, starting with the pieces that directly affect user-facing trust and security expectations."
+          ]
+        },
+        "verification": {
+          "evidence": [
+            "`dotnet build agentpowershell.sln --no-restore --verbosity minimal` succeeded after the Batch 2 changes.",
+            "`dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 35/35 tests.",
+            "`dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal` passed with 3/3 tests.",
+            "Manual smoke test for `session list` in text mode returned the supported human-readable output (`No sessions.` on a clean store).",
+            "Manual smoke test for blocked network execution returned `exitCode: 126`, `policyDecision: deny`, and `No matching network rule.`.",
+            "Manual smoke test for `start`, `status`, and `stop` showed the daemon process being launched, reported as running with PID/process name/working directory, and then stopped cleanly."
+          ],
+          "passed": true,
+          "regressions": [],
+          "testGaps": [
+            "There is still no end-to-end integration test that launches the real shim binary, auto-starts the daemon, and round-trips through IPC in one test.",
+            "The new daemon launch discovery path is covered by focused unit tests, but not yet by a published-binary packaging test."
+          ],
+          "unresolvedIssues": [
+            "Interactive shell replacement and fully installable PATH shim behavior remain incomplete by design and are still broader parity gaps outside this batch."
+          ]
+        }
+      },
+      "instructions": [
+        "Remove completed work from the backlog.",
+        "Promote unresolved regressions or failed verification findings above lower-priority enhancements.",
+        "Split oversized remaining batches if needed so the next implementation step is concrete and verifiable.",
+        "Return the updated backlog in execution order."
+      ],
+      "outputFormat": "JSON with batches, risks, and rationale",
+      "role": "technical lead refining an implementation backlog from fresh evidence",
+      "task": "Refine the remaining backlog using the latest verification and parity review results"
+    }
+  },
+  "io": {
+    "inputJsonPath": "tasks/01KN9V0Q0SRHH3D3QE9BGKE198/input.json",
+    "outputJsonPath": "tasks/01KN9V0Q0SRHH3D3QE9BGKE198/output.json"
+  },
+  "kind": "agent",
+  "title": "Refine backlog after batch 2",
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KN9V0Q0SRHH3D3QE9BGKE198",
+  "taskId": "backlog-refinement",
+  "invocationKey": "agentpowershell/spec-convergence:S000010:backlog-refinement",
+  "stepId": "S000010",
+  "inputs": {
+    "batchNumber": 2,
+    "parityReview": {
+      "nextFocus": [
+        "Implement the next real enforcement slice with behavior that is testable, starting from the currently partial Windows and cross-platform policy-backed controls.",
+        "Prefer runtime-verified enforcement and honest docs over additional surface-area claims or placeholders."
+      ],
+      "parityScore": 72,
+      "remainingGaps": [
+        "The project still does not provide a finished, installable drop-in shell replacement flow equivalent to the broader agentsh-style spec.",
+        "OS-level sandbox enforcement remains shallow: Windows has initial job-object containment, but Linux and macOS enforcement are still mostly scaffolded and network blocking is still pre-launch policy evaluation rather than true egress interception.",
+        "End-to-end published-binary and real shim-to-daemon IPC coverage are still limited relative to the architecture claims."
+      ],
+      "strengths": [
+        "The core CLI surface now performs real work for sessions, exec, checkpoints, reports, config, status, start, and stop.",
+        "Batch 2 materially improved non-interactive daemon usability by making CLI and shim share the same daemon launch discovery path and by validating it with tests and manual smoke checks.",
+        "Policy-backed command and explicit network blocking behavior is exercised through passing automated tests and manual validation on Windows."
+      ]
+    },
+    "previousBacklog": {
+      "batches": [
+        {
+          "expectedOutcome": "Supported non-interactive execution paths are more coherent from shim to CLI to daemon, and the docs describe those paths precisely.",
+          "goal": "Make the actual shim/daemon execution path more usable and explicit for supported scenarios, especially around PowerShell command routing, session flow, and installation/status behavior.",
+          "name": "Batch 2 - Shim and daemon usability completion",
+          "targets": [
+            "src/AgentPowerShell.Shim/*",
+            "src/AgentPowerShell.Cli/CliApp.cs",
+            "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+            "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+            "tests/AgentPowerShell.IntegrationTests/*",
+            "docs/getting-started.md",
+            "docs/cli-reference.md"
+          ],
+          "verification": [
+            "dotnet build agentpowershell.sln",
+            "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build",
+            "manual CLI and shim smoke tests for supported exec flows on the current platform"
+          ]
+        },
+        {
+          "expectedOutcome": "The security story becomes less scaffolded and more behaviorally verified where feasible.",
+          "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control while preserving honest claims and good tests.",
+          "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+          "targets": [
+            "src/AgentPowerShell.Platform.Windows/*",
+            "src/AgentPowerShell.Platform.Linux/*",
+            "src/AgentPowerShell.Platform.MacOS/*",
+            "src/AgentPowerShell.Daemon/*Monitor*",
+            "src/AgentPowerShell.Core/*",
+            "tests/AgentPowerShell.Platform.Tests/*",
+            "tests/AgentPowerShell.Tests/*"
+          ],
+          "verification": [
+            "dotnet build agentpowershell.sln",
+            "dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build",
+            "targeted policy enforcement regression tests"
+          ]
+        },
+        {
+          "expectedOutcome": "Cross-platform install and release guidance become defensible against the current runtime maturity.",
+          "goal": "Tighten install, Docker, CI, and release behavior so repo guidance matches real support.",
+          "name": "Batch 4 - Cross-platform and packaging truthfulness",
+          "targets": [
+            ".github/workflows/*",
+            "Dockerfile",
+            "install.ps1",
+            "install.sh",
+            "docs/cross-platform.md",
+            "README.md",
+            "eng/*"
+          ],
+          "verification": [
+            "docker build .",
+            "documented workflow checks",
+            "dotnet publish checks for documented RIDs"
+          ]
+        },
+        {
+          "expectedOutcome": "The project ends in an honestly reviewable state with explicit remaining blockers if full spec fulfillment is still not reached.",
+          "goal": "Reassess remaining gaps against request.task.md and either implement the last high-impact items or reduce claims to the exact truth.",
+          "name": "Batch 5 - Final parity closure",
+          "targets": [
+            "request.task.md",
+            "README.md",
+            "docs/architecture.md",
+            "docs/final-report.md",
+            "remaining code hotspots identified by earlier batches"
+          ],
+          "verification": [
+            "full solution build and test run",
+            "manual end-to-end validation of the supported product surface",
+            "final parity review against request.task.md"
+          ]
+        }
+      ],
+      "rationale": [
+        "Batch 1 is complete enough to remove from the front of the queue.",
+        "The parity score only moved from 58 to 66, which means the next work must target the actual runtime usability gap rather than more surface cleanup.",
+        "CLI reference and stronger shim/daemon execution validation became more urgent because they directly affect whether the project can be used as instructed."
+      ],
+      "risks": [
+        "The biggest remaining parity gaps are now concentrated in runtime behavior, not docs, so future batches are likely to surface deeper architectural limitations.",
+        "Shim and daemon end-to-end behavior may require changing user-facing boundaries rather than just adding code.",
+        "Some platform-native enforcement goals may still need to be documented as future work even after additional implementation."
+      ]
+    },
+    "projectRoot": "C:/work/agentpowershell",
+    "specification": {
+      "backlogSeed": [
+        "Batch 1: Spec and documentation alignment plus integration-test hardening around the currently implemented CLI/daemon/shim surface.",
+        "Batch 2: Usability-focused execution path completion for shim and daemon orchestration, including clearer boundaries for supported interactive and non-interactive behaviors.",
+        "Batch 3: Deeper enforcement work, prioritizing the most realistic next OS-level controls and policy-backed behavior that can actually be verified in tests.",
+        "Batch 4: Cross-platform support tightening, including Linux/macOS fallback behavior, platform capability reporting, and honest packaging/runtime docs.",
+        "Batch 5: Broader parity review against request.task.md and docs/architecture.md, removing or implementing any remaining high-impact mismatches."
+      ],
+      "implementedAreas": [
+        "CLI commands for exec, session, checkpoint, config, network check, report, status, start, and stop now exercise real code paths rather than placeholder payloads.",
+        "Policy loading and first-match-wins evaluation for command, file, network, and environment rules are implemented with automated coverage.",
+        "Session persistence, checkpoint persistence, report generation, approval flows, authentication modes, LLM proxy routing, and MCP inspection all have concrete repository implementations with tests.",
+        "Hosted PowerShell execution for inline commands now exists via a constrained runspace path, and native process launches have a first OS-level Windows Job Object control."
+      ],
+      "initialParityScore": 58,
+      "missingAreas": [
+        "Usable shim installation and drop-in PATH replacement flow matching the stated agentsh-style usage is not complete.",
+        "True platform-native sandbox enforcement on Linux and macOS is missing, and Windows enforcement is only partially started.",
+        "End-to-end daemon plus shim integration remains thin, with integration coverage still limited and one integration test still named Placeholder_Integration_Test.",
+        "Documentation still contains explicit work-in-progress framing and parity claims that are broader than the verified runtime behavior.",
+        "Spec-complete cross-platform behavioral testing, especially real Docker and OS-matrix execution of the product surface, is not yet matched by product-level runtime maturity."
+      ],
+      "partialAreas": [
+        "PowerShell execution is usable for explicit inline commands, but interactive shell sessions remain intentionally unsupported and full shell replacement behavior is not complete.",
+        "Network enforcement exists as policy evaluation plus explicit pre-launch target blocking, but not as true OS-level egress interception across platforms.",
+        "Cross-platform support exists at the project layout, docs, build, and packaging level, but Linux and macOS platform enforcers remain mostly plan/scaffold implementations instead of runtime-complete enforcement layers.",
+        "Daemon lifecycle exists for local state tracking and IPC hosting, but the broader architecture described in docs/architecture.md still overstates current transport and platform capabilities."
+      ],
+      "prioritizedGaps": [
+        "Close the largest usability gap between the documented agentsh-like model and the actual executable product surface, especially shim/daemon execution flow and unsupported shell interaction boundaries.",
+        "Bring docs and packaging claims back into alignment with verified behavior while the implementation is improved, so the project is honest and testable.",
+        "Strengthen integration and end-to-end tests around daemon, shim, hosted PowerShell execution, policy enforcement, and blocked-vs-allowed scenarios.",
+        "Implement the next real platform-native enforcement slices beyond Windows Job Objects, especially Linux/macOS process and network controls or explicit constrained fallbacks.",
+        "Reduce remaining placeholder/scaffold areas in daemon and platform projects, starting with the pieces that directly affect user-facing trust and security expectations."
+      ]
+    },
+    "verification": {
+      "evidence": [
+        "`dotnet build agentpowershell.sln --no-restore --verbosity minimal` succeeded after the Batch 2 changes.",
+        "`dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-build --no-restore --verbosity minimal` passed with 35/35 tests.",
+        "`dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build --verbosity minimal` passed with 3/3 tests.",
+        "Manual smoke test for `session list` in text mode returned the supported human-readable output (`No sessions.` on a clean store).",
+        "Manual smoke test for blocked network execution returned `exitCode: 126`, `policyDecision: deny`, and `No matching network rule.`.",
+        "Manual smoke test for `start`, `status`, and `stop` showed the daemon process being launched, reported as running with PID/process name/working directory, and then stopped cleanly."
+      ],
+      "passed": true,
+      "regressions": [],
+      "testGaps": [
+        "There is still no end-to-end integration test that launches the real shim binary, auto-starts the daemon, and round-trips through IPC in one test.",
+        "The new daemon launch discovery path is covered by focused unit tests, but not yet by a published-binary packaging test."
+      ],
+      "unresolvedIssues": [
+        "Interactive shell replacement and fully installable PATH shim behavior remain incomplete by design and are still broader parity gaps outside this batch."
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-04-03T12:28:47.502Z",
+  "data": {
+    "runId": "01KN9N2GD136MH4YG8DPE772JT",
+    "processId": "agentpowershell/spec-convergence",
+    "entrypoint": {
+      "importPath": "../../processes/agentpowershell-spec-convergence.process.js",
+      "exportName": "process"
+    },
+    "harness": "codex",
+    "inputsRef": "inputs.json",
+    "prompt": "keep improving and completing the entire project until it fulfill the entire specs"
+  },
+  "checksum": "f4ac28650c99f81233b9c7e47c4dccf5a440dca68c5376614a70449a1443c407"
+}

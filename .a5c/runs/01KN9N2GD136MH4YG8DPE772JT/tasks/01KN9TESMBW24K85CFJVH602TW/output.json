@@ -1,0 +1,20 @@
+{
+  "parityScore": 66,
+  "strengths": [
+    "The repository now describes its verified runtime surface more honestly, which reduces the gap between user expectation and actual behavior.",
+    "Unit and integration coverage around the current command-execution path improved, including real checks for hosted PowerShell and CLI-level network denial.",
+    "The current CLI/session/policy/reporting baseline remains solid and tested after the documentation and integration hardening pass."
+  ],
+  "remainingGaps": [
+    "The product still does not offer a true agentsh-style drop-in PowerShell replacement with interactive shell interception.",
+    "Linux and macOS enforcement remain mostly structural abstractions rather than verified runtime controls.",
+    "Daemon and shim behavior are still not exercised through a deeper external-process end-to-end workflow.",
+    "Network enforcement is still pre-execution intent filtering rather than full OS-level network blocking.",
+    "Cross-platform packaging and runtime verification remain behind the repository's architectural ambition."
+  ],
+  "nextFocus": [
+    "Complete the next shim/daemon usability batch, including tighter CLI and shim behavior coverage for supported non-interactive execution paths.",
+    "Expand integration tests so the runspace, shim resolution, policy denial, and session flow are exercised more like real usage.",
+    "Tighten the user-facing CLI and getting-started documentation anywhere it still implies broader shell replacement than is actually supported."
+  ]
+}

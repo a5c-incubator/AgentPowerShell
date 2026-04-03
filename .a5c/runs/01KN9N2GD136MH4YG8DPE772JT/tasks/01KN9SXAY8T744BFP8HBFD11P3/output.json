@@ -1,0 +1,108 @@
+{
+  "batches": [
+    {
+      "name": "Batch 1 - Honest product surface and integration hardening",
+      "goal": "Align README/docs and integration coverage with what the product actually does today, while removing the most misleading placeholders.",
+      "targets": [
+        "README.md",
+        "docs/architecture.md",
+        "docs/cross-platform.md",
+        "docs/final-report.md",
+        "tests/AgentPowerShell.IntegrationTests/*",
+        "src/AgentPowerShell.Daemon/Worker.cs"
+      ],
+      "expectedOutcome": "The repository no longer overclaims parity, placeholder integration tests are replaced with meaningful coverage, and daemon/runtime docs match verified behavior.",
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.Tests/AgentPowerShell.Tests.csproj --no-restore",
+        "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-restore"
+      ]
+    },
+    {
+      "name": "Batch 2 - Shim and daemon usability completion",
+      "goal": "Make the actual shim/daemon execution path more usable and explicit for supported scenarios, especially around PowerShell command routing and installation/status behavior.",
+      "targets": [
+        "src/AgentPowerShell.Shim/*",
+        "src/AgentPowerShell.Cli/CliApp.cs",
+        "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+        "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+        "tests/AgentPowerShell.IntegrationTests/*",
+        "docs/getting-started.md",
+        "docs/cli-reference.md"
+      ],
+      "expectedOutcome": "Supported execution paths are clearly usable through the shim and CLI, unsupported interactive paths are explicitly surfaced, and daemon/shim integration has real end-to-end coverage.",
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-restore",
+        "manual CLI smoke tests for shim/exec flows on the current platform"
+      ]
+    },
+    {
+      "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+      "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control, while keeping behavior testable and honest.",
+      "targets": [
+        "src/AgentPowerShell.Platform.Windows/*",
+        "src/AgentPowerShell.Platform.Linux/*",
+        "src/AgentPowerShell.Platform.MacOS/*",
+        "src/AgentPowerShell.Daemon/*Monitor*",
+        "src/AgentPowerShell.Core/*",
+        "tests/AgentPowerShell.Platform.Tests/*",
+        "tests/AgentPowerShell.Tests/*"
+      ],
+      "expectedOutcome": "Platform capability reporting and enforcement behavior become less scaffolded, and policy-backed security guarantees are either implemented or explicitly downgraded in docs.",
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-restore",
+        "targeted policy enforcement regression tests"
+      ]
+    },
+    {
+      "name": "Batch 4 - Cross-platform and packaging truthfulness",
+      "goal": "Tighten the packaging, install scripts, Docker surface, and CI stories so they match the actual runtime state across OS targets.",
+      "targets": [
+        ".github/workflows/*",
+        "Dockerfile",
+        "install.ps1",
+        "install.sh",
+        "docs/cross-platform.md",
+        "README.md",
+        "eng/*"
+      ],
+      "expectedOutcome": "Cross-platform install, CI, release, and Docker guidance are accurate and backed by the build/test matrix the repo can really support.",
+      "verification": [
+        "workflow lint or dry-run checks where available",
+        "docker build .",
+        "dotnet publish checks for documented RIDs"
+      ]
+    },
+    {
+      "name": "Batch 5 - Final parity closure",
+      "goal": "Reassess remaining gaps against request.task.md and either implement the last high-impact items or reduce claims so the project description is truthful.",
+      "targets": [
+        "request.task.md",
+        "README.md",
+        "docs/architecture.md",
+        "docs/final-report.md",
+        "remaining code hotspots identified by earlier batches"
+      ],
+      "expectedOutcome": "The repo either reaches an honest high-parity state or documents the exact blockers that still prevent saying it fulfills the entire spec.",
+      "verification": [
+        "full solution build and test run",
+        "manual end-to-end validation of the supported product surface",
+        "final parity review against request.task.md"
+      ]
+    }
+  ],
+  "risks": [
+    "The requested spec is broader than the current repository maturity, so some remaining gaps may require reducing documentation claims before true feature completion is possible.",
+    "Linux and macOS enforcement layers likely cannot reach full agentsh-style parity in one pass without native helpers or kernel integrations that do not yet exist here.",
+    "Shim and harness behavior may expose hidden integration bugs once the current unit-tested code paths are exercised end-to-end through the real binaries.",
+    "Existing docs such as docs/final-report.md may conflict with verified behavior and need coordinated correction to avoid false confidence."
+  ],
+  "successCriteria": [
+    "The repository builds and tests cleanly with meaningful integration coverage for the supported execution surface.",
+    "Documentation claims match verified behavior instead of architectural aspiration.",
+    "The highest-impact usability and enforcement gaps identified in the audit are either implemented or explicitly documented as remaining blockers.",
+    "A final parity review can justify the completion claim with specific evidence rather than placeholders or scaffolding."
+  ]
+}

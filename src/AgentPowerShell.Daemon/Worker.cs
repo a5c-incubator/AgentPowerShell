@@ -7,7 +7,7 @@ internal sealed class Worker(ILogger<Worker> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        logger.LogInformation("AgentPowerShell daemon placeholder started.");
+        logger.LogInformation("AgentPowerShell daemon worker started.");
         while (!stoppingToken.IsCancellationRequested)
         {
             await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken).ConfigureAwait(false);

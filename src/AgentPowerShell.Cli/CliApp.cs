@@ -105,23 +105,23 @@ public static class CliApp
                 return;
             }
 
-            var daemonProject = System.IO.Path.Combine(Environment.CurrentDirectory, "src", "AgentPowerShell.Daemon", "AgentPowerShell.Daemon.csproj");
-            var startInfo = new ProcessStartInfo
+            var plan = DaemonLaunchResolver.Resolve(Environment.CurrentDirectory, AppContext.BaseDirectory);
+            if (plan is null)
             {
-                FileName = "dotnet",
-                WorkingDirectory = Environment.CurrentDirectory,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-            startInfo.ArgumentList.Add("run");
-            startInfo.ArgumentList.Add("--project");
-            startInfo.ArgumentList.Add(daemonProject);
-            startInfo.ArgumentList.Add("--no-build");
+                Emit(output, new
+                {
+                    command = "start",
+                    status = "unavailable",
+                    message = "Unable to locate a daemon command, binary, or project. Set AGENTPOWERSHELL_DAEMON_PATH or AGENTPOWERSHELL_DAEMON_CMD."
+                });
+                return;
+            }
 
+            var startInfo = DaemonLaunchResolver.CreateStartInfo(plan);
             var process = Process.Start(startInfo) ?? throw new InvalidOperationException("Failed to start daemon process.");
             var state = new DaemonProcessState(process.Id, DateTimeOffset.UtcNow, Environment.CurrentDirectory);
             stateStore.Save(state);
-            Emit(output, new { command = "start", status = "started", processId = process.Id, startedAt = state.StartedAt });
+            Emit(output, new { command = "start", status = "started", processId = process.Id, startedAt = state.StartedAt, launch = new { fileName = plan.FileName, arguments = plan.Arguments } });
         }, outputOption);
         return command;
     }
@@ -193,7 +193,7 @@ public static class CliApp
 
             foreach (var session in summarized)
             {
-                Console.WriteLine($"{session.Id} | active={session.IsActive} | cwd={session.WorkingDirectory} | last={session.LastActivityAt:O}");
+                Console.WriteLine($"{session.Id} | active={session.IsActive} | cwd={Abbreviate(session.WorkingDirectory, 60)} | created={session.CreatedAt:O} | last={session.LastActivityAt:O} | expires={session.ExpiresAt:O} | policy={session.PolicyPath}");
             }
         }, outputOption);
 
@@ -343,6 +343,8 @@ public static class CliApp
                 daemon = daemon.IsRunning ? "running" : "stopped",
                 daemonProcessId = daemon.ProcessId,
                 daemonStartedAt = daemon.StartedAt,
+                daemonWorkingDirectory = daemon.WorkingDirectory,
+                daemonProcessName = daemon.ProcessName,
                 sessionCount = sessions.Count
             });
         }, outputOption);
@@ -566,6 +568,16 @@ public static class CliApp
             session.LastActivityAt,
             session.ExpiresAt,
             session.ExpiresAt > now);
+    }
+
+    private static string Abbreviate(string value, int maxLength)
+    {
+        if (string.IsNullOrWhiteSpace(value) || value.Length <= maxLength)
+        {
+            return value;
+        }
+
+        return "..." + value[^Math.Max(0, maxLength - 3)..];
     }
 }
 

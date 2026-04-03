@@ -1,0 +1,16 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-04-03T12:56:50.762Z",
+  "data": {
+    "harness": "codex",
+    "effectId": "01KN9PNW8SF1NYR6HW71YH1ENZ",
+    "invocationKey": "agentpowershell/spec-convergence:S000001:specification-audit",
+    "invocationHash": "1b185cf63c9417bad1429ea963c95c5761928280c7f6ce958bec952e83a65014",
+    "stepId": "S000001",
+    "taskId": "specification-audit",
+    "kind": "agent",
+    "label": "Audit requested spec against current repo state",
+    "taskDefRef": "tasks/01KN9PNW8SF1NYR6HW71YH1ENZ/task.json"
+  },
+  "checksum": "8144e76455bc30ebf63703325baa3ecc4d2a6a25fd97361ed057e85fe92653ed"
+}

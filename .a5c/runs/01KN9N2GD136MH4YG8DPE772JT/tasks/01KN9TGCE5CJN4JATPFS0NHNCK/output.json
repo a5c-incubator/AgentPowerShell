@@ -1,0 +1,88 @@
+{
+  "batches": [
+    {
+      "name": "Batch 2 - Shim and daemon usability completion",
+      "goal": "Make the actual shim/daemon execution path more usable and explicit for supported scenarios, especially around PowerShell command routing, session flow, and installation/status behavior.",
+      "targets": [
+        "src/AgentPowerShell.Shim/*",
+        "src/AgentPowerShell.Cli/CliApp.cs",
+        "src/AgentPowerShell.Daemon/ShimIpcHostedService.cs",
+        "src/AgentPowerShell.Daemon/ShimCommandProcessor.cs",
+        "tests/AgentPowerShell.IntegrationTests/*",
+        "docs/getting-started.md",
+        "docs/cli-reference.md"
+      ],
+      "expectedOutcome": "Supported non-interactive execution paths are more coherent from shim to CLI to daemon, and the docs describe those paths precisely.",
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.IntegrationTests/AgentPowerShell.IntegrationTests.csproj --no-build",
+        "manual CLI and shim smoke tests for supported exec flows on the current platform"
+      ]
+    },
+    {
+      "name": "Batch 3 - Enforcement depth and policy-backed behavior",
+      "goal": "Expand the next realistic enforcement slices beyond current prechecks and Windows job control while preserving honest claims and good tests.",
+      "targets": [
+        "src/AgentPowerShell.Platform.Windows/*",
+        "src/AgentPowerShell.Platform.Linux/*",
+        "src/AgentPowerShell.Platform.MacOS/*",
+        "src/AgentPowerShell.Daemon/*Monitor*",
+        "src/AgentPowerShell.Core/*",
+        "tests/AgentPowerShell.Platform.Tests/*",
+        "tests/AgentPowerShell.Tests/*"
+      ],
+      "expectedOutcome": "The security story becomes less scaffolded and more behaviorally verified where feasible.",
+      "verification": [
+        "dotnet build agentpowershell.sln",
+        "dotnet test tests/AgentPowerShell.Platform.Tests/AgentPowerShell.Platform.Tests.csproj --no-build",
+        "targeted policy enforcement regression tests"
+      ]
+    },
+    {
+      "name": "Batch 4 - Cross-platform and packaging truthfulness",
+      "goal": "Tighten install, Docker, CI, and release behavior so repo guidance matches real support.",
+      "targets": [
+        ".github/workflows/*",
+        "Dockerfile",
+        "install.ps1",
+        "install.sh",
+        "docs/cross-platform.md",
+        "README.md",
+        "eng/*"
+      ],
+      "expectedOutcome": "Cross-platform install and release guidance become defensible against the current runtime maturity.",
+      "verification": [
+        "docker build .",
+        "documented workflow checks",
+        "dotnet publish checks for documented RIDs"
+      ]
+    },
+    {
+      "name": "Batch 5 - Final parity closure",
+      "goal": "Reassess remaining gaps against request.task.md and either implement the last high-impact items or reduce claims to the exact truth.",
+      "targets": [
+        "request.task.md",
+        "README.md",
+        "docs/architecture.md",
+        "docs/final-report.md",
+        "remaining code hotspots identified by earlier batches"
+      ],
+      "expectedOutcome": "The project ends in an honestly reviewable state with explicit remaining blockers if full spec fulfillment is still not reached.",
+      "verification": [
+        "full solution build and test run",
+        "manual end-to-end validation of the supported product surface",
+        "final parity review against request.task.md"
+      ]
+    }
+  ],
+  "risks": [
+    "The biggest remaining parity gaps are now concentrated in runtime behavior, not docs, so future batches are likely to surface deeper architectural limitations.",
+    "Shim and daemon end-to-end behavior may require changing user-facing boundaries rather than just adding code.",
+    "Some platform-native enforcement goals may still need to be documented as future work even after additional implementation."
+  ],
+  "rationale": [
+    "Batch 1 is complete enough to remove from the front of the queue.",
+    "The parity score only moved from 58 to 66, which means the next work must target the actual runtime usability gap rather than more surface cleanup.",
+    "CLI reference and stronger shim/daemon execution validation became more urgent because they directly affect whether the project can be used as instructed."
+  ]
+}

@@ -61,6 +61,19 @@ public sealed class ShimCommandProcessor
             };
         }
 
+        var environmentDecision = EnvironmentPolicyFilter.Evaluate(request, session);
+        if (!environmentDecision.Allowed)
+        {
+            return new ShimCommandResponse
+            {
+                SessionId = session.SessionId,
+                ExitCode = 126,
+                PolicyDecision = "deny",
+                DenialReason = environmentDecision.DenialReason ?? "Blocked by environment policy.",
+                Stderr = environmentDecision.DenialReason ?? "Blocked by environment policy."
+            };
+        }
+
         if (IsUnsupportedInteractiveShellLaunch(request))
         {
             const string message = "Interactive shell sessions are not supported by `exec` yet. Pass an explicit command, for example `powershell.exe -Command Get-Date`.";
@@ -76,7 +89,7 @@ public sealed class ShimCommandProcessor
 
         var execution = _hostedPowerShellExecutor.CanExecute(request)
             ? await _hostedPowerShellExecutor.ExecuteAsync(request, session, cancellationToken).ConfigureAwait(false)
-            : await _nativeProcessLauncher.ExecuteAsync(request, session, cancellationToken).ConfigureAwait(false);
+            : await _nativeProcessLauncher.ExecuteAsync(request, session, environmentDecision.AllowedOverrides, cancellationToken).ConfigureAwait(false);
 
         return new ShimCommandResponse
         {
