@@ -214,6 +214,41 @@ public static class CliApp
             }
         }, outputOption);
 
+        var show = new Command("show", "Show one session");
+        var showSessionId = new Argument<string?>("session-id", () => null);
+        show.AddArgument(showSessionId);
+        show.SetHandler(async (string? id, string output) =>
+        {
+            using var store = new SessionStore(GetSessionsPath());
+            await store.LoadAsync(CancellationToken.None).ConfigureAwait(false);
+            var sessions = await store.ListAsync(CancellationToken.None).ConfigureAwait(false);
+
+            var session = string.IsNullOrWhiteSpace(id)
+                ? sessions.Count == 0 ? null : sessions[^1]
+                : await store.GetAsync(id, CancellationToken.None).ConfigureAwait(false);
+
+            if (session is null)
+            {
+                Emit(output, new
+                {
+                    command = "session show",
+                    sessionId = id,
+                    status = "not-found"
+                });
+                Environment.ExitCode = 1;
+                return;
+            }
+
+            var summary = ToSessionSummary(session);
+            if (string.Equals(output, "json", StringComparison.OrdinalIgnoreCase))
+            {
+                Emit(output, new { command = "session show", sessionId = summary.Id, session = summary });
+                return;
+            }
+
+            Console.WriteLine($"{summary.Id} | active={summary.IsActive} | cwd={summary.WorkingDirectory} | created={summary.CreatedAt:O} | last={summary.LastActivityAt:O} | expires={summary.ExpiresAt:O} | policy={summary.PolicyPath}");
+        }, showSessionId, outputOption);
+
         var destroy = new Command("destroy", "Destroy session");
         var sessionId = new Argument<string>("session-id");
         destroy.AddArgument(sessionId);
@@ -227,6 +262,7 @@ public static class CliApp
 
         command.AddCommand(create);
         command.AddCommand(list);
+        command.AddCommand(show);
         command.AddCommand(destroy);
         return command;
     }

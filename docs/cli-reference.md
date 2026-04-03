@@ -55,6 +55,10 @@ Create a new session identifier.
 
 List persisted sessions from `.agentpowershell/sessions.json`. Text mode includes the active flag, working directory, created/last/expires timestamps, and policy path. JSON mode emits a stable summary shape.
 
+### `session show [session-id]`
+
+Show one persisted session from `.agentpowershell/sessions.json`. If `session-id` is omitted, the command returns the most recently created session. Missing sessions return `status: not-found` and a non-zero exit code.
+
 ### `session destroy <session-id>`
 
 Remove a session from the session store.

@@ -1511,6 +1511,77 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task CliApp_SessionShow_Json_Mode_Returns_Latest_Session_By_Default()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-session-show-json");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+
+            using (var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json")))
+            {
+                await store.LoadAsync(CancellationToken.None);
+                await store.GetOrCreateAsync("session-a", root, new AgentPowerShellConfig().Sessions, CancellationToken.None);
+                await Task.Delay(10);
+                await store.GetOrCreateAsync("session-b", root, new AgentPowerShellConfig().Sessions, CancellationToken.None);
+            }
+
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(0, CliApp.Run(["session", "show", "--output", "json"]));
+            var payload = writer.ToString();
+            Assert.Contains("\"command\":\"session show\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"sessionId\":\"session-b\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"id\":\"session-b\"", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public void CliApp_SessionShow_Returns_NotFound_For_Missing_Session()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-session-show-missing");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(1, CliApp.Run(["session", "show", "missing-session", "--output", "json"]));
+            var payload = writer.ToString();
+            Assert.Contains("\"command\":\"session show\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"status\":\"not-found\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"sessionId\":\"missing-session\"", payload, StringComparison.Ordinal);
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public void DaemonLaunchResolver_Uses_Explicit_Dll_Path_When_Configured()
     {
         var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-daemon-launch-explicit");

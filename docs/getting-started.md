@@ -45,6 +45,12 @@ List sessions:
 dotnet run --project src/AgentPowerShell.Cli -- session list
 ```
 
+Show the most recent session:
+
+```powershell
+dotnet run --project src/AgentPowerShell.Cli -- session show --output json
+```
+
 Execute an explicit inline PowerShell command through the current runtime path:
 
 ```powershell
