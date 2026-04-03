@@ -57,9 +57,10 @@ dotnet run --project src/AgentPowerShell.Cli -- policy validate default-policy.y
 
 ## Release And CI
 
-- Pull requests and pushes to `main` and `master` run the cross-platform CI workflow.
+- Pull requests and pushes to `main` and `master` run .NET build/test jobs on Windows, Linux, and macOS.
+- Docker smoke coverage runs on Linux and Windows GitHub-hosted runners. macOS runners only execute the direct .NET test matrix because hosted macOS runners do not expose a Docker daemon.
 - Release tags use semantic versioning in the form `vMAJOR.MINOR.PATCH`.
-- Tagged releases publish CLI artifacts and Docker images under the `a5c-ai` GitHub organization.
+- Tagged releases publish CLI artifacts and Linux multi-arch Docker images under the `a5c-ai` GitHub organization.
 - The nightly workflow publishes `edge` container images to `ghcr.io/a5c-ai/agentpowershell`.
 
 ## Status
@@ -70,6 +71,7 @@ The repository currently delivers a usable, tested baseline for:
 - `exec` for explicit commands through the shim/daemon processor path
 - hosted PowerShell execution for inline `powershell` and `pwsh` `-Command` invocations
 - command policy checks, explicit-network prechecks, and first-pass Windows Job Object process control
+- env-rule enforcement for explicit environment overrides passed into command execution
 
 The repository does not yet fulfill the full `agentsh`-style specification described in `request.task.md` and `docs/architecture.md`. In particular:
 

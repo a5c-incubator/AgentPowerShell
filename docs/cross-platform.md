@@ -19,5 +19,6 @@ The macOS project likewise reflects the planned abstraction surface for Endpoint
 - Keep shared models and policy logic in `AgentPowerShell.Core`.
 - Put platform-native behavior behind explicit abstractions.
 - Validate cross-platform projects in CI for every change.
+- Treat Docker support as Linux-container packaging that is smoke-tested on Linux and Windows runners; GitHub-hosted macOS runners do not provide Docker.
 - Prefer runtime-specific integration tests before claiming full feature parity on a platform.
 - Phrase current support in terms of verified behavior, not architectural intent.
