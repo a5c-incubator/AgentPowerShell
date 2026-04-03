@@ -2,6 +2,7 @@
 .github
 .a5c
 .agentpowershell
+.artifacts
 **/bin
 **/obj
 **/.vs
