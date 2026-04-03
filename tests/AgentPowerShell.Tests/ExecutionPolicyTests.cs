@@ -1672,6 +1672,52 @@ public sealed class ExecutionPolicyTests
     }
 
     [Fact]
+    public async Task CliApp_SessionDestroy_Uses_Latest_Session_By_Default()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-cli-session-destroy-latest");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+        var originalOut = Console.Out;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+
+            using (var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json")))
+            {
+                await store.LoadAsync(CancellationToken.None);
+                await store.GetOrCreateAsync("session-a", root, new AgentPowerShellConfig().Sessions, CancellationToken.None);
+                await Task.Delay(10);
+                await store.GetOrCreateAsync("session-b", root, new AgentPowerShellConfig().Sessions, CancellationToken.None);
+            }
+
+            using var writer = new StringWriter();
+            Console.SetOut(writer);
+
+            Assert.Equal(0, CliApp.Run(["session", "destroy", "--output", "json"]));
+            var payload = writer.ToString();
+            Assert.Contains("\"command\":\"session destroy\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"sessionId\":\"session-b\"", payload, StringComparison.Ordinal);
+            Assert.Contains("\"removed\":true", payload, StringComparison.Ordinal);
+
+            using var verifyStore = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await verifyStore.LoadAsync(CancellationToken.None);
+            var sessions = await verifyStore.ListAsync(CancellationToken.None);
+            Assert.DoesNotContain(sessions, session => session.SessionId == "session-b");
+            Assert.Contains(sessions, session => session.SessionId == "session-a");
+        }
+        finally
+        {
+            Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
     public async Task SessionReportGenerator_Builds_Markdown_And_Findings()
     {
         var storePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-report.jsonl");

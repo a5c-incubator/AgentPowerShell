@@ -51,6 +51,12 @@ Show the most recent session:
 dotnet run --project src/AgentPowerShell.Cli -- session show --output json
 ```
 
+Destroy the most recent session:
+
+```powershell
+dotnet run --project src/AgentPowerShell.Cli -- session destroy --output json
+```
+
 Execute an explicit inline PowerShell command through the current runtime path:
 
 ```powershell

@@ -59,9 +59,9 @@ List persisted sessions from `.agentpowershell/sessions.json`. Text mode include
 
 Show one persisted session from `.agentpowershell/sessions.json`. If `session-id` is omitted, the command returns the most recently created session. Missing sessions return `status: not-found` and a non-zero exit code.
 
-### `session destroy <session-id>`
+### `session destroy [session-id]`
 
-Remove a session from the session store. Missing sessions return `status: not-found`, `removed: false`, and a non-zero exit code.
+Remove a session from the session store. If `session-id` is omitted, the command removes the most recently created session. Missing sessions return `status: not-found`, `removed: false`, and a non-zero exit code.
 
 ### `policy validate <path>`
 

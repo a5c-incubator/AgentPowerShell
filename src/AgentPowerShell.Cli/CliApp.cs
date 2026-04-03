@@ -250,14 +250,19 @@ public static class CliApp
         }, showSessionId, outputOption);
 
         var destroy = new Command("destroy", "Destroy session");
-        var sessionId = new Argument<string>("session-id");
+        var sessionId = new Argument<string?>("session-id", () => null);
         destroy.AddArgument(sessionId);
-        destroy.SetHandler(async (string id, string output) =>
+        destroy.SetHandler(async (string? id, string output) =>
         {
-            var store = new SessionStore(Path.Combine(Environment.CurrentDirectory, ".agentpowershell", "sessions.json"));
+            using var store = new SessionStore(GetSessionsPath());
             await store.LoadAsync(CancellationToken.None).ConfigureAwait(false);
-            var removed = await store.RemoveAsync(id, CancellationToken.None).ConfigureAwait(false);
-            Emit(output, new { command = "session destroy", sessionId = id, removed, status = removed ? "removed" : "not-found" });
+            var sessions = await store.ListAsync(CancellationToken.None).ConfigureAwait(false);
+            var resolvedId = string.IsNullOrWhiteSpace(id)
+                ? sessions.Count == 0 ? null : sessions[^1].SessionId
+                : id;
+            var removed = !string.IsNullOrWhiteSpace(resolvedId)
+                && await store.RemoveAsync(resolvedId, CancellationToken.None).ConfigureAwait(false);
+            Emit(output, new { command = "session destroy", sessionId = resolvedId ?? id, removed, status = removed ? "removed" : "not-found" });
             if (!removed)
             {
                 Environment.ExitCode = 1;
