@@ -5,8 +5,8 @@
       "workingDirectory": "C:\\work\\agentpowershell",
       "policyPath": "C:\\work\\agentpowershell\\default-policy.yml",
       "createdAt": "2026-04-03T11:47:36.5535956+00:00",
-      "lastActivityAt": "2026-04-03T11:56:11.1178374+00:00",
-      "expiresAt": "2026-04-03T12:26:11.1178374+00:00",
+      "lastActivityAt": "2026-04-03T12:03:44.8489803+00:00",
+      "expiresAt": "2026-04-03T12:33:44.8489803+00:00",
       "platform": "Win32NT"
     }
   ]

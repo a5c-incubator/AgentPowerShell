@@ -27,6 +27,19 @@ public sealed class ShimCommandProcessor(SessionStore sessionStore, AgentPowerSh
             };
         }
 
+        var networkDecision = EvaluateExplicitNetworkTargets(request, session);
+        if (networkDecision is not null)
+        {
+            return new ShimCommandResponse
+            {
+                SessionId = session.SessionId,
+                ExitCode = 126,
+                PolicyDecision = networkDecision.Decision.ToString().ToLowerInvariant(),
+                DenialReason = networkDecision.Message ?? "Blocked by network policy.",
+                Stderr = networkDecision.Message ?? "Blocked by network policy."
+            };
+        }
+
         if (IsUnsupportedInteractiveShellLaunch(request))
         {
             const string message = "Interactive shell sessions are not supported by `exec` yet. Pass an explicit command, for example `powershell.exe -Command Get-Date`.";
@@ -99,6 +112,29 @@ public sealed class ShimCommandProcessor(SessionStore sessionStore, AgentPowerSh
         return result.Decision == PolicyDecision.Approve
             ? result with { Decision = PolicyDecision.Allow }
             : result;
+    }
+
+    private static EvaluationResult? EvaluateExplicitNetworkTargets(ShimCommandRequest request, AgentSession session)
+    {
+        var policyPath = session.PolicyPath;
+        if (!File.Exists(policyPath))
+        {
+            return null;
+        }
+
+        var policy = new PolicyLoader().LoadFromFile(policyPath);
+        var engine = new PolicyEngine(policy);
+        foreach (var observation in NetworkIntentInspector.Extract(request))
+        {
+            var result = engine.EvaluateNetwork(new NetworkRequest(observation.Destination, observation.Port));
+            if (result.Decision == PolicyDecision.Deny)
+            {
+                var message = result.Message ?? $"Network access to {observation.Destination}:{observation.Port} is blocked.";
+                return result with { Message = message };
+            }
+        }
+
+        return null;
     }
 
     private static bool IsUnsupportedInteractiveShellLaunch(ShimCommandRequest request)

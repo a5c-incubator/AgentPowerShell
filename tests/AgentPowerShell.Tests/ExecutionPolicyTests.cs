@@ -4,6 +4,7 @@ using AgentPowerShell.Events;
 using AgentPowerShell.Daemon;
 using AgentPowerShell.LlmProxy;
 using AgentPowerShell.Mcp;
+using AgentPowerShell.Protos;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -1043,6 +1044,57 @@ public sealed class ExecutionPolicyTests
         finally
         {
             Console.SetOut(originalOut);
+            Environment.CurrentDirectory = originalDirectory;
+            if (Directory.Exists(root))
+            {
+                Directory.Delete(root, recursive: true);
+            }
+        }
+    }
+
+    [Fact]
+    public async Task ShimProcessor_Denies_Explicit_Network_Targets_Before_Process_Start()
+    {
+        var root = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid():N}-shim-network-deny");
+        Directory.CreateDirectory(root);
+        var originalDirectory = Environment.CurrentDirectory;
+
+        try
+        {
+            Environment.CurrentDirectory = root;
+            await File.WriteAllTextAsync(Path.Combine(root, "default-policy.yml"), """
+                command_rules:
+                  - name: allow-powershell
+                    pattern: "powershell"
+                    decision: allow
+                network_rules:
+                  - name: allow-localhost
+                    domain: "localhost"
+                    ports: ["443"]
+                    decision: allow
+                """);
+
+            using var store = new SessionStore(Path.Combine(root, ".agentpowershell", "sessions.json"));
+            await store.LoadAsync(CancellationToken.None);
+            var processor = new ShimCommandProcessor(store, new AgentPowerShellConfig());
+
+            var response = await processor.ExecuteAsync(
+                new ShimCommandRequest
+                {
+                    SessionId = "session-a",
+                    InvocationName = "powershell",
+                    ExecutablePath = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                    Arguments = ["-Command", "Invoke-WebRequest https://example.com"],
+                    WorkingDirectory = root
+                },
+                CancellationToken.None);
+
+            Assert.Equal(126, response.ExitCode);
+            Assert.Equal("deny", response.PolicyDecision);
+            Assert.Contains("No matching network rule", response.Stderr, StringComparison.Ordinal);
+        }
+        finally
+        {
             Environment.CurrentDirectory = originalDirectory;
             if (Directory.Exists(root))
             {
